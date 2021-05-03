@@ -37,6 +37,8 @@ namespace T_Rec.Views
                 _view_model.OnAppearing();
 
                 tbtn_add_job.IsEnabled = _view_model.can_add_job;
+
+                if (_view_model.can_add_job) JobsListView.Position = 1;
             }
             catch (Exception ex)
             {

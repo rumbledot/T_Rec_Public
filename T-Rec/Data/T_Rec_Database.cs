@@ -28,8 +28,16 @@ namespace T_Rec
 
         public Task<List<JobUnit>> GetTodayJobs()
         {
-            Console.WriteLine($"getting {DateTime.Now} jobs");
-            return GetTodayJobs(DateTime.Now);
+            try
+            {
+                Console.WriteLine($"getting {DateTime.Now} jobs");
+                return GetTodayJobs(DateTime.Now);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to get today jobs \n {ex.Message} \n {ex.StackTrace}");
+                throw ex;
+            }
         }
 
         public Task<List<JobUnit>> GetTodayJobs(DateTime today)
@@ -44,24 +52,32 @@ namespace T_Rec
 
         public Task<List<JobUnit>> GetWeekReviews()
         {
-            DateTime input = DateTime.Now;
-            DateTime weekstart_day = DateTime.Now;
-            DateTime weekend_day = DateTime.Now;
-            int delta = 0;
-            int sunday_offset = 0; //if this is Sunday then get a week before
+            try
+            {
+                DateTime input = DateTime.Now;
+                DateTime weekstart_day = DateTime.Now;
+                DateTime weekend_day = DateTime.Now;
+                int delta = 0;
+                int sunday_offset = 0; //if this is Sunday then get a week before
 
-            if (input.DayOfWeek == DayOfWeek.Sunday) sunday_offset = -7;
+                if (input.DayOfWeek == DayOfWeek.Sunday) sunday_offset = -7;
 
-            delta = DayOfWeek.Monday - input.DayOfWeek;
-            weekstart_day = DateTime.Parse(input.AddDays(delta + sunday_offset).ToString("yyyy-MM-dd 00:00:00"));
+                delta = DayOfWeek.Monday - input.DayOfWeek;
+                weekstart_day = DateTime.Parse(input.AddDays(delta + sunday_offset).ToString("yyyy-MM-dd 00:00:00"));
 
-            delta = DayOfWeek.Saturday - input.DayOfWeek;
-            weekend_day = DateTime.Parse(input.AddDays(delta + 1 + sunday_offset).ToString("yyyy-MM-dd 00:00:00"));
+                delta = DayOfWeek.Saturday - input.DayOfWeek;
+                weekend_day = DateTime.Parse(input.AddDays(delta + 1 + sunday_offset).ToString("yyyy-MM-dd 00:00:00"));
 
-            Console.WriteLine($"week start : {weekstart_day} - {weekend_day}");
+                Console.WriteLine($"week start : {weekstart_day} - {weekend_day}");
 
-            return Database.Table<JobUnit>().Where(job => (
-            job.time_start > weekstart_day && job.time_start < weekend_day)).ToListAsync();
+                return Database.Table<JobUnit>().Where(job => (
+                job.time_start > weekstart_day && job.time_start < weekend_day)).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"failed to get week reviews \n {ex.Message} \n {ex.StackTrace}");
+                throw ex;
+            }
         }
 
         public Task<List<JobUnit>> GetItemsAsync()

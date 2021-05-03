@@ -24,8 +24,8 @@
             <RefreshView x:DataType="vm:JobsViewModel"
                 IsRefreshing="{Binding is_busy, Mode=TwoWay}"
                 x:Name="JobsRefreshView"
-                Command="{Binding LoadTodayJobsCommand}">
-                <!--CommandParameter="{x:Reference JobsListView}"-->
+                Command="{Binding LoadTodayJobsCommand}"
+                CommandParameter="{x:Reference JobsListView}">
                 <CarouselView x:Name="JobsListView"
                     VerticalOptions="Center"
                     HorizontalOptions="Fill"
@@ -35,6 +35,8 @@
                     ItemsSource="{Binding Jobs}">
                     <CarouselView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal"
+                            SnapPointsType="MandatorySingle"
+                            SnapPointsAlignment="Start"
                             ItemSpacing="20" />
                     </CarouselView.ItemsLayout>
                     <CarouselView.EmptyView>

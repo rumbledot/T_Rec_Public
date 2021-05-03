@@ -35,6 +35,7 @@ namespace T_Rec.ViewModels
             Jobs = new ObservableCollection<JobUnit>();
 
             LoadTodayJobsCommand = new Command(async (object view) => await ExecuteLoadJobsCommand(view));
+            //LoadTodayJobsCommand = new Command(async () => await ExecuteLoadJobsCommand());
 
             OnAddJobCommand = new Command(async () => await OnAddJob());
 
@@ -50,6 +51,7 @@ namespace T_Rec.ViewModels
             this.Database = await T_Rec_Database.Instance;
         }
 
+        //async Task ExecuteLoadJobsCommand()
         async Task ExecuteLoadJobsCommand(object view)
         {
             is_busy = true;
@@ -78,7 +80,8 @@ namespace T_Rec.ViewModels
                     toolbtn_add_new_job.IsEnabled = can_add_job; 
                 }
 
-                //CarouselView jobview = view as CarouselView;
+                CarouselView jobview = view as CarouselView;
+                jobview.Position = 1;
                 //Console.WriteLine("View orientation " + jobview.ItemsLayout.Orientation);
             }
             catch (Exception ex)
