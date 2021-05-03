@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="T_Rec.Views.JobPage"
+             Title="{Binding Name}">
+    <Frame>
+        <StackLayout Margin="20" VerticalOptions="StartAndExpand">
+            <Label Text="Project" />
+            <Entry x:Name="tbox_Project_name"
+                Placeholder="Project name" 
+                PlaceholderColor="{StaticResource PrimaryLight}" 
+                Text="" />
+            <Label Text="Description" />
+            <Editor x:Name="tbox_Description"
+                AutoSize="TextChanges"
+                Placeholder="Job description" 
+                PlaceholderColor="{StaticResource PrimaryLight}" 
+                MaxLength="200"
+                Text=""/>
+            <Button Text="Save" Clicked="OnSaveClicked" />
+            <Button Text="Cancel" Clicked="OnCancelClicked" />
+        </StackLayout>
+    </Frame>
+</ContentPage>

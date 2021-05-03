@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="T_Rec.Views.WeekJobsPage"
+             xmlns:vm="clr-namespace:T_Rec.ViewModels"
+             xmlns:model="clr-namespace:T_Rec.Models" 
+             x:Name="WeekJobsReviews"
+             Title="{Binding Title}">
+
+    <StackLayout>
+        <Label 
+            x:DataType="vm:WeekReviewViewModel"
+            Text="{Binding total_week_hours}"/>
+
+        <RefreshView x:DataType="vm:WeekReviewViewModel" 
+            Command="{Binding LoadWeekCommand}" 
+            IsRefreshing="{Binding is_busy, Mode=TwoWay}">
+
+            <CollectionView x:Name="WeekListView"
+                    ItemsSource="{Binding Days}">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                            <StackLayout HorizontalOptions="StartAndExpand"
+                                Orientation="Horizontal"
+                                x:DataType="model:JobInADay">
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0"
+                                    Grid.Column="1"
+                                    Text="{Binding day_name}"
+                                    FontAttributes="Bold" />
+                                <Label Grid.Row="1"
+                                    Grid.Column="1"
+                                    Text="{Binding day_total_hours, StringFormat='{0:####.##} hrs'}"
+                                    FontAttributes="Italic"
+                                    VerticalOptions="End" />
+                                <Label Grid.Row="1"
+                                    Grid.Column="2"
+                                    Text="{Binding day_total_jobs}"
+                                    FontAttributes="Italic"
+                                    VerticalOptions="End" />
+                                <Button Grid.Row="1"
+                                    Grid.Column="3"
+                                    HeightRequest="30"
+                                    WidthRequest="30"
+                                    CornerRadius="15"
+                                    Text="M"
+                                    Clicked="OnMore"
+                                    CommandParameter="{Binding .}"/>
+                            </Grid>
+                            </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        
+        </RefreshView>
+
+    </StackLayout>
+
+</ContentPage>
