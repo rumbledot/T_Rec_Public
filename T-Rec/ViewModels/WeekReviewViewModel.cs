@@ -88,19 +88,30 @@ namespace T_Rec.ViewModels
                     today_jobs = jobs.Where<JobUnit>(j =>(j.time_start > each_day && j.time_start < each_day_end)).OrderBy(j => (j.time_start)).ToList();
 
                     Console.WriteLine($"Day : {day.ToString()}");
-                    foreach (var job in today_jobs)
-                    {
-                        Console.WriteLine($"job : {job.project_name} : {job.job_time_in_hours}");
-                        total_hours += job.job_time_in_hours;
-                    }
-
                     Console.WriteLine($"day total hours : {total_hours}");
+
                     JobInADay day_reviews = new JobInADay()
                     {
                         day_name = day.ToString(),
                         day_total_hours = total_hours,
-                        day_total_jobs = today_jobs.Count
+                        day_total_jobs = 0
                     };
+
+                    if (today_jobs != null && today_jobs.Count > 0)
+                    {
+                        foreach (var job in today_jobs)
+                        {
+                            Console.WriteLine($"job : {job.project_name} : {job.job_time_in_hours}");
+                            total_hours += job.job_time_in_hours;
+                        }
+
+                        day_reviews = new JobInADay()
+                        {
+                            day_name = day.ToString(),
+                            day_total_hours = total_hours,
+                            day_total_jobs = today_jobs.Count
+                        };
+                    }
 
                     total_week_hours += total_hours;
                     Days.Add(day_reviews);
