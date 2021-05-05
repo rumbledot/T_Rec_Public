@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Android.Widget;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -34,8 +35,8 @@ namespace T_Rec.ViewModels
             toolbtn_add_new_job = btn;
             Jobs = new ObservableCollection<JobUnit>();
 
-            LoadTodayJobsCommand = new Command(async (object view) => await ExecuteLoadJobsCommand(view));
-            //LoadTodayJobsCommand = new Command(async () => await ExecuteLoadJobsCommand());
+            //LoadTodayJobsCommand = new Command(async (object view) => await ExecuteLoadJobsCommand(view));
+            LoadTodayJobsCommand = new Command(async () => await ExecuteLoadJobsCommand());
 
             OnAddJobCommand = new Command(async () => await OnAddJob());
 
@@ -51,8 +52,8 @@ namespace T_Rec.ViewModels
             this.Database = await T_Rec_Database.Instance;
         }
 
-        //async Task ExecuteLoadJobsCommand()
-        async Task ExecuteLoadJobsCommand(object view)
+        async Task ExecuteLoadJobsCommand()
+        //async Task ExecuteLoadJobsCommand(object view)
         {
             is_busy = true;
             can_add_job = true;
@@ -63,7 +64,7 @@ namespace T_Rec.ViewModels
 
                 Jobs.Clear();
                 var items = await Database.GetTodayJobs();
-                Console.WriteLine($"item count {items.Count}");
+                //Console.WriteLine($"item count {items.Count}");
                 if (items != null && items.Count > 0)
                 {
                     foreach (JobUnit item in items)
@@ -71,22 +72,25 @@ namespace T_Rec.ViewModels
                         Jobs.Add(item);
                         if (!item.job_done)
                         {
-                            Console.WriteLine($"job {item.job_id} is not done");
+                            //Console.WriteLine($"job {item.job_id} is not done");
 
                             can_add_job = false;
                         }
                     }
 
-                    toolbtn_add_new_job.IsEnabled = can_add_job; 
+                    DependencyService.Get<Toast>().Show("Jobs loaded");
+
+                    toolbtn_add_new_job.IsEnabled = can_add_job;
                 }
 
-                CarouselView jobview = view as CarouselView;
-                jobview.Position = 1;
+                //CarouselView jobview = view as CarouselView;
+                //jobview.Position = 1;
                 //Console.WriteLine("View orientation " + jobview.ItemsLayout.Orientation);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to load today jobs \n {ex.Message} \n {ex.StackTrace}");
+                DependencyService.Get<Toast>().Show($"Failed to load today's jobs \n {ex.Message}");
+                //Console.WriteLine($"Failed to load today jobs \n {ex.Message} \n {ex.StackTrace}");
             }
             finally
             {

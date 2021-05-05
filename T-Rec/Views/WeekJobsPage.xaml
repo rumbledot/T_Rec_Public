@@ -10,7 +10,11 @@
     <StackLayout>
         <Label 
             x:DataType="vm:WeekReviewViewModel"
-            Text="{Binding total_week_hours}"/>
+            FontSize="Title"
+            Text="{Binding total_week_hours_string, StringFormat='This week total hours : {0:####.##}'}"/>
+        <BoxView HeightRequest="1" 
+            HorizontalOptions="Fill"
+            Color="{StaticResource AccentLight}"/>
 
         <RefreshView x:DataType="vm:WeekReviewViewModel" 
             Command="{Binding LoadWeekCommand}" 
@@ -21,16 +25,16 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                            <StackLayout HorizontalOptions="StartAndExpand"
-                                Orientation="Horizontal"
-                                x:DataType="model:JobInADay">
+                        <StackLayout HorizontalOptions="StartAndExpand"
+                            Orientation="Vertical"
+                            x:DataType="model:JobInADay">
                             <Grid Padding="10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="40" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
@@ -38,26 +42,33 @@
                                     Grid.Column="1"
                                     Text="{Binding day_name}"
                                     FontAttributes="Bold" />
+                                <Label Grid.Row="0"
+                                    Grid.Column="2"
+                                    Text="{Binding day_date}"
+                                    FontAttributes="Bold" />
                                 <Label Grid.Row="1"
                                     Grid.Column="1"
-                                    Text="{Binding day_total_hours, StringFormat='{0:####.##} hrs'}"
+                                    Text="{Binding day_total_hours, StringFormat='{0:##.##} hrs'}"
                                     FontAttributes="Italic"
                                     VerticalOptions="End" />
                                 <Label Grid.Row="1"
                                     Grid.Column="2"
-                                    Text="{Binding day_total_jobs}"
+                                    Text="{Binding day_total_jobs, StringFormat='{0} activities'}"
                                     FontAttributes="Italic"
                                     VerticalOptions="End" />
-                                <Button Grid.Row="1"
-                                    Grid.Column="3"
-                                    HeightRequest="30"
-                                    WidthRequest="30"
-                                    CornerRadius="15"
-                                    Text="M"
+                                <Button Grid.Row="0"
+                                    Grid.Column="0"
+                                    HeightRequest="40"
+                                    WidthRequest="40"
+                                    CornerRadius="20"
+                                    Text=">"
                                     Clicked="OnMore"
                                     CommandParameter="{Binding .}"/>
                             </Grid>
-                            </StackLayout>
+                            <BoxView HeightRequest="1" 
+                                     HorizontalOptions="Fill"
+                                     Color="{StaticResource AccentLight}"/>
+                        </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

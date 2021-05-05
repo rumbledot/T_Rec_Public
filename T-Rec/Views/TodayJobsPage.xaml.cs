@@ -38,11 +38,11 @@ namespace T_Rec.Views
 
                 tbtn_add_job.IsEnabled = _view_model.can_add_job;
 
-                if (_view_model.can_add_job) JobsListView.Position = 1;
+                //if (_view_model.can_add_job) JobsListView.Position = 1;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"On appearing error \n {ex.Message} \n {ex.StackTrace}");
+                //Console.WriteLine($"On appearing error \n {ex.Message} \n {ex.StackTrace}");
             }
         }
 
@@ -63,7 +63,7 @@ namespace T_Rec.Views
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to set job to done \n {ex.Message} \n {ex.StackTrace}");
+                //Console.WriteLine($"Failed to set job to done \n {ex.Message} \n {ex.StackTrace}");
             }
         }
 
@@ -80,7 +80,7 @@ namespace T_Rec.Views
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to delete job {j.job_id} \n {ex.Message} \n {ex.StackTrace}");
+                //Console.WriteLine($"Failed to delete job {j.job_id} \n {ex.Message} \n {ex.StackTrace}");
             }
         }
 

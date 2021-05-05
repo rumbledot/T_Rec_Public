@@ -28,7 +28,8 @@ namespace T_Rec.Models
         { 
             get 
             {
-                return Math.Abs(time_end.Subtract(time_start).TotalHours) < 0.001 ? 0 : Math.Abs(time_end.Subtract(time_start).TotalHours);
+                //return (Math.Abs(time_end.Subtract(time_start).TotalHours)).ToString("0000.00");
+                return Math.Abs(time_end.Subtract(time_start).TotalHours) < 0.009 ? 0 : Math.Abs(time_end.Subtract(time_start).TotalHours);
             }
         }
 

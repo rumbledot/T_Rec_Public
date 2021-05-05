@@ -20,6 +20,13 @@ namespace T_Rec.ViewModels
             set { SetProperty(ref _total_week_hours, value); }
         }
 
+        string _total_week_hours_string = "0";
+        public string total_week_hours_string
+        {
+            get { return _total_week_hours_string; }
+            set { SetProperty(ref _total_week_hours_string, value); }
+        }
+
         public ObservableCollection<JobInADay> Days { get; }
         public Command LoadWeekCommand { get; }
 
@@ -34,7 +41,7 @@ namespace T_Rec.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"WeekReviewViewModel error \n {ex.Message} \n {ex.StackTrace}");
+                //Console.WriteLine($"WeekReviewViewModel error \n {ex.Message} \n {ex.StackTrace}");
             }
         }
 
@@ -48,7 +55,7 @@ namespace T_Rec.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"WeekReviewViewModel error \n {ex.Message} \n {ex.StackTrace}");
+                //Console.WriteLine($"WeekReviewViewModel error \n {ex.Message} \n {ex.StackTrace}");
             }
         }
 
@@ -72,7 +79,7 @@ namespace T_Rec.ViewModels
 
                 var jobs = await Database.GetWeekReviews();
 
-                Console.WriteLine($"total jobs in week {jobs.Count}");
+                //Console.WriteLine($"total jobs in week {jobs.Count}");
 
                 //week starts on Monday, ends on Saturday
                 foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek))
@@ -87,12 +94,13 @@ namespace T_Rec.ViewModels
 
                     today_jobs = jobs.Where<JobUnit>(j =>(j.time_start > each_day && j.time_start < each_day_end)).OrderBy(j => (j.time_start)).ToList();
 
-                    Console.WriteLine($"Day : {day.ToString()}");
-                    Console.WriteLine($"day total hours : {total_hours}");
+                    //Console.WriteLine($"Day : {day.ToString()}");
+                    //Console.WriteLine($"day total hours : {total_hours}");
 
                     JobInADay day_reviews = new JobInADay()
                     {
                         day_name = day.ToString(),
+                        day_date = each_day.ToString("d MMM yyyy"),
                         day_total_hours = total_hours,
                         day_total_jobs = 0
                     };
@@ -101,26 +109,34 @@ namespace T_Rec.ViewModels
                     {
                         foreach (var job in today_jobs)
                         {
-                            Console.WriteLine($"job : {job.project_name} : {job.job_time_in_hours}");
+                            //Console.WriteLine($"job : {job.time_end} - {job.time_start}");
+                            //Console.WriteLine($"job : {job.time_end.Subtract(job.time_start).TotalHours}");
+                            //Console.WriteLine($"job : {job.project_name} : {job.job_time_in_hours}");
                             total_hours += job.job_time_in_hours;
                         }
 
                         day_reviews = new JobInADay()
                         {
                             day_name = day.ToString(),
+                            day_date = each_day.ToString("d MMM yyyy"),
                             day_total_hours = total_hours,
                             day_total_jobs = today_jobs.Count
                         };
                     }
 
                     total_week_hours += total_hours;
+
+                    total_week_hours_string = total_week_hours.ToString("0000.00");
                     Days.Add(day_reviews);
                 }
-                Console.WriteLine($"week total hours : {total_week_hours}");
+
+                DependencyService.Get<Toast>().Show("Weekly Reviews ready");
+                //Console.WriteLine($"week total hours : {total_week_hours}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to load week reviews \n {ex.Message} \n {ex.StackTrace}");
+                DependencyService.Get<Toast>().Show($"Failed to load week reviews \n {ex.Message}");
+                //Console.WriteLine($"Failed to load week reviews \n {ex.Message} \n {ex.StackTrace}");
             }
             finally
             {

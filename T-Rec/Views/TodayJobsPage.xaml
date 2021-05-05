@@ -17,32 +17,32 @@
     
     <AbsoluteLayout>
         <StackLayout BackgroundColor="{StaticResource PrimaryLight}"
-            Orientation="Vertical" 
-            Margin="30,30,30,30"
-            VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            Orientation="Horizontal"
+            Padding="20, 0, 20, 0"
+            AbsoluteLayout.LayoutBounds="0, 0.2, 1, 0.8"
+            AbsoluteLayout.LayoutFlags="All">
 
             <RefreshView x:DataType="vm:JobsViewModel"
                 IsRefreshing="{Binding is_busy, Mode=TwoWay}"
                 x:Name="JobsRefreshView"
-                Command="{Binding LoadTodayJobsCommand}"
-                CommandParameter="{x:Reference JobsListView}">
-                <CarouselView x:Name="JobsListView"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Fill"
-                    PeekAreaInsets="30"
-                    HeightRequest="400"
-                    IndicatorView="indicatorView"
+                Command="{Binding LoadTodayJobsCommand}">
+                <CollectionView x:Name="JobsListView"            
+                    AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.8, 0.8"
+                    AbsoluteLayout.LayoutFlags="All"
                     ItemsSource="{Binding Jobs}">
-                    <CarouselView.ItemsLayout>
+                    <!--HeightRequest="400"-->
+                    <!--IndicatorView="indicatorView"
+                    PeekAreaInsets="30"-->
+                    <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal"
-                            SnapPointsType="MandatorySingle"
+                            ItemSpacing="20"/>
+                        <!--SnapPointsType="MandatorySingle"
                             SnapPointsAlignment="Start"
-                            ItemSpacing="20" />
-                    </CarouselView.ItemsLayout>
-                    <CarouselView.EmptyView>
+                            ItemSpacing="20" />-->
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.EmptyView>
                         <ContentView>
-                            <StackLayout HorizontalOptions="CenterAndExpand"
-                             VerticalOptions="CenterAndExpand">
+                            <StackLayout>
                                 <Label Text="No job created for today.."
                                     Margin="10,25,10,10"
                                     FontAttributes="Bold"
@@ -68,8 +68,8 @@
                                 <!--Clicked="OnJobDelete"-->
                             </StackLayout>
                         </ContentView>
-                    </CarouselView.EmptyView>
-                    <CarouselView.ItemTemplate>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
                             <Frame HasShadow="True"
@@ -147,8 +147,8 @@
                             </Frame>
                             </StackLayout>
                         </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
             </RefreshView>
             

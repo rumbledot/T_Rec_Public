@@ -30,12 +30,12 @@ namespace T_Rec
         {
             try
             {
-                Console.WriteLine($"getting {DateTime.Now} jobs");
+                //Console.WriteLine($"getting {DateTime.Now} jobs");
                 return GetTodayJobs(DateTime.Now);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to get today jobs \n {ex.Message} \n {ex.StackTrace}");
+                //Console.WriteLine($"Failed to get today jobs \n {ex.Message} \n {ex.StackTrace}");
                 throw ex;
             }
         }
@@ -44,7 +44,7 @@ namespace T_Rec
         {
             today = DateTime.Parse(today.Date.ToString("yyyy-MM-dd 00:00:00"));
             DateTime today_end = DateTime.Parse(today.AddDays(1).ToString("yyyy-MM-dd 00:00:00"));
-            Console.WriteLine($"getting jobs between {today} - {today_end}");
+            //Console.WriteLine($"getting jobs between {today} - {today_end}");
 
             return Database.Table<JobUnit>().Where(job => (
             job.time_start > today && job.time_start < today_end)).OrderByDescending(job =>(job.time_start)).ToListAsync();
@@ -68,14 +68,14 @@ namespace T_Rec
                 delta = DayOfWeek.Saturday - input.DayOfWeek;
                 weekend_day = DateTime.Parse(input.AddDays(delta + 1 + sunday_offset).ToString("yyyy-MM-dd 00:00:00"));
 
-                Console.WriteLine($"week start : {weekstart_day} - {weekend_day}");
+                //Console.WriteLine($"week start : {weekstart_day} - {weekend_day}");
 
                 return Database.Table<JobUnit>().Where(job => (
                 job.time_start > weekstart_day && job.time_start < weekend_day)).ToListAsync();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"failed to get week reviews \n {ex.Message} \n {ex.StackTrace}");
+                //Console.WriteLine($"failed to get week reviews \n {ex.Message} \n {ex.StackTrace}");
                 throw ex;
             }
         }

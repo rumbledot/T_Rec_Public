@@ -42,7 +42,9 @@ namespace T_Rec.Views
                     day_total_jobs = 0
                 };
             }
-            Console.WriteLine($"Detail clicked {j.day_name} : {j.day_total_hours}hrs : {j.day_total_jobs}");
+
+            DependencyService.Get<Toast>().Show($"Detail clicked {j.day_name} : {j.day_total_hours}hrs : {j.day_total_jobs}");
+            //Console.WriteLine($"Detail clicked {j.day_name} : {j.day_total_hours}hrs : {j.day_total_jobs}");
         }
     }
 }
