@@ -13,8 +13,6 @@ namespace T_Rec
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
-            DependencyService.Register<JobsMockData>();
             MainPage = new AppShell();
         }
 

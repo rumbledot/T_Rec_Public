@@ -8,14 +8,15 @@
     <Application.Resources>
         <ResourceDictionary>
             <local:NegateBooleanConverter x:Key="inverter"/>
-            <Color x:Key="Primary">#c8e6c9</Color>
-            <Color x:Key="PrimaryLight">#fbfffc</Color>
-            <Color x:Key="PrimaryDark">#97b498</Color>
-            <Color x:Key="Accent">#3f594e</Color>
-            <Color x:Key="AccentLight">#6a867a</Color>
-            <Color x:Key="AccentDark">#173026</Color>
+            <Color x:Key="Background">#edf6f9</Color>
+            <Color x:Key="Primary">#78909c</Color>
+            <Color x:Key="PrimaryLight">#a7c0cd</Color>
+            <Color x:Key="PrimaryDark">#4b636e</Color>
+            <Color x:Key="Accent">#f9a825</Color>
+            <Color x:Key="AccentLight">#ffd95a</Color>
+            <Color x:Key="AccentDark">#c17900</Color>
             <Color x:Key="PrimaryText">#000000</Color>
-            <Color x:Key="AccentText">#ffffff</Color>
+            <Color x:Key="AccentText">#000000</Color>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="{StaticResource PrimaryText}"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">

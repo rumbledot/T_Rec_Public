@@ -26,8 +26,6 @@ namespace T_Rec.ViewModels
         public ObservableCollection<JobUnit> Jobs { get; }
         public Command LoadTodayJobsCommand { get; }
         public Command OnAddJobCommand { get; }
-        //public Command OnJobDoneCommand { get; }
-        //public Command OnJobDeleteCommand { get; }
 
         public JobsViewModel(ToolbarItem btn)
         {
@@ -35,14 +33,9 @@ namespace T_Rec.ViewModels
             toolbtn_add_new_job = btn;
             Jobs = new ObservableCollection<JobUnit>();
 
-            //LoadTodayJobsCommand = new Command(async (object view) => await ExecuteLoadJobsCommand(view));
             LoadTodayJobsCommand = new Command(async () => await ExecuteLoadJobsCommand());
 
             OnAddJobCommand = new Command(async () => await OnAddJob());
-
-            //OnJobDoneCommand = new Command(async (object item) => await OnJobDone(item));
-
-            //OnJobDeleteCommand = new Command(async (object item) => await OnJobDelete(item));
         }
 
         public async void OnAppearing()
@@ -53,7 +46,6 @@ namespace T_Rec.ViewModels
         }
 
         async Task ExecuteLoadJobsCommand()
-        //async Task ExecuteLoadJobsCommand(object view)
         {
             is_busy = true;
             can_add_job = true;
@@ -64,7 +56,7 @@ namespace T_Rec.ViewModels
 
                 Jobs.Clear();
                 var items = await Database.GetTodayJobs();
-                //Console.WriteLine($"item count {items.Count}");
+                
                 if (items != null && items.Count > 0)
                 {
                     foreach (JobUnit item in items)
@@ -72,8 +64,6 @@ namespace T_Rec.ViewModels
                         Jobs.Add(item);
                         if (!item.job_done)
                         {
-                            //Console.WriteLine($"job {item.job_id} is not done");
-
                             can_add_job = false;
                         }
                     }
@@ -82,15 +72,10 @@ namespace T_Rec.ViewModels
 
                     toolbtn_add_new_job.IsEnabled = can_add_job;
                 }
-
-                //CarouselView jobview = view as CarouselView;
-                //jobview.Position = 1;
-                //Console.WriteLine("View orientation " + jobview.ItemsLayout.Orientation);
             }
             catch (Exception ex)
             {
                 DependencyService.Get<Toast>().Show($"Failed to load today's jobs \n {ex.Message}");
-                //Console.WriteLine($"Failed to load today jobs \n {ex.Message} \n {ex.StackTrace}");
             }
             finally
             {
@@ -101,40 +86,6 @@ namespace T_Rec.ViewModels
         private async Task OnAddJob()
         {
             await Shell.Current.GoToAsync(nameof(JobPage));
-            //if (can_add_job)
-            //{
-            //    await Shell.Current.GoToAsync(nameof(JobPage));
-            //}
         }
-
-        //private async Task OnJobDone(object item)
-        //{
-        //    try
-        //    {
-        //        JobUnit job = (JobUnit)item;
-        //        job.job_done = true;
-        //        job.time_end = DateTime.Now;
-
-        //        await Database.SaveItemAsync(job);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Failed to set job done \n {ex.Message} \n {ex.StackTrace}");
-        //    }
-        //}
-
-        //private async Task OnJobDelete(object item)
-        //{
-        //    try
-        //    {
-        //        JobUnit job = (JobUnit)item;
-
-        //        await Database.DeleteItemAsync(job);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Failed to delete job done \n {ex.Message} \n {ex.StackTrace}");
-        //    }
-        //}
     }
 }

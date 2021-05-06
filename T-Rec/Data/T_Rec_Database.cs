@@ -14,12 +14,15 @@ namespace T_Rec
     {
         static SQLiteAsyncConnection Database;
 
-        public static readonly AsyncLazy<T_Rec_Database> Instance = new AsyncLazy<T_Rec_Database>(async () =>
-        {
-            var instance = new T_Rec_Database();
-            CreateTableResult result = await Database.CreateTableAsync<JobUnit>();
-            return instance;
-        });
+        public static readonly AsyncLazy<T_Rec_Database> Instance = new AsyncLazy<T_Rec_Database>
+        (
+            async () =>
+            {
+                var instance = new T_Rec_Database();
+                CreateTableResult result = await Database.CreateTableAsync<JobUnit>();
+                return instance;
+            }
+        );
 
         public T_Rec_Database()
         {
@@ -30,12 +33,10 @@ namespace T_Rec
         {
             try
             {
-                //Console.WriteLine($"getting {DateTime.Now} jobs");
                 return GetTodayJobs(DateTime.Now);
             }
             catch (Exception ex)
             {
-                //Console.WriteLine($"Failed to get today jobs \n {ex.Message} \n {ex.StackTrace}");
                 throw ex;
             }
         }
@@ -68,14 +69,18 @@ namespace T_Rec
                 delta = DayOfWeek.Saturday - input.DayOfWeek;
                 weekend_day = DateTime.Parse(input.AddDays(delta + 1 + sunday_offset).ToString("yyyy-MM-dd 00:00:00"));
 
-                //Console.WriteLine($"week start : {weekstart_day} - {weekend_day}");
-
-                return Database.Table<JobUnit>().Where(job => (
-                job.time_start > weekstart_day && job.time_start < weekend_day)).ToListAsync();
+                return Database.Table<JobUnit>()
+                    .Where
+                    (
+                        job => 
+                        (
+                            job.time_start > weekstart_day && job.time_start < weekend_day
+                        )
+                    )
+                    .ToListAsync();
             }
             catch (Exception ex)
             {
-                //Console.WriteLine($"failed to get week reviews \n {ex.Message} \n {ex.StackTrace}");
                 throw ex;
             }
         }
@@ -88,13 +93,17 @@ namespace T_Rec
 
         public Task<List<JobUnit>> GetItemsNotDoneAsync()
         {
-            // SQL queries are also possible
             return Database.QueryAsync<JobUnit>("SELECT * FROM [JOBUNIT] WHERE [JOB_DONE] = 0");
         }
 
         public Task<JobUnit> GetItemAsync(int id)
         {
-            return Database.Table<JobUnit>().Where(i => i.job_id == id).FirstOrDefaultAsync();
+            return Database.Table<JobUnit>()
+                .Where
+                (
+                    i => i.job_id == id
+                )
+                .FirstOrDefaultAsync();
         }
 
         public Task<int> SaveItemAsync(JobUnit item)

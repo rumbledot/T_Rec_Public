@@ -41,6 +41,7 @@ namespace T_Rec.ViewModels
             }
             catch (Exception ex)
             {
+                DependencyService.Get<Toast>().Show("Page failed to load");
                 //Console.WriteLine($"WeekReviewViewModel error \n {ex.Message} \n {ex.StackTrace}");
             }
         }
@@ -55,6 +56,7 @@ namespace T_Rec.ViewModels
             }
             catch (Exception ex)
             {
+                DependencyService.Get<Toast>().Show("Database instance failed");
                 //Console.WriteLine($"WeekReviewViewModel error \n {ex.Message} \n {ex.StackTrace}");
             }
         }

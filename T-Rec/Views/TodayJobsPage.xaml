@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib" 
-             xmlns:local="clr-namespace:T_Rec.Services" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"  
              xmlns:vm="clr-namespace:T_Rec.ViewModels" 
              xmlns:model="clr-namespace:T_Rec.Models"
              x:Class="T_Rec.Views.TodayJobsPage"
@@ -16,7 +15,8 @@
     </ContentPage.ToolbarItems>
     
     <AbsoluteLayout>
-        <StackLayout BackgroundColor="{StaticResource PrimaryLight}"
+        <StackLayout 
+            BackgroundColor="{StaticResource Background}"
             Orientation="Horizontal"
             Padding="20, 0, 20, 0"
             AbsoluteLayout.LayoutBounds="0, 0.2, 1, 0.8"
@@ -30,15 +30,9 @@
                     AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.8, 0.8"
                     AbsoluteLayout.LayoutFlags="All"
                     ItemsSource="{Binding Jobs}">
-                    <!--HeightRequest="400"-->
-                    <!--IndicatorView="indicatorView"
-                    PeekAreaInsets="30"-->
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal"
                             ItemSpacing="20"/>
-                        <!--SnapPointsType="MandatorySingle"
-                            SnapPointsAlignment="Start"
-                            ItemSpacing="20" />-->
                     </CollectionView.ItemsLayout>
                     <CollectionView.EmptyView>
                         <ContentView>
@@ -65,7 +59,6 @@
                                     x:Name="btn_start_job"
                                     Command="{Binding OnAddJobCommand}"
                                     CommandParameter="{Binding .}"/>
-                                <!--Clicked="OnJobDelete"-->
                             </StackLayout>
                         </ContentView>
                     </CollectionView.EmptyView>

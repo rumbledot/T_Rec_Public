@@ -10,9 +10,6 @@ namespace T_Rec.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
-        public IDataStore<JobUnit> JobDataStore => DependencyService.Get<IDataStore<JobUnit>>();
-
         bool _is_busy = false;
         public bool is_busy
         {

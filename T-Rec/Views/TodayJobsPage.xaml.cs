@@ -37,12 +37,10 @@ namespace T_Rec.Views
                 _view_model.OnAppearing();
 
                 tbtn_add_job.IsEnabled = _view_model.can_add_job;
-
-                //if (_view_model.can_add_job) JobsListView.Position = 1;
             }
             catch (Exception ex)
             {
-                //Console.WriteLine($"On appearing error \n {ex.Message} \n {ex.StackTrace}");
+                DependencyService.Get<Toast>().Show("Page load failed");
             }
         }
 
@@ -63,7 +61,7 @@ namespace T_Rec.Views
             }
             catch (Exception ex)
             {
-                //Console.WriteLine($"Failed to set job to done \n {ex.Message} \n {ex.StackTrace}");
+                DependencyService.Get<Toast>().Show("Failed to set a job to done");
             }
         }
 
@@ -80,7 +78,7 @@ namespace T_Rec.Views
             }
             catch (Exception ex)
             {
-                //Console.WriteLine($"Failed to delete job {j.job_id} \n {ex.Message} \n {ex.StackTrace}");
+                DependencyService.Get<Toast>().Show("Failed to delete a job");
             }
         }
 
