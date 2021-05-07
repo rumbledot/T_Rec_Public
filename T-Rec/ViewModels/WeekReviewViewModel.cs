@@ -13,6 +13,9 @@ namespace T_Rec.ViewModels
     {
         private T_Rec_Database Database;
 
+        public ObservableCollection<JobInADay> Days { get; }
+        public Command LoadWeekCommand { get; }
+
         double _total_week_hours = 0;
         public double total_week_hours
         {
@@ -23,12 +26,17 @@ namespace T_Rec.ViewModels
         string _total_week_hours_string = "0";
         public string total_week_hours_string
         {
-            get { return _total_week_hours_string; }
-            set { SetProperty(ref _total_week_hours_string, value); }
+            get 
+            {
+                int proper_hour = (int)Math.Floor(_total_week_hours);
+                int proper_min = (int)Math.Ceiling((_total_week_hours - proper_hour) * 60);
+                return $"{proper_hour} hrs : {proper_min} mins";
+            }
+            set 
+            {
+                SetProperty(ref _total_week_hours_string, value);
+            }
         }
-
-        public ObservableCollection<JobInADay> Days { get; }
-        public Command LoadWeekCommand { get; }
 
         public WeekReviewViewModel()
         {
@@ -41,7 +49,7 @@ namespace T_Rec.ViewModels
             }
             catch (Exception ex)
             {
-                DependencyService.Get<Toast>().Show("Page failed to load");
+                DependencyService.Get<Toast>().Show($"Page failed to load \n {ex.Message}");
                 //Console.WriteLine($"WeekReviewViewModel error \n {ex.Message} \n {ex.StackTrace}");
             }
         }
@@ -56,7 +64,7 @@ namespace T_Rec.ViewModels
             }
             catch (Exception ex)
             {
-                DependencyService.Get<Toast>().Show("Database instance failed");
+                DependencyService.Get<Toast>().Show($"Database instance failed \n {ex.Message}");
                 //Console.WriteLine($"WeekReviewViewModel error \n {ex.Message} \n {ex.StackTrace}");
             }
         }
@@ -127,8 +135,7 @@ namespace T_Rec.ViewModels
                     }
 
                     total_week_hours += total_hours;
-
-                    total_week_hours_string = total_week_hours.ToString("0000.00");
+;
                     Days.Add(day_reviews);
                 }
 
@@ -138,7 +145,6 @@ namespace T_Rec.ViewModels
             catch (Exception ex)
             {
                 DependencyService.Get<Toast>().Show($"Failed to load week reviews \n {ex.Message}");
-                //Console.WriteLine($"Failed to load week reviews \n {ex.Message} \n {ex.StackTrace}");
             }
             finally
             {

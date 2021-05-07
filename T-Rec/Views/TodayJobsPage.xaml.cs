@@ -48,6 +48,8 @@ namespace T_Rec.Views
         {
             try
             {
+                IsBusy = true;
+
                 var item = sender as Button;
                 JobUnit j = item.CommandParameter as JobUnit;
                 j.time_end = DateTime.Now;
@@ -62,6 +64,10 @@ namespace T_Rec.Views
             catch (Exception ex)
             {
                 DependencyService.Get<Toast>().Show("Failed to set a job to done");
+            }
+            finally 
+            {
+                IsBusy = false;
             }
         }
 

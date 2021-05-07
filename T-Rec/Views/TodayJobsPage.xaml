@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:T_Rec.ViewModels" 
              xmlns:model="clr-namespace:T_Rec.Models"
              x:Class="T_Rec.Views.TodayJobsPage"
+             BackgroundColor="{StaticResource Background}"
              Title="{Binding Title}">
     
     <ContentPage.ToolbarItems>
@@ -15,8 +16,7 @@
     </ContentPage.ToolbarItems>
     
     <AbsoluteLayout>
-        <StackLayout 
-            BackgroundColor="{StaticResource Background}"
+        <StackLayout
             Orientation="Horizontal"
             Padding="20, 0, 20, 0"
             AbsoluteLayout.LayoutBounds="0, 0.2, 1, 0.8"

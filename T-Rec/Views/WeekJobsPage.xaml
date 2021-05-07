@@ -5,16 +5,23 @@
              xmlns:vm="clr-namespace:T_Rec.ViewModels"
              xmlns:model="clr-namespace:T_Rec.Models" 
              x:Name="WeekJobsReviews"
+             BackgroundColor="{StaticResource Background}"
              Title="{Binding Title}">
 
     <StackLayout>
-        <Label 
-            x:DataType="vm:WeekReviewViewModel"
-            FontSize="Title"
-            Text="{Binding total_week_hours_string, StringFormat='This week total hours : {0:####.##}'}"/>
-        <BoxView HeightRequest="1" 
+        <StackLayout>
+            <Label 
+                x:DataType="vm:WeekReviewViewModel"
+                FontSize="Title"
+                Text="{Binding total_week_hours_string, StringFormat='Your week in review'}"/>
+            <Label 
+                x:DataType="vm:WeekReviewViewModel"
+                FontSize="Small"
+                Text="{Binding total_week_hours_string, StringFormat='This week total hours : {0}'}"/>
+            <BoxView HeightRequest="1" 
             HorizontalOptions="Fill"
             Color="{StaticResource AccentLight}"/>
+        </StackLayout>
 
         <RefreshView x:DataType="vm:WeekReviewViewModel" 
             Command="{Binding LoadWeekCommand}" 
@@ -22,7 +29,6 @@
 
             <CollectionView x:Name="WeekListView"
                     ItemsSource="{Binding Days}">
-
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout HorizontalOptions="StartAndExpand"
@@ -48,7 +54,7 @@
                                     FontAttributes="Bold" />
                                 <Label Grid.Row="1"
                                     Grid.Column="1"
-                                    Text="{Binding day_total_hours, StringFormat='{0:##.##} hrs'}"
+                                    Text="{Binding day_total_hours_string}"
                                     FontAttributes="Italic"
                                     VerticalOptions="End" />
                                 <Label Grid.Row="1"
