@@ -10,21 +10,21 @@ using T_Rec.Models;
 namespace T_Rec
 {
     //https://docs.microsoft.com/en-us/xamarin/xamarin-forms/data-cloud/data/databases
-    public class T_Rec_Database
+    public partial class T_Rec_DB_Job
     {
         static SQLiteAsyncConnection Database;
 
-        public static readonly AsyncLazy<T_Rec_Database> Instance = new AsyncLazy<T_Rec_Database>
+        public static readonly AsyncLazy<T_Rec_DB_Job> Instance = new AsyncLazy<T_Rec_DB_Job>
         (
             async () =>
             {
-                var instance = new T_Rec_Database();
+                var instance = new T_Rec_DB_Job();
                 CreateTableResult result = await Database.CreateTableAsync<JobUnit>();
                 return instance;
             }
         );
 
-        public T_Rec_Database()
+        public T_Rec_DB_Job()
         {
             Database = new SQLiteAsyncConnection(T_Rec_Controller.DatabasePath, T_Rec_Controller.Flags);
         }

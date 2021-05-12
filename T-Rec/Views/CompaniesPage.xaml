@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="T_Rec.Views.CompaniesPage"
+             xmlns:vm="clr-namespace:T_Rec.ViewModels"
+             xmlns:model="clr-namespace:T_Rec.Models"
+             x:Name="CompanyListPage"
+             BackgroundColor="{StaticResource Background}"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add"
+            x:Name="tbtn_add_job"
+            x:DataType="vm:CompaniesViewModel"
+            Command="{Binding OnAddCompanyCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <Label 
+                    FontSize="Title"
+                    Text="Registered Companies"/>
+                <Label 
+                    FontSize="Small"
+                    Text="Create a company to create a project."/>
+                <Label 
+                    FontSize="Small"
+                    Text="Including your own company to create unbillable projects and activities (eg. lunch break)."/>
+            </StackLayout>
+
+            <RefreshView x:DataType="vm:CompaniesViewModel" 
+                         Command="{Binding LoadCompaniesCommand}" 
+                         IsRefreshing="{Binding is_busy, Mode=TwoWay}">
+
+                <CollectionView x:Name="WeekListView"
+                                ItemsSource="{Binding Companies}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout HorizontalOptions="StartAndExpand"
+                                         Orientation="Vertical"
+                                         x:DataType="model:Company">
+                                <Grid Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0"
+                                           Grid.Column="0"
+                                           Grid.ColumnSpan="4"
+                                           Text="{Binding name}"
+                                           FontAttributes="Bold" />
+                                    <Label Grid.Row="1"
+                                           Grid.Column="0"
+                                           Grid.ColumnSpan="4"
+                                           Text="{Binding email}"
+                                           FontAttributes="Bold" />
+                                    <Button Grid.Row="3"
+                                            Grid.Column="0"
+                                            HeightRequest="40"
+                                            WidthRequest="40"
+                                            CornerRadius="20"
+                                            BackgroundColor="ForestGreen"
+                                            Text="!"
+                                            Clicked="OnEdit"
+                                            CommandParameter="{Binding .}"/>
+                                    <Button Grid.Row="3"
+                                            Grid.Column="1"
+                                            HeightRequest="40"
+                                            WidthRequest="40"
+                                            CornerRadius="20"
+                                            BackgroundColor="Red"
+                                            Text="X"
+                                            Clicked="OnDelete"
+                                            CommandParameter="{Binding .}"/>
+                                </Grid>
+                                <BoxView HeightRequest="1" 
+                                         HorizontalOptions="Fill"
+                                         Color="{StaticResource AccentLight}"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </RefreshView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

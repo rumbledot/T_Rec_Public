@@ -22,16 +22,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\JobPage\NewJobPage.xaml.cs">
+      <DependentUpon>NewJobPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\WeekJobsPage.xaml.cs">
       <DependentUpon>WeekJobsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\JobPage.xaml">
+    <EmbeddedResource Update="Views\CompaniesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\TodayJobsPage.xaml">
+    <EmbeddedResource Update="Views\JobPage\NewJobPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\NewProjectPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ProjectsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\JobPage\TodayJobsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

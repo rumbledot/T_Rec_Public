@@ -12,7 +12,7 @@ namespace T_Rec.ViewModels
 {
     public class JobsViewModel : BaseViewModel
     {
-        private T_Rec_Database Database;
+        private T_Rec_DB_Job Database;
 
         bool _can_add_job = true;
         public bool can_add_job
@@ -42,7 +42,7 @@ namespace T_Rec.ViewModels
         {
             is_busy = true;
 
-            this.Database = await T_Rec_Database.Instance;
+            this.Database = await T_Rec_DB_Job.Instance;
         }
 
         async Task ExecuteLoadJobsCommand()
@@ -52,8 +52,6 @@ namespace T_Rec.ViewModels
 
             try
             {
-                this.Database = await T_Rec_Database.Instance;
-
                 Jobs.Clear();
                 var items = await Database.GetTodayJobs();
                 
@@ -85,7 +83,7 @@ namespace T_Rec.ViewModels
 
         private async Task OnAddJob()
         {
-            await Shell.Current.GoToAsync(nameof(JobPage));
+            await Shell.Current.GoToAsync(nameof(NewJobPage));
         }
     }
 }

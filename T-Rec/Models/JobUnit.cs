@@ -12,8 +12,6 @@ namespace T_Rec.Models
         [Indexed]
         public int project_id { get; set; }
 
-        public string project_name { get; set; }
-
         [MaxLength(200)]
         public string description { get; set; }
 
@@ -22,6 +20,9 @@ namespace T_Rec.Models
         public DateTime time_end { get; set; }
 
         public bool job_done { get; set; }
+
+        [Ignore]
+        public string project_name { get; set; }
 
         [Ignore]
         public double job_time_in_hours
@@ -40,6 +41,12 @@ namespace T_Rec.Models
             {
                 return job_done ? Color.LightGray : Color.WhiteSmoke;
             }
+        }
+
+        public string GetProjectName()
+        {
+            string query = $"SELECT name FROM project WHERE project_id={project_id}";
+            return query;
         }
     }
 }

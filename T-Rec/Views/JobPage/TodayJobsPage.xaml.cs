@@ -15,7 +15,7 @@ namespace T_Rec.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TodayJobsPage : ContentPage
     {
-        private T_Rec_Database Database;
+        private T_Rec_DB_Job Database;
 
         private JobsViewModel _view_model;
 
@@ -32,7 +32,7 @@ namespace T_Rec.Views
             {
                 base.OnAppearing();
 
-                Database = await T_Rec_Database.Instance;
+                Database = await T_Rec_DB_Job.Instance;
 
                 _view_model.OnAppearing();
 
@@ -90,9 +90,9 @@ namespace T_Rec.Views
 
         async void OnJobAdded(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new JobPage
+            await Navigation.PushAsync(new NewJobPage
             {
-                BindingContext = new Models.JobUnit()
+                BindingContext = new JobUnit()
             });
         }
     }

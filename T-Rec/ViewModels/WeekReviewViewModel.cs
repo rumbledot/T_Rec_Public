@@ -11,7 +11,7 @@ namespace T_Rec.ViewModels
 {
     public class WeekReviewViewModel : BaseViewModel
     {
-        private T_Rec_Database Database;
+        private T_Rec_DB_Job Database;
 
         public ObservableCollection<JobInADay> Days { get; }
         public Command LoadWeekCommand { get; }
@@ -60,7 +60,7 @@ namespace T_Rec.ViewModels
             {
                 is_busy = true;
 
-                this.Database = await T_Rec_Database.Instance;
+                this.Database = await T_Rec_DB_Job.Instance;
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace T_Rec.ViewModels
 
                 Days.Clear();
 
-                this.Database = await T_Rec_Database.Instance;
+                this.Database = await T_Rec_DB_Job.Instance;
 
                 var jobs = await Database.GetWeekReviews();
 

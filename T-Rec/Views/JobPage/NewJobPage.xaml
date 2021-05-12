@@ -1,11 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="T_Rec.Views.JobPage"
+             xmlns:model="clr-namespace:T_Rec.Models" 
+             x:Class="T_Rec.Views.NewJobPage"
              Title="{Binding Name}">
     <Frame>
         <StackLayout Margin="20" VerticalOptions="StartAndExpand">
             <Label Text="Project" />
+            <!--<Picker x:Name="picker_active_projects"
+                Title="Projects.."
+                x:DataType="model:Project"
+                ItemsSource="{Binding Projects}"
+                ItemDisplayBinding="{Binding name}"
+                SelectedIndexChanged="Projects_SelectedIndexChanged"/>-->
             <Entry x:Name="tbox_Project_name"
                 Placeholder="Project name" 
                 PlaceholderColor="{StaticResource PrimaryLight}" 

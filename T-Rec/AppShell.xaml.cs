@@ -11,7 +11,7 @@ namespace T_Rec
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(JobPage), typeof(JobPage));
+            Routing.RegisterRoute(nameof(NewJobPage), typeof(NewJobPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
