@@ -8,7 +8,8 @@
              BackgroundColor="{StaticResource Background}"
              Title="{Binding Title}">
 
-    <StackLayout>
+    <ContentPage.Content>
+    <StackLayout Margin="10,10,10,10">
         <StackLayout>
             <Label 
                 x:DataType="vm:WeekReviewViewModel"
@@ -19,12 +20,12 @@
                 FontSize="Small"
                 Text="{Binding total_week_hours_string, StringFormat='This week total hours : {0}'}"/>
             <BoxView HeightRequest="1" 
-            HorizontalOptions="Fill"
-            Color="{StaticResource AccentLight}"/>
+                HorizontalOptions="Fill"
+                Color="{StaticResource AccentLight}"/>
         </StackLayout>
 
         <RefreshView x:DataType="vm:WeekReviewViewModel" 
-            Command="{Binding LoadWeekCommand}" 
+            Command="{Binding LoadWeekCommand}"
             IsRefreshing="{Binding is_busy, Mode=TwoWay}">
 
             <CollectionView x:Name="WeekListView"
@@ -82,5 +83,5 @@
         </RefreshView>
 
     </StackLayout>
-
+    </ContentPage.Content>
 </ContentPage>

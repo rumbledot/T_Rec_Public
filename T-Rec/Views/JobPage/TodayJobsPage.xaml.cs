@@ -21,33 +21,34 @@ namespace T_Rec.Views
 
         public TodayJobsPage()
         {
-            InitializeComponent();
-
-            BindingContext = _view_model = new JobsViewModel(tbtn_add_job);
-        }
-
-        protected override async void OnAppearing()
-        {
             try
             {
-                base.OnAppearing();
+                InitializeComponent();
 
-                Database = await T_Rec_DB_Job.Instance;
+                BindingContext = _view_model = new JobsViewModel(tbtn_add_job);
+            }
+            catch (Exception ex)
+            {
+
+                DependencyService.Get<Toast>().Show($"Page load failed {ex.Message}");
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+                base.OnAppearing();
 
                 _view_model.OnAppearing();
 
                 tbtn_add_job.IsEnabled = _view_model.can_add_job;
-            }
-            catch (Exception ex)
-            {
-                DependencyService.Get<Toast>().Show("Page load failed");
-            }
         }
 
         async void OnJobDone(object sender, EventArgs e)
         {
             try
             {
+                Database = await T_Rec_DB_Job.Instance;
+
                 IsBusy = true;
 
                 var item = sender as Button;
@@ -55,7 +56,7 @@ namespace T_Rec.Views
                 j.time_end = DateTime.Now;
                 j.job_done = true;
 
-                await Database.SaveItemAsync(j);
+                await Database.SaveJobAsync(j);
 
                 _view_model.can_add_job = true;
 
@@ -80,7 +81,7 @@ namespace T_Rec.Views
                 var item = sender as Button;
                 j = item.CommandParameter as JobUnit;
 
-                await Database.DeleteItemAsync(j);
+                await Database.DeleteJobAsync(j);
             }
             catch (Exception ex)
             {

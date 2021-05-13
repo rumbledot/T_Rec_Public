@@ -18,26 +18,26 @@ namespace T_Rec.Views
             InitializeComponent();
         }
 
-        public async void OnAppearing()
-        {
-            this.Database = await T_Rec_DB_Job.Instance;
-        }
-
         async void OnSaveClicked(object sender, EventArgs e)
         {
-            this.Database = await T_Rec_DB_Job.Instance;
-
-            JobUnit j = new JobUnit() 
+            try
             {
-                description = tbox_Description.Text,
-                time_start = DateTime.Now,
-                job_done = false
-            };
+                this.Database = await T_Rec_DB_Job.Instance;
 
-            T_Rec_DB_Job database = await T_Rec_DB_Job.Instance;
+                JobUnit j = new JobUnit()
+                {
+                    description = tbox_Description.Text,
+                    time_start = DateTime.Now,
+                    job_done = false
+                };
 
-            await database.SaveItemAsync(j);
-            await Navigation.PopAsync();
+                await Database.SaveJobAsync(j);
+                await Navigation.PopAsync();
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toast>().Show($"Failed to save job \n {ex.Message}");
+            }
         }
 
         async void OnCancelClicked(object sender, EventArgs e)

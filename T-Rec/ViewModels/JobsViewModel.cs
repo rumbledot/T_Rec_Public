@@ -38,21 +38,21 @@ namespace T_Rec.ViewModels
             OnAddJobCommand = new Command(async () => await OnAddJob());
         }
 
-        public async void OnAppearing()
+        public void OnAppearing()
         {
             is_busy = true;
-
-            this.Database = await T_Rec_DB_Job.Instance;
         }
 
         async Task ExecuteLoadJobsCommand()
         {
-            is_busy = true;
-            can_add_job = true;
-
             try
             {
+                this.Database = await T_Rec_DB_Job.Instance;
+
+                is_busy = true;
+                can_add_job = true;
                 Jobs.Clear();
+
                 var items = await Database.GetTodayJobs();
                 
                 if (items != null && items.Count > 0)

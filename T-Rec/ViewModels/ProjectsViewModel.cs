@@ -24,20 +24,21 @@ namespace T_Rec.ViewModels
             LoadProjectsCommand = new Command(async () => await ExecuteLoadProjectsCommand());
         }
 
-        public async void OnAppearing()
+        public void OnAppearing()
         {
             is_busy = true;
-
-            this.Database = await T_Rec_DB_Job.Instance;
         }
 
         async Task ExecuteLoadProjectsCommand()
         {
-            is_busy = true;
-
             try
             {
+                this.Database = await T_Rec_DB_Job.Instance;
+
+                is_busy = true;
+
                 Projects.Clear();
+
                 var items = await Database.GetTodayJobs();
 
                 if (items != null && items.Count > 0)

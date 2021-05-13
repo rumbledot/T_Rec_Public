@@ -19,7 +19,7 @@ namespace T_Rec
             async () =>
             {
                 var instance = new T_Rec_DB_Company();
-                CreateTableResult result = await Database.CreateTableAsync<JobUnit>();
+                CreateTableResult result = await Database.CreateTableAsync<Company>();
                 return instance;
             }
         );
@@ -46,7 +46,7 @@ namespace T_Rec
 
         public Task<int> SaveCompanyAsync(Company company)
         {
-            if (company.company_id != 0)
+            if (company.company_id > 0)
             {
                 return Database.UpdateAsync(company);
             }

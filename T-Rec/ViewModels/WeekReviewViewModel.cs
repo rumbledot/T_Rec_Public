@@ -50,32 +50,23 @@ namespace T_Rec.ViewModels
             catch (Exception ex)
             {
                 DependencyService.Get<Toast>().Show($"Page failed to load \n {ex.Message}");
-                //Console.WriteLine($"WeekReviewViewModel error \n {ex.Message} \n {ex.StackTrace}");
             }
         }
 
-        public async void OnAppearing()
+        public void OnAppearing()
         {
-            try
-            {
-                is_busy = true;
-
-                this.Database = await T_Rec_DB_Job.Instance;
-            }
-            catch (Exception ex)
-            {
-                DependencyService.Get<Toast>().Show($"Database instance failed \n {ex.Message}");
-                //Console.WriteLine($"WeekReviewViewModel error \n {ex.Message} \n {ex.StackTrace}");
-            }
+            is_busy = true;
         }
 
         async Task ExecuteLoadWeekCommand()
         {
-            is_busy = true;
-            total_week_hours = 0;
-            
             try
             {
+                this.Database = await T_Rec_DB_Job.Instance;
+
+                is_busy = true;
+                total_week_hours = 0;
+            
                 int delta = 0;
                 double total_hours = 0;
                 DateTime input = DateTime.Now;

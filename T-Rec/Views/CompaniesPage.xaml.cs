@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using T_Rec.Models;
+using T_Rec.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,28 +14,57 @@ namespace T_Rec.Views
     public partial class CompaniesPage : ContentPage
     {
         public T_Rec_DB_Company Database { get; set; }
+
+        private CompaniesViewModel _view_model;
+
         public CompaniesPage()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+
+                BindingContext = _view_model = new CompaniesViewModel();
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toast>().Show($"Page load failed {ex.Message}");
+            }
         }
 
-        public async void OnAppearing()
+        protected override void OnAppearing()
         {
-            this.Database = await T_Rec_DB_Company.Instance;
+            base.OnAppearing();
+
+            _view_model.OnAppearing();
         }
 
         async void OnEdit(object sender, EventArgs e)
         {
-            var item = sender as Button;
-            Company c = item.CommandParameter as Company;
+            try
+            {
+                var item = sender as Button;
+                Company c = item.CommandParameter as Company;
 
-            DependencyService.Get<Toast>().Show($"Edit a company {c.company_id}");
+                DependencyService.Get<Toast>().Show($"Edit a company {c.company_id}");
+
+                //await Navigation.PushAsync(new NewCompanyPage
+                //{
+                //    BindingContext = c
+                //});
+                await Navigation.PushAsync(new NewCompanyPage(c));
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toast>().Show($"Failed to edit a company \n {ex.Message}");
+            }
         }
 
         async void OnDelete(object sender, EventArgs e)
         {
             try
             {
+                this.Database = await T_Rec_DB_Company.Instance;
+
                 IsBusy = true;
                 var item = sender as Button;
                 Company c = item.CommandParameter as Company;
@@ -42,12 +72,14 @@ namespace T_Rec.Views
                 await Database.DeleteCompanyAsync(c);
 
                 DependencyService.Get<Toast>().Show($"Company deleted");
-
-                IsBusy = false;
             }
             catch (Exception ex)
             {
                 DependencyService.Get<Toast>().Show($"Failed to delete a company \n {ex.Message}");
+            }
+            finally 
+            {
+                IsBusy = false;
             }
         }
     }

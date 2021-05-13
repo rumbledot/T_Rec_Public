@@ -12,6 +12,8 @@ namespace T_Rec
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(NewJobPage), typeof(NewJobPage));
+            Routing.RegisterRoute(nameof(NewProjectPage), typeof(NewProjectPage));
+            Routing.RegisterRoute(nameof(NewCompanyPage), typeof(NewCompanyPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

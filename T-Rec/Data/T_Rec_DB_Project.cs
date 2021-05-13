@@ -17,7 +17,6 @@ namespace T_Rec.Data
             {
                 var instance = new T_Rec_DB_Project();
                 CreateTableResult result = await Database.CreateTableAsync<Project>();
-                result = await Database.CreateTableAsync<Company>();
                 return instance;
             }
         );

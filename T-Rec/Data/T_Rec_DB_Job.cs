@@ -26,7 +26,14 @@ namespace T_Rec
 
         public T_Rec_DB_Job()
         {
-            Database = new SQLiteAsyncConnection(T_Rec_Controller.DatabasePath, T_Rec_Controller.Flags);
+            try
+            {
+                Database = new SQLiteAsyncConnection(T_Rec_Controller.DatabasePath, T_Rec_Controller.Flags);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Task<List<JobUnit>> GetTodayJobs()
@@ -43,12 +50,19 @@ namespace T_Rec
 
         public Task<List<JobUnit>> GetTodayJobs(DateTime today)
         {
-            today = DateTime.Parse(today.Date.ToString("yyyy-MM-dd 00:00:00"));
-            DateTime today_end = DateTime.Parse(today.AddDays(1).ToString("yyyy-MM-dd 00:00:00"));
-            //Console.WriteLine($"getting jobs between {today} - {today_end}");
+            try
+            {
+                today = DateTime.Parse(today.Date.ToString("yyyy-MM-dd 00:00:00"));
+                DateTime today_end = DateTime.Parse(today.AddDays(1).ToString("yyyy-MM-dd 00:00:00"));
+                //Console.WriteLine($"getting jobs between {today} - {today_end}");
 
-            return Database.Table<JobUnit>().Where(job => (
-            job.time_start > today && job.time_start < today_end)).OrderByDescending(job =>(job.time_start)).ToListAsync();
+                return Database.Table<JobUnit>().Where(job => (
+                job.time_start > today && job.time_start < today_end)).OrderByDescending(job => (job.time_start)).ToListAsync();
+            }
+            catch (Exception ex )
+            {
+                throw ex;
+            }
         }
 
         public Task<List<JobUnit>> GetWeekReviews()
@@ -85,18 +99,18 @@ namespace T_Rec
             }
         }
 
-        public Task<List<JobUnit>> GetItemsAsync()
+        public Task<List<JobUnit>> GetJobsAsync()
         {
             return Database.Table<JobUnit>().ToListAsync();
         }
 
 
-        public Task<List<JobUnit>> GetItemsNotDoneAsync()
+        public Task<List<JobUnit>> GetJobsNotDoneAsync()
         {
             return Database.QueryAsync<JobUnit>("SELECT * FROM [JOBUNIT] WHERE [JOB_DONE] = 0");
         }
 
-        public Task<JobUnit> GetItemAsync(int id)
+        public Task<JobUnit> GetJobAsync(int id)
         {
             return Database.Table<JobUnit>()
                 .Where
@@ -106,7 +120,7 @@ namespace T_Rec
                 .FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveItemAsync(JobUnit item)
+        public Task<int> SaveJobAsync(JobUnit item)
         {
             if (item.job_id != 0)
             {
@@ -118,7 +132,7 @@ namespace T_Rec
             }
         }
 
-        public Task<int> DeleteItemAsync(JobUnit item)
+        public Task<int> DeleteJobAsync(JobUnit item)
         {
             return Database.DeleteAsync(item);
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using T_Rec.Models;
+using T_Rec.Views;
 using Xamarin.Forms;
 
 namespace T_Rec.ViewModels
@@ -16,28 +17,6 @@ namespace T_Rec.ViewModels
         public ObservableCollection<Company> Companies { get; protected set; }
         public Command LoadCompaniesCommand { get; }
         public Command OnAddCompanyCommand { get; }
-
-        double _total_week_hours = 0;
-        public double total_week_hours
-        {
-            get { return _total_week_hours; }
-            set { SetProperty(ref _total_week_hours, value); }
-        }
-
-        string _total_week_hours_string = "0";
-        public string total_week_hours_string
-        {
-            get
-            {
-                int proper_hour = (int)Math.Floor(_total_week_hours);
-                int proper_min = (int)Math.Ceiling((_total_week_hours - proper_hour) * 60);
-                return $"{proper_hour} hrs : {proper_min} mins";
-            }
-            set
-            {
-                SetProperty(ref _total_week_hours_string, value);
-            }
-        }
 
         public CompaniesViewModel()
         {
@@ -56,27 +35,19 @@ namespace T_Rec.ViewModels
             }
         }
 
-        public async void OnAppearing()
+        public void OnAppearing()
         {
-            try
-            {
-                is_busy = true;
-
-                this.Database = await T_Rec_DB_Company.Instance;
-            }
-            catch (Exception ex)
-            {
-                DependencyService.Get<Toast>().Show($"Database instance failed \n {ex.Message}");
-            }
+            is_busy = true;
         }
 
         async Task ExecuteLoadCompaniesCommand()
         {
-            is_busy = true;
-            total_week_hours = 0;
-
             try
             {
+                this.Database = await T_Rec_DB_Company.Instance;
+
+                is_busy = true;
+
                 Companies.Clear();
 
                 var companies = await Database.GetCompanies();
@@ -100,7 +71,7 @@ namespace T_Rec.ViewModels
 
         async Task OnAddCompany() 
         {
-            DependencyService.Get<Toast>().Show("Add new company command");
+            await Shell.Current.GoToAsync(nameof(NewCompanyPage));
         }
 
     }

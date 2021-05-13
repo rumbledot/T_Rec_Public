@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:model="clr-namespace:T_Rec.Models" 
-             x:Class="T_Rec.Views.NewJobPage"
+             x:Class="T_Rec.Views.NewCompanyPage"
              Title="{Binding Name}">
     <ContentPage.Content>
         <Frame>
             <StackLayout Margin="20" VerticalOptions="StartAndExpand">
-                <Label Text="Project" />
+                <Label Text="Company Name" />
                 <!--<Picker x:Name="picker_active_projects"
-                    Title="Projects.."
-                    x:DataType="model:Project"
-                    ItemsSource="{Binding Projects}"
-                    ItemDisplayBinding="{Binding name}"
-                    SelectedIndexChanged="Projects_SelectedIndexChanged"/>-->
-                <Entry x:Name="tbox_Project_name"
-                    Placeholder="Project name" 
+                Title="Projects.."
+                x:DataType="model:Project"
+                ItemsSource="{Binding Projects}"
+                ItemDisplayBinding="{Binding name}"
+                SelectedIndexChanged="Projects_SelectedIndexChanged"/>-->
+                <Entry x:Name="tbox_Company_name"
+                    Placeholder="Company Name" 
                     PlaceholderColor="{StaticResource PrimaryLight}" 
+                    MaxLength="100"
                     Text="" />
-                <Label Text="Description" />
-                <Editor x:Name="tbox_Description"
+                <Label Text="Main Email/Contact Number" />
+                <Editor x:Name="tbox_Email"
                     AutoSize="TextChanges"
                     Placeholder="Job description" 
                     PlaceholderColor="{StaticResource PrimaryLight}" 
-                    MaxLength="200"
+                    MaxLength="50"
                     Text=""/>
                 <Button Text="Save" Clicked="OnSaveClicked" />
                 <Button Text="Cancel" Clicked="OnCancelClicked" />

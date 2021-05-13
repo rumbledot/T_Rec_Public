@@ -25,7 +25,7 @@
     <Compile Update="Views\JobPage\NewJobPage.xaml.cs">
       <DependentUpon>NewJobPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\WeekJobsPage.xaml.cs">
+    <Compile Update="Views\JobPage\WeekJobsPage.xaml.cs">
       <DependentUpon>WeekJobsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -35,6 +35,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\JobPage\NewJobPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\NewCompanyPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\NewProjectPage.xaml">

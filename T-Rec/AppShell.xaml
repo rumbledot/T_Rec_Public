@@ -101,10 +101,10 @@
     <FlyoutItem Title="Week Reviews" Icon="ic_task_weekly.png">
         <ShellContent Route="WeekJobsPage" ContentTemplate="{DataTemplate local:WeekJobsPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Projects" Icon="ic_task_weekly.png">
-        <ShellContent Route="WeekJobsPage" ContentTemplate="{DataTemplate local:WeekJobsPage}" />
+    <FlyoutItem Title="Companies" Icon="ic_client_company.png">
+        <ShellContent Route="CompaniesPage" ContentTemplate="{DataTemplate local:CompaniesPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Company" Icon="ic_task_weekly.png">
+    <FlyoutItem Title="Projects" Icon="ic_client_project.png">
         <ShellContent Route="WeekJobsPage" ContentTemplate="{DataTemplate local:WeekJobsPage}" />
     </FlyoutItem>
 
