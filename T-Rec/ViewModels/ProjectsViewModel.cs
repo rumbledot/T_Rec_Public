@@ -47,34 +47,68 @@ namespace T_Rec.ViewModels
         {
             try
             {
-                this.Database = await T_Rec_DB_Project.Instance;
-                this.Database_Company = await T_Rec_DB_Company.Instance;
 
                 is_busy = true;
 
                 Projects.Clear();
 
-                var items = await Database.GetAllProjects();
-                var companies = await Database_Company.GetCompanies();
+                #region safe keeping
 
-                if (items != null && items.Count > 0 && companies != null && companies.Count > 0)
+                //this.Database = await T_Rec_DB_Project.Instance;
+                //this.Database_Company = await T_Rec_DB_Company.Instance;
+
+                //var items = await Database.GetAllProjects();
+                //var companies = await Database_Company.GetCompanies();
+
+                //if (items != null && items.Count > 0 && companies != null && companies.Count > 0)
+                //{
+                //    foreach (var item in items)
+                //    {
+                //        companies.ForEach(delegate (Company c)
+                //        {
+                //            if (c.company_id == item.company_id) item.company_name = c.name;
+                //        });
+                //        //Console.WriteLine(item.name + " : " + item.description + " : " + item.company_name);
+                //        Projects.Add(item);
+                //    }
+
+                //    DependencyService.Get<Toast>().Show("All Projects loaded");
+                //} 
+
+                #endregion //safe keeping
+
+                List<object[]> result = T_Rec_Controller.RunSQL("SELECT PROJECT.*, COMPANY.NAME FROM PROJECT JOIN COMPANY ON PROJECT.COMPANY_ID=COMPANY.COMPANY_ID", false);
+
+                Project p;
+
+                foreach (var row in result)
                 {
-                    foreach (var item in items)
+                    if (row != null)
                     {
-                        companies.ForEach(delegate (Company c)
+                        p = new Project()
                         {
-                            if (c.company_id == item.company_id) item.company_name = c.name;
-                        });
-                        Console.WriteLine(item.name + " : " + item.description + " : " + item.company_name);
-                        Projects.Add(item);
-                    }
+                            project_id = Convert.ToInt32(row[0]),
+                            company_id = Convert.ToInt32(row[1]),
+                            project_status = (ProjectStatus)Convert.ToInt32(row[2]),
+                            project_status_note = row[3].ToString(),
+                            name = row[4].ToString(),
+                            description = row[5].ToString(),
+                            project_started = Convert.ToDateTime(row[6]),
+                            project_ended = Convert.ToDateTime(row[7]),
+                            billable = Convert.ToBoolean(row[8]),
+                            company_name = row[9].ToString()
+                        };
 
-                    DependencyService.Get<Toast>().Show("All Projects loaded");
+                        Projects.Add(p);
+                        //Console.WriteLine(new string('-', 20));
+                    }
                 }
+
+                DependencyService.Get<Toast>().Show("All Projects loaded");
             }
             catch (Exception ex)
             {
-                DependencyService.Get<Toast>().Show($"Failed to load projects \n {ex.Message}");
+                DependencyService.Get<Toast>().Show($"Failed to load projects \n {ex.Message} \n {ex.StackTrace}");
             }
             finally
             {

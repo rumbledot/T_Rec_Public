@@ -21,6 +21,8 @@ namespace T_Rec.Models
 
         public bool job_done { get; set; }
 
+        public bool billable { get; set; }
+
         [Ignore]
         public string project_name { get; set; }
 

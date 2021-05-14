@@ -32,6 +32,13 @@ namespace T_Rec.Views
             }
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            _view_model.OnAppearing();
+        }
+
         public void OnMore(object sender, EventArgs e)
         {
             var item = sender as Button;

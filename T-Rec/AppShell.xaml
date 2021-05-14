@@ -95,14 +95,14 @@
         
     </Shell.FlyoutHeader>
     
-    <FlyoutItem Title="Projects" Icon="ic_client_project.png">
-        <ShellContent Route="ProjectsPage" ContentTemplate="{DataTemplate local:ProjectsPage}" />
-    </FlyoutItem>
     <FlyoutItem Title="Today's Job" Icon="ic_task_today.png">
         <ShellContent Route="TodayJobsPage" ContentTemplate="{DataTemplate local:TodayJobsPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Week Reviews" Icon="ic_task_weekly.png">
         <ShellContent Route="WeekJobsPage" ContentTemplate="{DataTemplate local:WeekJobsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Projects" Icon="ic_client_project.png">
+        <ShellContent Route="ProjectsPage" ContentTemplate="{DataTemplate local:ProjectsPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Companies" Icon="ic_client_company.png">
         <ShellContent Route="CompaniesPage" ContentTemplate="{DataTemplate local:CompaniesPage}" />
