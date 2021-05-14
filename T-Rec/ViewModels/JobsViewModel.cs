@@ -29,13 +29,20 @@ namespace T_Rec.ViewModels
 
         public JobsViewModel(ToolbarItem btn)
         {
-            Title = "Today's Jobs";
-            toolbtn_add_new_job = btn;
-            Jobs = new ObservableCollection<JobUnit>();
+            try
+            {
+                Title = "Today's Jobs";
+                toolbtn_add_new_job = btn;
+                Jobs = new ObservableCollection<JobUnit>();
 
-            LoadTodayJobsCommand = new Command(async () => await ExecuteLoadJobsCommand());
+                LoadTodayJobsCommand = new Command(async () => await ExecuteLoadJobsCommand());
 
-            OnAddJobCommand = new Command(async () => await OnAddJob());
+                OnAddJobCommand = new Command(async () => await OnAddJob());
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toast>().Show($"Page failed to load \n {ex.Message}");
+            }
         }
 
         public void OnAppearing()
@@ -78,6 +85,8 @@ namespace T_Rec.ViewModels
             finally
             {
                 is_busy = false;
+
+                this.Database = null;
             }
         }
 

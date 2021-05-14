@@ -1,12 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:T_Rec.Models"
              x:Class="T_Rec.Views.NewProjectPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+        <Frame>
+            <StackLayout Margin="20" VerticalOptions="StartAndExpand">
+                <Label Text="Company"/>
+                <Picker x:Name="picker_Company"
+                    Title="For company.."/>
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Start date" />
+                        <DatePicker x:Name="dtpicker_Start_date"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="End date" />
+                        <DatePicker x:Name="dtpicker_End_date"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand">
+                        <Label Text="Billable" FontSize="Small" />
+                        <Switch x:Name="switch_Billable"/>
+                    </StackLayout>
+                </StackLayout>
+                <Label Text="Project Name"/>
+                <Entry x:Name="tbox_Project_name"
+                    Placeholder="Project's Name" 
+                    PlaceholderColor="{StaticResource PrimaryLight}" 
+                    MaxLength="100"
+                    Text="" />
+                <Label Text="Description" />
+                <Entry x:Name="tbox_Project_description"
+                    Placeholder="Brief description"
+                    PlaceholderColor="{StaticResource PrimaryLight}" 
+                    MaxLength="200"
+                    Text="" />
+                <Label Text="Main Email/Contact Number" />
+                <Editor x:Name="tbox_Email"
+                    AutoSize="TextChanges"
+                    Placeholder="Job description" 
+                    PlaceholderColor="{StaticResource PrimaryLight}" 
+                    MaxLength="50"
+                    Text=""/>
+                <Label Text="Project Status" />
+                <Picker x:Name="picker_Project_status"
+                    Title="Status.."
+                    ItemsSource="{Binding picker_list}"
+                    SelectedItem="{Binding selected_status}"/>
+                <Label Text="Project Status Note" />
+                <Editor x:Name="tbox_Note"
+                    AutoSize="TextChanges"
+                    Placeholder="Optional note on project status" 
+                    PlaceholderColor="{StaticResource PrimaryLight}" 
+                    MaxLength="200"
+                    Text=""/>
+                <Button Text="Save" Clicked="OnSaveClicked" />
+                <Button Text="Cancel" Clicked="OnCancelClicked" />
+            </StackLayout>
+        </Frame>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -30,7 +30,7 @@ namespace T_Rec.Views
             catch (Exception ex)
             {
 
-                DependencyService.Get<Toast>().Show($"Page load failed {ex.Message}");
+                DependencyService.Get<Toast>().Show($"Page load failed \n {ex.Message}");
             }
         }
 
@@ -64,20 +64,24 @@ namespace T_Rec.Views
             }
             catch (Exception ex)
             {
-                DependencyService.Get<Toast>().Show("Failed to set a job to done");
+                DependencyService.Get<Toast>().Show($"Failed to set a job to done \n {ex.Message}");
             }
             finally 
             {
                 IsBusy = false;
+
+                Database = null;
             }
         }
 
         async void OnJobDelete(object sender, EventArgs e)
         {
-            JobUnit j = new JobUnit();
-
             try
             {
+                Database = await T_Rec_DB_Job.Instance;
+
+                JobUnit j = new JobUnit();
+
                 var item = sender as Button;
                 j = item.CommandParameter as JobUnit;
 
@@ -85,7 +89,11 @@ namespace T_Rec.Views
             }
             catch (Exception ex)
             {
-                DependencyService.Get<Toast>().Show("Failed to delete a job");
+                DependencyService.Get<Toast>().Show($"Failed to delete a job \n {ex.Message}");
+            }
+            finally 
+            {
+                Database = null;
             }
         }
 

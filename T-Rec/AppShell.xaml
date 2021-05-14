@@ -95,6 +95,9 @@
         
     </Shell.FlyoutHeader>
     
+    <FlyoutItem Title="Projects" Icon="ic_client_project.png">
+        <ShellContent Route="ProjectsPage" ContentTemplate="{DataTemplate local:ProjectsPage}" />
+    </FlyoutItem>
     <FlyoutItem Title="Today's Job" Icon="ic_task_today.png">
         <ShellContent Route="TodayJobsPage" ContentTemplate="{DataTemplate local:TodayJobsPage}" />
     </FlyoutItem>
@@ -103,9 +106,6 @@
     </FlyoutItem>
     <FlyoutItem Title="Companies" Icon="ic_client_company.png">
         <ShellContent Route="CompaniesPage" ContentTemplate="{DataTemplate local:CompaniesPage}" />
-    </FlyoutItem>
-    <FlyoutItem Title="Projects" Icon="ic_client_project.png">
-        <ShellContent Route="WeekJobsPage" ContentTemplate="{DataTemplate local:WeekJobsPage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->

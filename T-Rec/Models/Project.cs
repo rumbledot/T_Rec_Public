@@ -15,6 +15,12 @@ namespace T_Rec.Models
         all
     }
 
+    public class CompanyIDNames
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+    }
+
     public class Project
     {
         [PrimaryKey, AutoIncrement]

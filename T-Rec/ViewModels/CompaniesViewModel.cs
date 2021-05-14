@@ -66,6 +66,8 @@ namespace T_Rec.ViewModels
             finally
             {
                 is_busy = false;
+
+                this.Database = null;
             }
         }
 

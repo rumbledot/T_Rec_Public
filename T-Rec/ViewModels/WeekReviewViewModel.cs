@@ -76,8 +76,6 @@ namespace T_Rec.ViewModels
 
                 Days.Clear();
 
-                this.Database = await T_Rec_DB_Job.Instance;
-
                 var jobs = await Database.GetWeekReviews();
 
                 //Console.WriteLine($"total jobs in week {jobs.Count}");
@@ -131,7 +129,6 @@ namespace T_Rec.ViewModels
                 }
 
                 DependencyService.Get<Toast>().Show("Weekly Reviews ready");
-                //Console.WriteLine($"week total hours : {total_week_hours}");
             }
             catch (Exception ex)
             {
@@ -140,6 +137,8 @@ namespace T_Rec.ViewModels
             finally
             {
                 is_busy = false;
+
+                this.Database = null;
             }
         }
     }

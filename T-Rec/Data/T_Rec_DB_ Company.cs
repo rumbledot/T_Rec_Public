@@ -34,6 +34,11 @@ namespace T_Rec
             return Database.Table<Company>().ToListAsync();
         }
 
+        public Task<List<CompanyIDNames>> GetCompanyNames() 
+        {
+            return Database.QueryAsync<CompanyIDNames>("SELECT COMPANY_ID, NAME FROM COMPANY");
+        }
+
         public Task<Company> GetCompanyAsync(int id)
         {
             return Database.Table<Company>()

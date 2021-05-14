@@ -7,12 +7,6 @@
         <Frame>
             <StackLayout Margin="20" VerticalOptions="StartAndExpand">
                 <Label Text="Company Name" />
-                <!--<Picker x:Name="picker_active_projects"
-                Title="Projects.."
-                x:DataType="model:Project"
-                ItemsSource="{Binding Projects}"
-                ItemDisplayBinding="{Binding name}"
-                SelectedIndexChanged="Projects_SelectedIndexChanged"/>-->
                 <Entry x:Name="tbox_Company_name"
                     Placeholder="Company Name" 
                     PlaceholderColor="{StaticResource PrimaryLight}" 

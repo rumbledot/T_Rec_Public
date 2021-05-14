@@ -45,7 +45,7 @@ namespace T_Rec.Views
                 var item = sender as Button;
                 Company c = item.CommandParameter as Company;
 
-                DependencyService.Get<Toast>().Show($"Edit a company {c.company_id}");
+                //DependencyService.Get<Toast>().Show($"Edit a company {c.company_id}");
 
                 //await Navigation.PushAsync(new NewCompanyPage
                 //{

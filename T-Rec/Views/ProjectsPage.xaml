@@ -3,65 +3,130 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="T_Rec.Views.ProjectsPage"
              xmlns:vm="clr-namespace:T_Rec.ViewModels"
-             xmlns:model="clr-namespace:T_Rec.Models" 
-             x:Name="ProjectsReviews"
+             xmlns:model="clr-namespace:T_Rec.Models"
              BackgroundColor="{StaticResource Background}"
              Title="{Binding Title}">
 
-    <StackLayout>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add"
+            x:DataType="vm:ProjectsViewModel"
+            Command="{Binding OnAddProjectCommand}" />
+    </ContentPage.ToolbarItems>
 
-        <RefreshView x:DataType="vm:ProjectsViewModel" 
-            Command="{Binding LoadProjectsCommand}" 
-            IsRefreshing="{Binding is_busy, Mode=TwoWay}">
+    <AbsoluteLayout>
+        <StackLayout
+            Orientation="Horizontal"
+            Padding="20, 0, 20, 0"
+            AbsoluteLayout.LayoutBounds="0, 0.2, 1, 0.8"
+            AbsoluteLayout.LayoutFlags="All">
 
-            <CollectionView x:Name="ProjectsListView"
+        <RefreshView x:DataType="vm:ProjectsViewModel"
+                IsRefreshing="{Binding is_busy, Mode=TwoWay}"
+                Command="{Binding LoadProjectsCommand}">
+            <CollectionView 
+                    AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.6, 0.6"
+                    AbsoluteLayout.LayoutFlags="All"
                     ItemsSource="{Binding Projects}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
+                            ItemSpacing="20"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <StackLayout>
+                            <Label Text="No project yet"
+                                    Margin="10,25,10,10"
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalOptions="Fill"
+                                    HorizontalTextAlignment="Center" />
+                            <Label Text="Create a new one?"
+                                    FontAttributes="Italic"
+                                    FontSize="12"
+                                    HorizontalOptions="Fill"
+                                    HorizontalTextAlignment="Center" />
+                            <Button 
+                                    Grid.Row="4"
+                                    Grid.Column="4"
+                                    BackgroundColor="{StaticResource Accent}"
+                                    Text="Start a job"
+                                    HeightRequest="40"
+                                    WidthRequest="100"
+                                    Padding="10"
+                                    x:Name="btn_start_job"
+                                    Command="{Binding OnAddProjectCommand}"
+                                    CommandParameter="{Binding .}"/>
+                        </StackLayout>
+                    </ContentView>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout HorizontalOptions="StartAndExpand"
-                            Orientation="Vertical"
-                            x:DataType="model:Project">
-                            <Grid Padding="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0"
-                                    Grid.Column="0"
-                                    Text="{Binding name}"
-                                    FontAttributes="Bold" />
-                                <Label Grid.Row="1"
-                                    Grid.Column="0"
-                                    Text="{Binding description}"
-                                    FontAttributes="Bold" />
-                                <Label Grid.Row="1"
-                                    Grid.Column="0"
-                                    Text="{Binding project_status}"
-                                    FontAttributes="Italic"
-                                    VerticalOptions="End" />
-                                <Label Grid.Row="1"
-                                    Grid.Column="1"
-                                    Text="{Binding project_status_note}"
-                                    FontAttributes="Italic"
-                                    VerticalOptions="End" />
-                                <Button Grid.Row="0"
-                                    Grid.Column="0"
-                                    HeightRequest="40"
-                                    WidthRequest="40"
-                                    CornerRadius="20"
-                                    Text=">"
-                                    Clicked="OnMore"
-                                    CommandParameter="{Binding .}"/>
-                            </Grid>
-                            <BoxView HeightRequest="1" 
-                                     HorizontalOptions="Fill"
-                                     Color="{StaticResource AccentLight}"/>
+                        <StackLayout>
+                            <Frame HasShadow="True"
+                                BorderColor="DarkGray"
+                                CornerRadius="5"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                x:DataType="model:Project">
+                                <Grid RowDefinitions="20,20,40,*,*,40,40"
+                                    ColumnDefinitions="*,*,40,40">
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Text="{Binding project_started, StringFormat='{0:dd MMM yyyy}'}"
+                                        LineBreakMode="NoWrap" 
+                                        FontSize="Small" />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Text="{Binding project_ended, StringFormat='{0:dd MMM yyyy}'}"
+                                        LineBreakMode="NoWrap" 
+                                        FontSize="Small" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="4"
+                                        Text="{Binding company_name}"
+                                        LineBreakMode="NoWrap" 
+                                        FontSize="Subtitle" />
+                                    <Label 
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="4"
+                                        Text="{Binding name}"
+                                        FontSize="Title" />
+                                    <Label 
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="4"
+                                        Text="{Binding description}"
+                                        FontSize="Small" />
+                                    <Button 
+                                        Grid.Row="5"
+                                        Grid.Column="2"
+                                        BackgroundColor="{StaticResource Accent}"
+                                        Text="!"
+                                        HeightRequest="40"
+                                        WidthRequest="40"
+                                        CornerRadius="80"
+                                        Padding="10"
+                                        x:Name="btn_Edit"
+                                        Clicked="OnEdit"
+                                        CommandParameter="{Binding .}"/>
+                                    <Button 
+                                        Grid.Row="5"
+                                        Grid.Column="3"
+                                        BackgroundColor="Red"
+                                        Text="X"
+                                        HeightRequest="40"
+                                        WidthRequest="40"
+                                        CornerRadius="80"
+                                        Padding="10"
+                                        x:Name="btn_Delete"
+                                        Clicked="OnDelete"
+                                        CommandParameter="{Binding .}"/>
+                                </Grid>
+                            </Frame>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -69,6 +134,10 @@
 
         </RefreshView>
 
-    </StackLayout>
-
+        <IndicatorView x:Name="indicatorView"
+                IndicatorColor="{StaticResource AccentLight}"
+                SelectedIndicatorColor="{StaticResource AccentDark}"
+                HorizontalOptions="Center" />
+        </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>

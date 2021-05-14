@@ -42,8 +42,8 @@ namespace T_Rec.Data
         {
             List<Project> result = new List<Project>();
 
-            return Database.QueryAsync<Project>($"SELECT P.*, C.NAME FROM PROJECT P JOIN COMPANY C ON C.COMPANY_ID=P.COMPANY_ID WHERE P.PROJECT_STATUS={(int)status}");
-            
+            //return Database.QueryAsync<Project>($"SELECT P.*, C.NAME FROM PROJECT P JOIN COMPANY C ON C.COMPANY_ID=P.COMPANY_ID WHERE P.PROJECT_STATUS={(int)status}");
+            return Database.Table<Project>().ToListAsync();
         }
 
         public IEnumerable<Project> GetProjects(ProjectStatus status) 
@@ -57,6 +57,33 @@ namespace T_Rec.Data
         {
             return (IEnumerable<Company>)Database.Table<Company>()
                 .OrderByDescending(c => (c.name));
+        }
+
+        public Task<Project> GetProjectAsync(int id)
+        {
+            return Database.Table<Project>()
+                .Where
+                (
+                    p => p.project_id == id
+                )
+                .FirstOrDefaultAsync();
+        }
+
+        public Task<int> SaveProjectAsync(Project project)
+        {
+            if (project.project_id > 0)
+            {
+                return Database.UpdateAsync(project);
+            }
+            else
+            {
+                return Database.InsertAsync(project);
+            }
+        }
+
+        public Task<int> DeleteProjectAsync(Project project)
+        {
+            return Database.DeleteAsync(project);
         }
     }
 }
