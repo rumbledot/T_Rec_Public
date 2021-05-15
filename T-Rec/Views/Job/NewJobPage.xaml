@@ -8,14 +8,27 @@
         <ScrollView>
         <Frame>
             <StackLayout Margin="20" VerticalOptions="StartAndExpand">
-                <Picker x:Name="picker_Active_projects"
+                <Grid 
+                    RowDefinitions="40, 40"
+                    ColumnDefinitions="*, 40">
+                <Picker 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.RowSpan="2"
+                    x:Name="picker_Active_projects"
                     Title="Projects.."
                     x:DataType="model:Project"/>
-                    <Label Text="Project" />
-                <Entry x:Name="tbox_Project_name"
-                    Placeholder="Project name" 
-                    PlaceholderColor="{StaticResource PrimaryLight}" 
-                    Text="" />
+                <Button 
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    CornerRadius="20"
+                    BackgroundColor="DarkSeaGreen"
+                    TextColor="White"
+                    x:Name="button_Is_billable"
+                    Text="$"/>
+                </Grid>
                 <Label Text="Description" />
                 <Editor x:Name="tbox_Description"
                     AutoSize="TextChanges"

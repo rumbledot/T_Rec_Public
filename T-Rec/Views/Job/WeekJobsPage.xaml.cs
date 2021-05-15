@@ -30,20 +30,28 @@ namespace T_Rec.Views
             _viewModel.OnAppearing();
         }
 
-        public void OnMore(object sender, EventArgs e)
+        public async void OnMore(object sender, EventArgs e)
         {
-            Button menu = sender as Button;
-            JobInADay j = menu.CommandParameter as JobInADay;
-            if (j == null)
+            DateTime day_we_wanted = DateTime.Now;
+            try
             {
-                j = new JobInADay() 
-                {
-                    day_total_hours = 0,
-                    day_total_jobs = 0
-                };
-            }
+                var item = sender as Button;
+                JobInADay job = item.CommandParameter as JobInADay;
 
-            DependencyService.Get<Toast>().Show($"Detail clicked {j.day_name} : {j.day_total_hours}hrs : {j.day_total_jobs}");
+                //DependencyService.Get<Toast>().Show($"Edit a company {c.company_id}");
+
+                //await Navigation.PushAsync(new NewCompanyPage
+                //{
+                //    BindingContext = c
+                //});
+                day_we_wanted = DateTime.Parse(job.day_date);
+
+                await Navigation.PushAsync(new TodayJobsPage(day_we_wanted));
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toast>().Show($"Failed to review jobs {day_we_wanted.ToString("dd MMM yyyy")} \n {ex.Message}");
+            }
         }
     }
 }

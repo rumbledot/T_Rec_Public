@@ -37,7 +37,7 @@
                             x:DataType="model:JobInADay">
                             <Grid Padding="10">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="40" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
@@ -60,7 +60,7 @@
                                     VerticalOptions="End" />
                                 <Label Grid.Row="1"
                                     Grid.Column="2"
-                                    Text="{Binding day_total_jobs, StringFormat='{0} activities'}"
+                                    Text="{Binding day_total_jobs, StringFormat='({0} activities)'}"
                                     FontAttributes="Italic"
                                     VerticalOptions="End" />
                                 <Button Grid.Row="0"

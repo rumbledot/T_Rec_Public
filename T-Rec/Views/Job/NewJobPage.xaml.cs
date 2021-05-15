@@ -32,20 +32,11 @@ namespace T_Rec.Views
         {
             try
             {
-                this.Database_Project = await T_Rec_DB_Project.Instance;
-
-                List<Project> result = await Database_Project.GetActiveProjects();
-
-                foreach (var p in result)
-                {
-                    _projects_picker.Add(p, p.name);
-                }
-
-                projects = _projects_picker.Values.ToList();
-
-                picker_Active_projects.ItemsSource = projects;
+                await LoadPickerProjects();
 
                 picker_Active_projects.SelectedIndex = 0;
+
+                picker_Active_projects.SelectedIndexChanged += Picker_Active_projects_SelectedIndexChanged;
             }
             catch (Exception ex)
             {
@@ -54,6 +45,46 @@ namespace T_Rec.Views
             finally
             {
                 Database_Project = null;
+            }
+        }
+
+        protected override void OnDisappearing()
+        {
+            picker_Active_projects.SelectedIndexChanged -= Picker_Active_projects_SelectedIndexChanged;
+
+            base.OnDisappearing();
+        }
+
+        private async Task LoadPickerProjects()
+        {
+            this.Database_Project = await T_Rec_DB_Project.Instance;
+
+            List<Project> result = await Database_Project.GetActiveProjects();
+
+            foreach (var p in result)
+            {
+                _projects_picker.Add(p, p.name);
+            }
+
+            projects = _projects_picker.Values.ToList();
+
+            picker_Active_projects.ItemsSource = projects;
+        }
+
+        private async void Picker_Active_projects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (picker_Active_projects.ItemsSource == null || picker_Active_projects.ItemsSource.Count <= 0)
+                {
+                    await LoadPickerProjects();
+                }
+
+                button_Is_billable.IsVisible = selected_project.billable;
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toast>().Show($"Failed to load picker Projects \n {ex.Message}");
             }
         }
 

@@ -111,7 +111,7 @@ namespace T_Rec.ViewModels
                             //Console.WriteLine($"job : {job.time_end} - {job.time_start}");
                             //Console.WriteLine($"job : {job.time_end.Subtract(job.time_start).TotalHours}");
                             //Console.WriteLine($"job : {job.project_name} : {job.job_time_in_hours}");
-                            total_hours += job.job_time_in_hours;
+                            total_hours += job.billable ? job.job_time_in_hours : 0;
                         }
 
                         day_reviews = new JobInADay()

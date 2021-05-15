@@ -73,6 +73,8 @@ namespace T_Rec.Views
             dtpicker_Start_date.DateSelected += Dtpicker_Start_date_DateSelected;
             dtpicker_End_date.DateSelected += Dtpicker_End_date_DateSelected;
 
+            picker_Company.SelectedIndexChanged += Picker_Company_SelectedIndexChanged1;
+
             if (edited_project != null)
             {
                 tbox_Project_name.Text = edited_project.name;
@@ -82,6 +84,30 @@ namespace T_Rec.Views
                 switch_Billable.IsToggled = edited_project.billable;
                 dtpicker_Start_date.Date = edited_project.project_started;
                 dtpicker_End_date.Date = edited_project.project_ended;
+            }
+        }
+
+        protected override void OnDisappearing()
+        {
+            picker_Company.ItemsSource = null;
+            picker_Project_status.ItemsSource = null;
+
+            dtpicker_Start_date.DateSelected -= Dtpicker_Start_date_DateSelected;
+            dtpicker_End_date.DateSelected -= Dtpicker_End_date_DateSelected;
+
+            picker_Company.SelectedIndexChanged -= Picker_Company_SelectedIndexChanged1;
+
+            _project_statusses = null;
+            _companies_picker = null;
+
+            base.OnDisappearing();
+        }
+
+        private void Picker_Company_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            if (picker_Company.ItemsSource == null || picker_Company.ItemsSource.Count <= 0) 
+            {
+                LoadCompanies();
             }
         }
 

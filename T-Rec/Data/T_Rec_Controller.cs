@@ -28,7 +28,7 @@ namespace T_Rec
             }
         }
 
-        public static List<object[]> RunSQL(string query, bool include_column_name)
+        public static List<object[]> QueryFetch(string query, bool include_column_name)
         {
             var result = new List<object[]>();
             SQLitePCL.sqlite3_stmt statement = null;
@@ -134,7 +134,7 @@ namespace T_Rec
             }
             catch (Exception ex)
             {
-                Console.WriteLine($">>>>>>>>>>>>>>>>>>>> EXCEPTION!!!!! \n {ex.Message} \n\n {ex.StackTrace}");
+                //Console.WriteLine($">>>>>>>>>>>>>>>>>>>> EXCEPTION!!!!! \n {ex.Message} \n\n {ex.StackTrace}");
                 throw new Exception($"RunSQL exeption \n {ex.Message} \n {ex.StackTrace}");
             }
             finally

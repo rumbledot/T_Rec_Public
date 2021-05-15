@@ -77,7 +77,7 @@ namespace T_Rec.ViewModels
 
                 #endregion //safe keeping
 
-                List<object[]> result = T_Rec_Controller.RunSQL("SELECT PROJECT.*, COMPANY.NAME FROM PROJECT JOIN COMPANY ON PROJECT.COMPANY_ID=COMPANY.COMPANY_ID", false);
+                List<object[]> result = T_Rec_Controller.QueryFetch("SELECT PROJECT.*, COMPANY.NAME FROM PROJECT JOIN COMPANY ON PROJECT.COMPANY_ID=COMPANY.COMPANY_ID", false);
 
                 Project p;
 
