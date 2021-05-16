@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using T_Rec.Models;
-using T_Rec.Services;
+using T_Rec.Converters;
 using Xamarin.Forms;
 
 namespace T_Rec.ViewModels

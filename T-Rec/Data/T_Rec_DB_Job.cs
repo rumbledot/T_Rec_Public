@@ -75,13 +75,15 @@ namespace T_Rec
                 int delta = 0;
                 int sunday_offset = 0; //if this is Sunday then get a week before
 
-                if (input.DayOfWeek == DayOfWeek.Sunday) sunday_offset = -7;
+                //if (input.DayOfWeek == DayOfWeek.Sunday) sunday_offset = -7;
 
-                delta = DayOfWeek.Monday - input.DayOfWeek;
+                delta = DayOfWeek.Sunday - input.DayOfWeek;
                 weekstart_day = DateTime.Parse(input.AddDays(delta + sunday_offset).ToString("yyyy-MM-dd 00:00:00"));
+                Console.WriteLine($"Weel start date {weekstart_day}");
 
                 delta = DayOfWeek.Saturday - input.DayOfWeek;
                 weekend_day = DateTime.Parse(input.AddDays(delta + 1 + sunday_offset).ToString("yyyy-MM-dd 00:00:00"));
+                Console.WriteLine($"Weel start date {weekend_day}");
 
                 return Database.Table<JobUnit>()
                     .Where

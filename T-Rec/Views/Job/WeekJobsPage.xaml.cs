@@ -32,25 +32,19 @@ namespace T_Rec.Views
 
         public async void OnMore(object sender, EventArgs e)
         {
-            DateTime day_we_wanted = DateTime.Now;
+            DateTime day_to_view = DateTime.Now;
             try
             {
                 var item = sender as Button;
                 JobInADay job = item.CommandParameter as JobInADay;
 
-                //DependencyService.Get<Toast>().Show($"Edit a company {c.company_id}");
+                day_to_view = DateTime.Parse(job.day_date);
 
-                //await Navigation.PushAsync(new NewCompanyPage
-                //{
-                //    BindingContext = c
-                //});
-                day_we_wanted = DateTime.Parse(job.day_date);
-
-                await Navigation.PushAsync(new TodayJobsPage(day_we_wanted));
+                await Navigation.PushAsync(new TodayJobsPage(day_to_view));
             }
             catch (Exception ex)
             {
-                DependencyService.Get<Toast>().Show($"Failed to review jobs {day_we_wanted.ToString("dd MMM yyyy")} \n {ex.Message}");
+                DependencyService.Get<Toast>().Show($"Failed to review jobs {day_to_view.ToString("dd MMM yyyy")} \n {ex.Message}");
             }
         }
     }

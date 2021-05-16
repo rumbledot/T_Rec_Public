@@ -28,7 +28,7 @@ namespace T_Rec.ViewModels
                 Title = "All Projects";
                 Projects = new ObservableCollection<Project>();
 
-                LoadProjectsCommand = new Command(async () => await ExecuteLoadProjectsCommand());
+                LoadProjectsCommand = new Command(() => ExecuteLoadProjectsCommand());
 
                 OnAddProjectCommand = new Command(async () => await OnAddProject());
             }
@@ -43,7 +43,7 @@ namespace T_Rec.ViewModels
             is_busy = true;
         }
 
-        async Task ExecuteLoadProjectsCommand()
+        private void ExecuteLoadProjectsCommand()
         {
             try
             {

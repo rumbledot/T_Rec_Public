@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace T_Rec.Services
+namespace T_Rec.Converters
 {
     public class NegateBooleanConverter : IValueConverter
     {

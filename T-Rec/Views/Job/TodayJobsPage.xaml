@@ -7,6 +7,44 @@
              x:Class="T_Rec.Views.TodayJobsPage"
              BackgroundColor="{StaticResource Background}"
              Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ContentView x:Key="LoadTodayEmptyView">
+            <StackLayout>
+                <Label Text="No job for today yet."
+                    Margin="10,25,10,10"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalOptions="Fill"
+                    HorizontalTextAlignment="Center" />
+                <Label Text="Create a new one?"
+                    FontAttributes="Italic"
+                    FontSize="12"
+                    HorizontalOptions="Fill"
+                    HorizontalTextAlignment="Center" />
+                <Button 
+                    Grid.Row="4"
+                    Grid.Column="4"
+                    BackgroundColor="{StaticResource Accent}"
+                    Text="Start a job"
+                    HeightRequest="40"
+                    WidthRequest="100"
+                    Padding="10"
+                    x:Name="btn_start_job"
+                    Command="{Binding OnAddJobCommand}"
+                    CommandParameter="{Binding .}"/>
+            </StackLayout>
+        </ContentView>
+        <ContentView x:Key="ReviewDayEmptyView">
+            <StackLayout>
+                <Label Text="No jobs found on this day."
+                    Margin="10,25,10,10"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalOptions="Fill"
+                    HorizontalTextAlignment="Center" />
+            </StackLayout>
+        </ContentView>
+    </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add"
@@ -34,10 +72,10 @@
                         <LinearItemsLayout Orientation="Horizontal"
                             ItemSpacing="20"/>
                     </CollectionView.ItemsLayout>
-                    <CollectionView.EmptyView>
+                    <!--<CollectionView.EmptyView>
                         <ContentView>
                             <StackLayout>
-                                <Label Text="No job created for today.."
+                                <Label Text="No job for today yet."
                                     Margin="10,25,10,10"
                                     FontAttributes="Bold"
                                     FontSize="18"
@@ -61,7 +99,7 @@
                                     CommandParameter="{Binding .}"/>
                             </StackLayout>
                         </ContentView>
-                    </CollectionView.EmptyView>
+                    </CollectionView.EmptyView>-->
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>

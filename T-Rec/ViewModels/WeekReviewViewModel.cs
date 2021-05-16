@@ -29,12 +29,26 @@ namespace T_Rec.ViewModels
             get 
             {
                 int proper_hour = (int)Math.Floor(_total_week_hours);
-                int proper_min = (int)Math.Ceiling((_total_week_hours - proper_hour) * 60);
-                return $"{proper_hour} hrs : {proper_min} mins";
+                return proper_hour.ToString();
             }
             set 
             {
                 SetProperty(ref _total_week_hours_string, value);
+            }
+        }
+
+        string _total_week_mins_string = "0";
+        public string total_week_mins_string
+        {
+            get
+            {
+                int proper_hour = (int)Math.Floor(_total_week_hours);
+                int proper_min = (int)Math.Ceiling((_total_week_hours - proper_hour) * 60);
+                return proper_min.ToString();
+            }
+            set
+            {
+                SetProperty(ref _total_week_mins_string, value);
             }
         }
 
@@ -83,8 +97,7 @@ namespace T_Rec.ViewModels
                 //week starts on Monday, ends on Saturday
                 foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek))
                               .OfType<DayOfWeek>()
-                              .ToList()
-                              .Skip(1))
+                              .ToList())
                 {
                     total_hours = 0;
                     delta = day - input.DayOfWeek;
@@ -93,15 +106,17 @@ namespace T_Rec.ViewModels
 
                     today_jobs = jobs.Where<JobUnit>(j =>(j.time_start > each_day && j.time_start < each_day_end)).OrderBy(j => (j.time_start)).ToList();
 
-                    //Console.WriteLine($"Day : {day.ToString()}");
-                    //Console.WriteLine($"day total hours : {total_hours}");
+                    Console.WriteLine($"Day : {day}");
+                    Console.WriteLine($"day total hours : {total_hours}");
 
                     JobInADay day_reviews = new JobInADay()
                     {
                         day_name = day.ToString(),
                         day_date = each_day.ToString("d MMM yyyy"),
                         day_total_hours = total_hours,
-                        day_total_jobs = 0
+                        day_total_jobs = 0,
+                        active_day = false,
+                        today_day = day == DateTime.Now.DayOfWeek ? Color.LightGray : Color.WhiteSmoke
                     };
 
                     if (today_jobs != null && today_jobs.Count > 0)
@@ -119,7 +134,8 @@ namespace T_Rec.ViewModels
                             day_name = day.ToString(),
                             day_date = each_day.ToString("d MMM yyyy"),
                             day_total_hours = total_hours,
-                            day_total_jobs = today_jobs.Count
+                            day_total_jobs = today_jobs.Count,
+                            active_day = true
                         };
                     }
 

@@ -6,6 +6,8 @@ using Xamarin.Forms;
 
 namespace T_Rec.ViewModels
 {
+    //plugin.validationrules
+    //https://luismts.com/es/reglas-de-validacion-xamarin-windows/
     public class LoginViewModel : BaseViewModel
     {
         public Command LoginCommand { get; }

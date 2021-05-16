@@ -18,7 +18,7 @@
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="Shell.ForegroundColor" Value="{StaticResource PrimaryText}" />
                 <Setter Property="Shell.TitleColor" Value="{StaticResource PrimaryText}" />
-                <Setter Property="Shell.DisabledColor" Value="{StaticResource AccentLight}" />
+                <Setter Property="Shell.DisabledColor" Value="{StaticResource AccentDark}" />
                 <Setter Property="Shell.UnselectedColor" Value="{StaticResource PrimaryText}" />
                 <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource PrimaryText}"/>

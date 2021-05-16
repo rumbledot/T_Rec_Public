@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace T_Rec.Models
 {
@@ -9,6 +10,10 @@ namespace T_Rec.Models
         public string day_name { get; set; }
         public string day_date { get; set; }
         public double day_total_hours { get; set; }
+
+        public bool active_day { get; set; }
+
+        public Color today_day { get; set; }
 
         public string day_total_hours_string
         {

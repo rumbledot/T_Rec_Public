@@ -29,7 +29,8 @@ namespace T_Rec.Views
 
                 viewing_only = false;
                 fab_Add_job.IsVisible = true;
-                fab_Add_job.IsVisible = true;
+
+                JobsListView.EmptyView = Resources["LoadTodayEmptyView"];
 
                 BindingContext = _view_model = new JobsViewModel(tbtn_add_job, DateTime.Now);
             }
@@ -49,6 +50,8 @@ namespace T_Rec.Views
                 Title = "Jobs Reviews";
                 viewing_only = true;
                 fab_Add_job.IsVisible = false;
+
+                JobsListView.EmptyView = Resources["ReviewDayEmptyView"];
 
                 BindingContext = _view_model = new JobsViewModel(tbtn_add_job, get_job_on_date);
             }
