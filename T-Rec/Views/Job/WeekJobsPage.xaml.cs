@@ -27,6 +27,10 @@ namespace T_Rec.Views
         {
             base.OnAppearing();
 
+            dtpicker_Review_date.MinimumDate = DateTime.Now.AddYears(-1);
+            dtpicker_Review_date.MaximumDate = DateTime.Now;
+            dtpicker_Review_date.Date = DateTime.Now.AddDays(-1);
+
             _viewModel.OnAppearing();
         }
 
@@ -40,6 +44,19 @@ namespace T_Rec.Views
 
                 day_to_view = DateTime.Parse(job.day_date);
 
+                await Navigation.PushAsync(new TodayJobsPage(day_to_view));
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toast>().Show($"Failed to review jobs {day_to_view.ToString("dd MMM yyyy")} \n {ex.Message}");
+            }
+        }
+
+        public async void OnReviewByDate(object sender, EventArgs e) 
+        {
+            DateTime day_to_view = dtpicker_Review_date.Date;
+            try
+            {
                 await Navigation.PushAsync(new TodayJobsPage(day_to_view));
             }
             catch (Exception ex)

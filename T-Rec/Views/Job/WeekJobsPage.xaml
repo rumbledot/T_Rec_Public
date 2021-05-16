@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:conv="clr-namespace:T_Rec.Converters"
-             xmlns:context="clr-namespace:ContextMenu.Views;assembly=ContextMenu"
              xmlns:vm="clr-namespace:T_Rec.ViewModels"
              xmlns:model="clr-namespace:T_Rec.Models" 
              x:Class="T_Rec.Views.WeekJobsPage;assembly=ContextMenu"
@@ -50,7 +49,42 @@
             </Frame>
         </Grid>
 
-        <RefreshView x:DataType="vm:WeekReviewViewModel" 
+            <StackLayout HorizontalOptions="StartAndExpand"
+                Margin="5"
+                Orientation="Vertical"
+                x:DataType="model:JobInADay">
+                <Frame BackgroundColor="{Binding today_day}"
+                    CornerRadius="10">
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"
+                            Grid.Column="1"
+                            Text="Review jobs on "
+                            FontSize="Title"
+                            FontAttributes="Bold" />
+                        <DatePicker Grid.Row="0"
+                            Grid.Column="2"
+                            x:Name="dtpicker_Review_date"/>
+                        <Button Grid.Row="0"
+                            Grid.Column="0"
+                            HeightRequest="40"
+                            WidthRequest="40"
+                            CornerRadius="20"
+                            Text=">"
+                            BackgroundColor="{StaticResource AccentLight}"
+                            Clicked="OnReviewByDate"/>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+
+            <RefreshView x:DataType="vm:WeekReviewViewModel" 
             Command="{Binding LoadWeekCommand}"
             IsRefreshing="{Binding is_busy, Mode=TwoWay}">
 

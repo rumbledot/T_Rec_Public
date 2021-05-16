@@ -50,3 +50,7 @@ set to Release build
 right click
 View Archive
 this will create a package, uploadable to Google Play console
+or use Deploy instead of Build/Rebuild
+
+for future use:
+ContextViewCell
