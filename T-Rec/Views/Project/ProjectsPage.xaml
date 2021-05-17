@@ -49,11 +49,10 @@
                                     Grid.Row="4"
                                     Grid.Column="4"
                                     BackgroundColor="{StaticResource Accent}"
-                                    Text="Start a job"
+                                    Text="New Project"
                                     HeightRequest="40"
                                     WidthRequest="100"
                                     Padding="10"
-                                    x:Name="btn_start_job"
                                     Command="{Binding OnAddProjectCommand}"
                                     CommandParameter="{Binding .}"/>
                         </StackLayout>

@@ -50,9 +50,16 @@ namespace T_Rec.Views
 
         protected override void OnDisappearing()
         {
-            picker_Active_projects.SelectedIndexChanged -= Picker_Active_projects_SelectedIndexChanged;
+            try
+            {
+                picker_Active_projects.SelectedIndexChanged -= Picker_Active_projects_SelectedIndexChanged;
 
-            base.OnDisappearing();
+                base.OnDisappearing();
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toast>().Show($"Disappearing exception \n {ex.Message}");
+            }
         }
 
         private async Task LoadPickerProjects()
