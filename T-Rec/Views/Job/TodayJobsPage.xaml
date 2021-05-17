@@ -72,34 +72,7 @@
                         <LinearItemsLayout Orientation="Horizontal"
                             ItemSpacing="20"/>
                     </CollectionView.ItemsLayout>
-                    <!--<CollectionView.EmptyView>
-                        <ContentView>
-                            <StackLayout>
-                                <Label Text="No job for today yet."
-                                    Margin="10,25,10,10"
-                                    FontAttributes="Bold"
-                                    FontSize="18"
-                                    HorizontalOptions="Fill"
-                                    HorizontalTextAlignment="Center" />
-                                <Label Text="Create a new one?"
-                                    FontAttributes="Italic"
-                                    FontSize="12"
-                                    HorizontalOptions="Fill"
-                                    HorizontalTextAlignment="Center" />
-                                <Button 
-                                    Grid.Row="4"
-                                    Grid.Column="4"
-                                    BackgroundColor="{StaticResource Accent}"
-                                    Text="Start a job"
-                                    HeightRequest="40"
-                                    WidthRequest="100"
-                                    Padding="10"
-                                    x:Name="btn_start_job"
-                                    Command="{Binding OnAddJobCommand}"
-                                    CommandParameter="{Binding .}"/>
-                            </StackLayout>
-                        </ContentView>
-                    </CollectionView.EmptyView>-->
+                    
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
@@ -141,7 +114,7 @@
                                         Grid.Column="3"
                                         Grid.ColumnSpan="2"
                                         IsVisible="{Binding job_done}"
-                                        Text="{Binding job_time_in_hours, StringFormat='{0:####.##} hrs'}"
+                                        Text="{Binding job_total_hours_string}"
                                         LineBreakMode="NoWrap" 
                                         FontSize="Micro" />
                                     <Label 

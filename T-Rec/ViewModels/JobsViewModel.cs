@@ -87,54 +87,6 @@ namespace T_Rec.ViewModels
 
                     toolbtn_add_new_job.IsEnabled = can_add_job;
                 }
-                //string today_start = DateTime.Now.ToString("MM/dd/yyyy 12:00:00");
-                //string today_end = DateTime.Now.AddDays(1).ToString("MM/dd/yyyy 12:00:00");
-                //string query = "SELECT JOBUNIT.*, PROJECT.NAME " +
-                //                "FROM JOBUNIT " +
-                //                "JOIN PROJECT ON JOBUNIT.PROJECT_ID=PROJECT.PROJECT_ID " +
-                //                //$"WHERE JOBUNIT.TIME_START > '{today_start} AM' " +
-                //                //$"AND JOBUNIT.TIME_START < '{today_end} AM' " +
-                //                $"ORDER BY JOBUNIT.TIME_START DESC ";
-                //Console.WriteLine(query);
-                //List<object[]> result = T_Rec_Controller.QueryFetch(query, false);
-                ////List<object[]> result = T_Rec_Controller.RunSQL("SELECT * FROM JOBUNIT", false);
-
-                //JobUnit j;
-                
-                //if (result != null && result.Count > 0)
-                //{
-                //    foreach (var row in result)
-                //    {
-                //        if (row != null)
-                //        {
-                //            foreach (var cell in row)
-                //            {
-                //                Console.Write(cell + " : ");
-                //            }
-
-                //            j = new JobUnit()
-                //            {
-                //                job_id = Convert.ToInt32(row[0]),
-                //                project_id = Convert.ToInt32(row[1]),
-                //                description = row[2].ToString(),
-                //                time_start = Convert.ToDateTime(row[3]),
-                //                time_end = Convert.ToDateTime(row[4]),
-                //                job_done = Convert.ToBoolean(row[5]),
-                //                billable = Convert.ToBoolean(row[6])
-                //            };
-
-                //            if (!j.job_done) can_add_job = false;
-
-                //            Jobs.Add(j);
-                //        }
-                //        Console.WriteLine();
-                //        Console.WriteLine(new string('-', 20));
-                //    }
-
-                //    DependencyService.Get<Toast>().Show("All Projects loaded");
-
-                //    toolbtn_add_new_job.IsEnabled = can_add_job;
-                //}
             }
             catch (Exception ex)
             {

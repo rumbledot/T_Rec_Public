@@ -20,7 +20,7 @@ namespace T_Rec.Views
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new WeekReviewViewModel();
+            BindingContext = _viewModel = new WeekReviewViewModel(label_Proper_hours, label_Proper_mins);
         }
 
         protected override void OnAppearing()

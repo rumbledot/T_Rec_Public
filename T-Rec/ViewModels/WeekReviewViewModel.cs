@@ -23,43 +23,30 @@ namespace T_Rec.ViewModels
             set { SetProperty(ref _total_week_hours, value); }
         }
 
-        string _total_week_hours_string = "0";
-        public string total_week_hours_string
-        {
-            get 
-            {
-                int proper_hour = (int)Math.Floor(_total_week_hours);
-                return proper_hour.ToString();
-            }
-            set 
-            {
-                SetProperty(ref _total_week_hours_string, value);
-            }
-        }
-
-        string _total_week_mins_string = "0";
-        public string total_week_mins_string
+        public int total_proper_hours 
         {
             get
             {
-                int proper_hour = (int)Math.Floor(_total_week_hours);
-                int proper_min = (int)Math.Ceiling((_total_week_hours - proper_hour) * 60);
-                return proper_min.ToString();
-            }
-            set
-            {
-                SetProperty(ref _total_week_mins_string, value);
+                return (int)Math.Floor(_total_week_hours);
             }
         }
 
-        public WeekReviewViewModel()
+        public int total_proper_mins
+        {
+            get 
+            {
+                return (int)Math.Floor((_total_week_hours - Math.Floor(_total_week_hours)) * 60);
+            }
+        }
+
+        public WeekReviewViewModel(Label proper_hours, Label proper_mins)
         {
             try
             {
                 Title = "Week in review";
                 Days = new ObservableCollection<JobInADay>();
 
-                LoadWeekCommand = new Command(async () => await ExecuteLoadWeekCommand());
+                LoadWeekCommand = new Command(async () => await ExecuteLoadWeekCommand(proper_hours, proper_mins));
             }
             catch (Exception ex)
             {
@@ -72,7 +59,7 @@ namespace T_Rec.ViewModels
             is_busy = true;
         }
 
-        async Task ExecuteLoadWeekCommand()
+        async Task ExecuteLoadWeekCommand(Label proper_hours, Label proper_mins)
         {
             try
             {
@@ -106,8 +93,8 @@ namespace T_Rec.ViewModels
 
                     today_jobs = jobs.Where<JobUnit>(j =>(j.time_start > each_day && j.time_start < each_day_end)).OrderBy(j => (j.time_start)).ToList();
 
-                    Console.WriteLine($"Day : {day}");
-                    Console.WriteLine($"day total hours : {total_hours}");
+                    //Console.WriteLine($"Day : {day}");
+                    //Console.WriteLine($"day total hours : {total_hours}");
 
                     JobInADay day_reviews = new JobInADay()
                     {
@@ -126,7 +113,7 @@ namespace T_Rec.ViewModels
                             //Console.WriteLine($"job : {job.time_end} - {job.time_start}");
                             //Console.WriteLine($"job : {job.time_end.Subtract(job.time_start).TotalHours}");
                             //Console.WriteLine($"job : {job.project_name} : {job.job_time_in_hours}");
-                            total_hours += job.billable ? job.job_time_in_hours : 0;
+                            total_hours += (job.billable && job.job_done) ? job.job_time_in_hours : 0;
                         }
 
                         day_reviews = new JobInADay()
@@ -140,9 +127,11 @@ namespace T_Rec.ViewModels
                     }
 
                     total_week_hours += total_hours;
-;
+
                     Days.Add(day_reviews);
                 }
+                proper_hours.Text = total_proper_hours.ToString();
+                proper_mins.Text = total_proper_mins.ToString();
 
                 DependencyService.Get<Toast>().Show("Weekly Reviews ready");
             }

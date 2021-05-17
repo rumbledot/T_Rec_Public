@@ -39,7 +39,7 @@
                 <Label Text="Main Email/Contact Number" />
                 <Editor x:Name="tbox_Email"
                     AutoSize="TextChanges"
-                    Placeholder="Job description" 
+                    Placeholder="Project PIC" 
                     PlaceholderColor="{StaticResource PrimaryLight}" 
                     MaxLength="50"
                     Text=""/>

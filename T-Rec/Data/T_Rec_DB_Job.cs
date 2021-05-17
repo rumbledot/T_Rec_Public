@@ -79,11 +79,11 @@ namespace T_Rec
 
                 delta = DayOfWeek.Sunday - input.DayOfWeek;
                 weekstart_day = DateTime.Parse(input.AddDays(delta + sunday_offset).ToString("yyyy-MM-dd 00:00:00"));
-                Console.WriteLine($"Weel start date {weekstart_day}");
+                //Console.WriteLine($"Weel start date {weekstart_day}");
 
                 delta = DayOfWeek.Saturday - input.DayOfWeek;
                 weekend_day = DateTime.Parse(input.AddDays(delta + 1 + sunday_offset).ToString("yyyy-MM-dd 00:00:00"));
-                Console.WriteLine($"Weel start date {weekend_day}");
+                //Console.WriteLine($"Weel start date {weekend_day}");
 
                 return Database.Table<JobUnit>()
                     .Where

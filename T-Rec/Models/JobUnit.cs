@@ -37,6 +37,18 @@ namespace T_Rec.Models
         }
 
         [Ignore]
+        public string job_total_hours_string 
+        {
+            get 
+            {
+                double total = time_end.Subtract(time_start).TotalHours;
+                double proper_hour = Math.Floor(total);
+                double proper_mins = Math.Floor((total - proper_hour) * 60);
+                return $"{proper_hour} hrs {proper_mins} mins";
+            }
+        }
+
+        [Ignore]
         public Color job_card_color 
         {
             get 

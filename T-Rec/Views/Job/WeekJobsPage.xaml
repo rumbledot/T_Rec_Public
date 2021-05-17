@@ -8,46 +8,42 @@
              x:Name="WeekJobsReviews"
              BackgroundColor="{StaticResource Background}"
              Title="{Binding Title}">
-    
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <conv:MenuFitWidthConverter x:Key="MenuFitWidthConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
 
     <ContentPage.Content>
-    <StackLayout Margin="10,10,10,10">
-        
-        <Grid RowDefinitions="80,35,5"
-            ColumnDefinitions="120,80,*">
-            <Frame
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="0"
-                MinimumHeightRequest="120"
-                MinimumWidthRequest="120"
-                BackgroundColor="{StaticResource PrimaryDark}"
-                CornerRadius="60">
-                <Label Text="{Binding total_week_hours_string}"
+        <StackLayout Margin="10,10,10,10">
+
+            <Grid RowDefinitions="80,35,5"
+                ColumnDefinitions="120,80,*">
+                <Frame
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    MinimumHeightRequest="120"
+                    MinimumWidthRequest="120"
+                    BackgroundColor="{StaticResource PrimaryDark}"
+                    CornerRadius="60">
+                <Label Text="0"
+                    x:Name="label_Proper_hours"
                     TextColor="{StaticResource Background}"
                     FontSize="60"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand"/>
-            </Frame>
-            <Frame
-                Grid.Row="0"
-                Grid.Column="1"
-                MinimumHeightRequest="80"
-                MinimumWidthRequest="80"
-                BackgroundColor="{StaticResource PrimaryLight}"
-                CornerRadius="40">
-                <Label Text="{Binding total_week_mins_string}"
+                </Frame>
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    MinimumHeightRequest="80"
+                    MinimumWidthRequest="80"
+                    BackgroundColor="{StaticResource PrimaryLight}"
+                    CornerRadius="40">
+                <Label Text="0"
+                    x:Name="label_Proper_mins"
                     TextColor="{StaticResource Background}"
                     FontSize="Title"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand"/>
-            </Frame>
-        </Grid>
+                </Frame>
+            </Grid>
 
             <StackLayout HorizontalOptions="StartAndExpand"
                 Margin="5"
@@ -88,65 +84,65 @@
             Command="{Binding LoadWeekCommand}"
             IsRefreshing="{Binding is_busy, Mode=TwoWay}">
 
-            <CollectionView x:Name="WeekListView"
+                <CollectionView x:Name="WeekListView"
                     ItemsSource="{Binding Days}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout HorizontalOptions="StartAndExpand"
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout HorizontalOptions="StartAndExpand"
                                 Margin="5"
                                 Orientation="Vertical"
                                 x:DataType="model:JobInADay">
-                            <Frame BackgroundColor="{Binding today_day}"
+                                <Frame BackgroundColor="{Binding today_day}"
                                 CornerRadius="10">
-                                <Grid Padding="10">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="40" />
-                                        <RowDefinition Height="20" />
-                                        <RowDefinition Height="20" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <Label Grid.Row="0"
-                                        Grid.Column="1"
-                                        Text="{Binding day_name}"
-                                        FontSize="Title"
-                                        FontAttributes="Bold" />
-                                    <Label Grid.Row="1"
-                                        Grid.Column="1"
-                                        Text="{Binding day_date}"
-                                        FontAttributes="Bold" />
-                                    <Label Grid.Row="2"
-                                        Grid.Column="1"
-                                        Text="{Binding day_total_hours_string}"
-                                        FontAttributes="Italic"
-                                        VerticalOptions="End" />
-                                    <Label Grid.Row="2"
-                                        Grid.Column="3"
-                                        Text="{Binding day_total_jobs, StringFormat='({0} activities)'}"
-                                        FontAttributes="Italic"
-                                        VerticalOptions="End" />
-                                    <Button Grid.Row="0"
-                                        Grid.Column="0"
-                                        HeightRequest="40"
-                                        WidthRequest="40"
-                                        CornerRadius="20"
-                                        Text=">"
-                                        BackgroundColor="{StaticResource AccentLight}"
-                                        IsEnabled="{Binding active_day}"
-                                        Clicked="OnMore"
-                                        CommandParameter="{Binding .}"/>
-                                </Grid>
-                            </Frame>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        
-        </RefreshView>
+                                    <Grid Padding="10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40" />
+                                            <RowDefinition Height="20" />
+                                            <RowDefinition Height="20" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Row="0"
+                                            Grid.Column="1"
+                                            Text="{Binding day_name}"
+                                            FontSize="Title"
+                                            FontAttributes="Bold" />
+                                        <Label Grid.Row="1"
+                                            Grid.Column="1"
+                                            Text="{Binding day_date}"
+                                            FontAttributes="Bold" />
+                                        <Label Grid.Row="2"
+                                            Grid.Column="1"
+                                            Text="{Binding day_total_hours_string}"
+                                            FontAttributes="Italic"
+                                            VerticalOptions="End" />
+                                        <Label Grid.Row="2"
+                                            Grid.Column="3"
+                                            Text="{Binding day_total_jobs, StringFormat='({0} activities)'}"
+                                            FontAttributes="Italic"
+                                            VerticalOptions="End" />
+                                        <Button Grid.Row="0"
+                                            Grid.Column="0"
+                                            HeightRequest="40"
+                                            WidthRequest="40"
+                                            CornerRadius="20"
+                                            Text=">"
+                                            BackgroundColor="{StaticResource AccentLight}"
+                                            IsEnabled="{Binding active_day}"
+                                            Clicked="OnMore"
+                                            CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-    </StackLayout>
+            </RefreshView>
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

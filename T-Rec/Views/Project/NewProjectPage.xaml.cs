@@ -73,7 +73,7 @@ namespace T_Rec.Views
             dtpicker_Start_date.DateSelected += Dtpicker_Start_date_DateSelected;
             dtpicker_End_date.DateSelected += Dtpicker_End_date_DateSelected;
 
-            picker_Company.SelectedIndexChanged += Picker_Company_SelectedIndexChanged1;
+            picker_Company.SelectedIndexChanged += Picker_Company_SelectedIndexChanged;
 
             if (edited_project != null)
             {
@@ -89,23 +89,27 @@ namespace T_Rec.Views
 
         protected override void OnDisappearing()
         {
-            picker_Company.ItemsSource = null;
-            picker_Project_status.ItemsSource = null;
+            try
+            {
+                picker_Company.ItemsSource = null;
+                picker_Project_status.ItemsSource = null;
 
-            dtpicker_Start_date.DateSelected -= Dtpicker_Start_date_DateSelected;
-            dtpicker_End_date.DateSelected -= Dtpicker_End_date_DateSelected;
+                dtpicker_Start_date.DateSelected -= Dtpicker_Start_date_DateSelected;
+                dtpicker_End_date.DateSelected -= Dtpicker_End_date_DateSelected;
 
-            picker_Company.SelectedIndexChanged -= Picker_Company_SelectedIndexChanged1;
+                picker_Company.SelectedIndexChanged -= Picker_Company_SelectedIndexChanged;
 
-            _project_statusses = null;
-            _companies_picker = null;
-
-            base.OnDisappearing();
+                base.OnDisappearing();
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toast>().Show($"New Project on disappearing exception \n {ex.Message}");
+            }
         }
 
-        private void Picker_Company_SelectedIndexChanged1(object sender, EventArgs e)
+        private void Picker_Company_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (picker_Company.ItemsSource == null || picker_Company.ItemsSource.Count <= 0) 
+            if (picker_Company != null && picker_Company.ItemsSource == null || picker_Company.ItemsSource.Count <= 0) 
             {
                 LoadCompanies();
             }
@@ -164,11 +168,6 @@ namespace T_Rec.Views
             }
 
             return index;
-        }
-
-        private void Picker_Company_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         private void Dtpicker_Start_date_DateSelected(object sender, DateChangedEventArgs e)
