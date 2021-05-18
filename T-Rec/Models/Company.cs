@@ -2,11 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace T_Rec.Models
 {
     public class Company
     {
+        [Ignore]
+        public ICommand ForceCloseCommand { get; set; }
+
         [PrimaryKey, AutoIncrement]
         public int company_id { get; set; }
 

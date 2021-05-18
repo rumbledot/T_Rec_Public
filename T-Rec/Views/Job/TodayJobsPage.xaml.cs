@@ -57,7 +57,6 @@ namespace T_Rec.Views
             }
             catch (Exception ex)
             {
-
                 DependencyService.Get<Toast>().Show($"Page load failed \n {ex.Message}");
             }
         }
@@ -79,8 +78,6 @@ namespace T_Rec.Views
                 {
                     Database = await T_Rec_DB_Job.Instance;
 
-                    IsBusy = true;
-
                     var item = sender as Button;
                     JobUnit j = item.CommandParameter as JobUnit;
                     j.time_end = DateTime.Now;
@@ -94,12 +91,10 @@ namespace T_Rec.Views
                 }
                 catch (Exception ex)
                 {
-                    DependencyService.Get<Toast>().Show($"Failed to set a job to done \n {ex.Message}");
+                    DependencyService.Get<Toast>().Show($"Failed to set a job to done \n {ex.Message} \n {ex.StackTrace}");
                 }
                 finally
                 {
-                    IsBusy = false;
-
                     Database = null;
                 } 
             }
@@ -111,6 +106,8 @@ namespace T_Rec.Views
             {
                 try
                 {
+                    _view_model.is_busy = true;
+
                     Database = await T_Rec_DB_Job.Instance;
 
                     JobUnit j = new JobUnit();
@@ -126,6 +123,8 @@ namespace T_Rec.Views
                 }
                 finally
                 {
+                    _view_model.is_busy = false;
+
                     Database = null;
                 } 
             }

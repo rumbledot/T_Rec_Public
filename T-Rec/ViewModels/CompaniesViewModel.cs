@@ -75,6 +75,5 @@ namespace T_Rec.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(NewCompanyPage));
         }
-
     }
 }

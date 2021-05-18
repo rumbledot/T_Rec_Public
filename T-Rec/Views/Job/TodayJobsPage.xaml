@@ -123,15 +123,13 @@
                                         Grid.ColumnSpan="2"
                                         HeightRequest="20"
                                         Text="Description" FontSize="Micro"/>
-                                    <StackLayout 
+                                    <Label 
                                         Grid.Row="3"
                                         Grid.Column="0"
-                                        Grid.ColumnSpan="5">
-                                        <Label 
-                                            Text="{Binding description}"
-                                            LineBreakMode="WordWrap" 
-                                            FontSize="Title" />
-                                    </StackLayout>
+                                        Grid.ColumnSpan="4"
+                                        Text="{Binding description}"
+                                        LineBreakMode="WordWrap" 
+                                        FontSize="Title" />
                                     <Button 
                                         Grid.Row="4"
                                         Grid.Column="3"

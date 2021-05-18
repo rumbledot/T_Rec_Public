@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1004" android:versionName="Alpha 0.02" package="com.fabe.t_rec" android:installLocation="preferExternal">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1006" android:versionName="Alpha 0.05" package="com.fabe.t_rec" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="30" />
 	<application android:label="T_Rec.Android" android:theme="@style/MainTheme" android:icon="@drawable/ic_launcher_round"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

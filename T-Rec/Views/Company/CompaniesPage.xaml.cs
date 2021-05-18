@@ -65,7 +65,6 @@ namespace T_Rec.Views
             {
                 this.Database = await T_Rec_DB_Company.Instance;
 
-                IsBusy = true;
                 var item = sender as Button;
                 Company c = item.CommandParameter as Company;
 
@@ -79,7 +78,7 @@ namespace T_Rec.Views
             }
             finally 
             {
-                IsBusy = false;
+                Database = null;
             }
         }
     }

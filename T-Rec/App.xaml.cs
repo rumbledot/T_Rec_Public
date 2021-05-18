@@ -40,9 +40,12 @@ namespace T_Rec
 
         private void SetTheme(Theme theme)
         {
-            DependencyService.Get<Toast>().Show($"Current OS Theme");
+            DependencyService.Get<Toast>().Show($"Current OS Theme {theme}");
+
             if (theme == Theme.Dark)
             {
+                DependencyService.Get<Toast>().Show($"Current OS Theme DARK");
+
                 Resources["PrimaryText"] = Color.LightGray;
                 Resources["SecondaryText"] = Color.LightGray;
 
