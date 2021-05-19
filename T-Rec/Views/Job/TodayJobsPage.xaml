@@ -5,42 +5,47 @@
              xmlns:vm="clr-namespace:T_Rec.ViewModels" 
              xmlns:model="clr-namespace:T_Rec.Models"
              x:Class="T_Rec.Views.TodayJobsPage"
-             BackgroundColor="{StaticResource Background}"
+             BackgroundColor="{DynamicResource Background}"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ContentView x:Key="LoadTodayEmptyView">
-            <StackLayout>
+            <StackLayout
+                BackgroundColor="{DynamicResource Background}">
                 <Label Text="No job for today yet."
                     Margin="10,25,10,10"
                     FontAttributes="Bold"
                     FontSize="18"
                     HorizontalOptions="Fill"
+                    TextColor="{DynamicResource PrimaryText}"
                     HorizontalTextAlignment="Center" />
                 <Label Text="Create a new one?"
                     FontAttributes="Italic"
                     FontSize="12"
                     HorizontalOptions="Fill"
+                    TextColor="{DynamicResource PrimaryText}"
                     HorizontalTextAlignment="Center" />
                 <Button 
                     Grid.Row="4"
                     Grid.Column="4"
-                    BackgroundColor="{StaticResource Accent}"
                     Text="Start a job"
                     HeightRequest="40"
                     WidthRequest="100"
                     Padding="10"
                     x:Name="btn_start_job"
+                    BackgroundColor="{DynamicResource AccentLight}"
                     Command="{Binding OnAddJobCommand}"
                     CommandParameter="{Binding .}"/>
             </StackLayout>
         </ContentView>
         <ContentView x:Key="ReviewDayEmptyView">
-            <StackLayout>
+            <StackLayout
+                BackgroundColor="{DynamicResource Background}">
                 <Label Text="No jobs found on this day."
                     Margin="10,25,10,10"
                     FontAttributes="Bold"
                     FontSize="18"
                     HorizontalOptions="Fill"
+                    TextColor="{DynamicResource PrimaryText}"
                     HorizontalTextAlignment="Center" />
             </StackLayout>
         </ContentView>
@@ -53,7 +58,8 @@
             Command="{Binding OnAddJobCommand}" />
     </ContentPage.ToolbarItems>
     
-    <AbsoluteLayout>
+    <AbsoluteLayout
+        BackgroundColor="{DynamicResource Background}">
         <StackLayout
             Orientation="Horizontal"
             Padding="20, 0, 20, 0"
@@ -64,99 +70,114 @@
                 IsRefreshing="{Binding is_busy, Mode=TwoWay}"
                 x:Name="JobsRefreshView"
                 Command="{Binding LoadTodayJobsCommand}">
-                <CollectionView x:Name="JobsListView"            
+                <CollectionView x:Name="JobsListView"
                     AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.8, 0.8"
                     AbsoluteLayout.LayoutFlags="All"
                     ItemsSource="{Binding Jobs}">
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal"
+                        <LinearItemsLayout 
+                            Orientation="Horizontal"
                             ItemSpacing="20"/>
                     </CollectionView.ItemsLayout>
                     
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
-                            <Frame HasShadow="True"
-                                BorderColor="DarkGray"
-                                BackgroundColor="{Binding job_card_color}"
-                                CornerRadius="5"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="FillAndExpand"
-                                x:DataType="model:JobUnit">
-                                <Grid RowDefinitions="40,20,20,*,40"
-                                    ColumnDefinitions="*,*,40,40">
-                                    <Label 
-                                        Grid.Row="0"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="3"
-                                        HeightRequest="15"
-                                        Text="{Binding project_name, StringFormat='> {0}'}"
-                                        FontSize="Small" />
-                                    <Button 
-                                        Grid.Row="0"
-                                        Grid.Column="4"
-                                        HeightRequest="40"
-                                        WidthRequest="40"
-                                        CornerRadius="20"
-                                        BackgroundColor="DarkSeaGreen"
-                                        TextColor="White"
-                                        Text="$"
-                                        IsVisible="{Binding billable}"/>
-                                    <Label 
-                                        Grid.Row="1"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="2"
-                                        HeightRequest="20"
-                                        Text="{Binding time_start, StringFormat='Started at {0:HH:mm}'}"
-                                        FontSize="Micro" />
-                                    <Label
-                                        Grid.Row="1"
-                                        Grid.Column="3"
-                                        Grid.ColumnSpan="2"
-                                        IsVisible="{Binding job_done}"
-                                        Text="{Binding job_total_hours_string}"
-                                        LineBreakMode="NoWrap" 
-                                        FontSize="Micro" />
-                                    <Label 
-                                        Grid.Row="2"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="2"
-                                        HeightRequest="20"
-                                        Text="Description" FontSize="Micro"/>
-                                    <Label 
-                                        Grid.Row="3"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="4"
-                                        Text="{Binding description}"
-                                        LineBreakMode="WordWrap" 
-                                        FontSize="Title" />
-                                    <Button 
-                                        Grid.Row="4"
-                                        Grid.Column="3"
-                                        BackgroundColor="{StaticResource Accent}"
-                                        Text="OK"
-                                        HeightRequest="40"
-                                        WidthRequest="40"
-                                        CornerRadius="80"
-                                        Padding="10"
-                                        x:Name="btn_done"
-                                        IsEnabled="{Binding job_done, Converter={StaticResource inverter}}"
-                                        Clicked="OnJobDone"
-                                        CommandParameter="{Binding .}"/>
-                                    <Button 
-                                        Grid.Row="4"
-                                        Grid.Column="4"
-                                        BackgroundColor="Red"
-                                        Text="X"
-                                        HeightRequest="40"
-                                        WidthRequest="40"
-                                        CornerRadius="80"
-                                        Padding="10"
-                                        x:Name="btn_delete"
-                                        Clicked="OnJobDelete"
-                                        CommandParameter="{Binding .}"/>
-                                </Grid>
-                            </Frame>
+                                <Frame HasShadow="True"
+                                    BorderColor="DarkGray"
+                                    BackgroundColor="{Binding job_done,Converter={StaticResource job_done_bg}}"
+                                    CornerRadius="5"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
+                                    x:DataType="model:JobUnit">
+                                    <StackLayout Orientation="Vertical"
+                                        HorizontalOptions="FillAndExpand">
+                                        <Frame
+                                            BackgroundColor="{DynamicResource AccentDark}"
+                                            Margin="-20,-20,-20,-20"
+                                            HorizontalOptions="FillAndExpand">
+                                            <Label 
+                                                TextColor="{DynamicResource AccentText}"
+                                                FontSize="Title"
+                                                HorizontalTextAlignment="Center"
+                                                Text="{Binding project_name}"/>
+                                        </Frame>
+                                        <Grid RowDefinitions="40,20,20,*,40"
+                                            ColumnDefinitions="20,100,20,20">
+                                            <Button 
+                                                Grid.Row="0"
+                                                Grid.Column="4"
+                                                HeightRequest="40"
+                                                WidthRequest="40"
+                                                CornerRadius="20"
+                                                BackgroundColor="{DynamicResource ColorSuccess}"
+                                                TextColor="White"
+                                                Text="$"
+                                                IsVisible="{Binding billable}"/>
+                                            <Label 
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                HeightRequest="20"
+                                                TextColor="{DynamicResource AccentText}"
+                                                Text="{Binding time_start, StringFormat='Started at {0:HH:mm}'}"
+                                                FontSize="Micro" />
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="3"
+                                                Grid.ColumnSpan="2"
+                                                IsVisible="{Binding job_done}"
+                                                TextColor="{DynamicResource AccentText}"
+                                                Text="{Binding job_total_hours_string}"
+                                                LineBreakMode="NoWrap" 
+                                                FontSize="Micro" />
+                                            <Label 
+                                                Grid.Row="2"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                HeightRequest="20"
+                                                TextColor="{DynamicResource AccentText}"
+                                                Text="Description" FontSize="Micro"/>
+                                            <ScrollView
+                                                Grid.Row="3"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="5">
+                                                <Label 
+                                                    TextColor="{DynamicResource AccentText}"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    VerticalOptions="StartAndExpand"
+                                                    Text="{Binding description}"
+                                                    LineBreakMode="WordWrap" 
+                                                    FontSize="Title" />
+                                            </ScrollView>
+                                        </Grid>
+                                        <StackLayout Orientation="Horizontal"
+                                                     HorizontalOptions="EndAndExpand"
+                                                     VerticalOptions="EndAndExpand">
+                                            <Button 
+                                                BackgroundColor="{DynamicResource AccentLight}"
+                                                Text="OK"
+                                                HeightRequest="40"
+                                                WidthRequest="40"
+                                                CornerRadius="20"
+                                                Padding="10"
+                                                x:Name="btn_done"
+                                                IsEnabled="{Binding job_done, Converter={StaticResource inverter}}"
+                                                Clicked="OnJobDone"
+                                                CommandParameter="{Binding .}"/>
+                                            <Button 
+                                                BackgroundColor="{DynamicResource ColorDanger}"
+                                                Text="X"
+                                                HeightRequest="40"
+                                                WidthRequest="40"
+                                                CornerRadius="20"
+                                                Padding="10"
+                                                x:Name="btn_delete"
+                                                Clicked="OnJobDelete"
+                                                CommandParameter="{Binding .}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -165,8 +186,8 @@
             </RefreshView>
             
             <IndicatorView x:Name="indicatorView"
-                IndicatorColor="{StaticResource AccentLight}"
-                SelectedIndicatorColor="{StaticResource AccentDark}"
+                IndicatorColor="{DynamicResource AccentLight}"
+                SelectedIndicatorColor="{DynamicResource AccentDark}"
                 HorizontalOptions="Center" />
             
         </StackLayout>

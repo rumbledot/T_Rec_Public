@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using T_Rec.Data;
+using T_Rec.Helpers;
 using T_Rec.Models;
 using T_Rec.Views;
 using Xamarin.Forms;
@@ -76,6 +77,8 @@ namespace T_Rec.ViewModels
 
                         item.project_name = p.name;
                         item.billable = p.billable;
+                        item.job_card_color = item.job_done ? Color.FromHex(ExtensionHelper.FindResource("BackgroundDark").ToString()) : Color.FromHex(ExtensionHelper.FindResource("BackgroundLight").ToString());
+
                         Jobs.Add(item);
                         if (!item.job_done)
                         {

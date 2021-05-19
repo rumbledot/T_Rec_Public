@@ -65,6 +65,8 @@ namespace T_Rec.Views
                 Project p = btn.CommandParameter as Project;
 
                 await Database.DeleteProjectAsync(p);
+
+                _view_model.is_busy = true;
             }
             catch (Exception ex)
             {
@@ -72,6 +74,7 @@ namespace T_Rec.Views
             }
             finally
             {
+                _view_model.is_busy = false;
                 Database = null;
             }
         }

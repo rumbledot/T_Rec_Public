@@ -8,6 +8,7 @@ using T_Rec.Models;
 using T_Rec.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using T_Rec.Helpers;
 
 namespace T_Rec.Views
 {
@@ -63,11 +64,11 @@ namespace T_Rec.Views
 
         protected override void OnAppearing()
         {
-                base.OnAppearing();
-
-                _view_model.OnAppearing();
-
-                tbtn_add_job.IsEnabled = _view_model.can_add_job && !viewing_only;
+            base.OnAppearing();
+            
+            _view_model.OnAppearing();
+            
+            tbtn_add_job.IsEnabled = _view_model.can_add_job && !viewing_only;
         }
 
         async void OnJobDone(object sender, EventArgs e)
@@ -85,6 +86,7 @@ namespace T_Rec.Views
 
                     await Database.SaveJobAsync(j);
 
+                    _view_model.is_busy = true;
                     _view_model.can_add_job = true;
 
                     tbtn_add_job.IsEnabled = _view_model.can_add_job && !viewing_only;
@@ -95,6 +97,7 @@ namespace T_Rec.Views
                 }
                 finally
                 {
+                    _view_model.is_busy = false;
                     Database = null;
                 } 
             }
@@ -106,8 +109,6 @@ namespace T_Rec.Views
             {
                 try
                 {
-                    _view_model.is_busy = true;
-
                     Database = await T_Rec_DB_Job.Instance;
 
                     JobUnit j = new JobUnit();
@@ -116,6 +117,8 @@ namespace T_Rec.Views
                     j = item.CommandParameter as JobUnit;
 
                     await Database.DeleteJobAsync(j);
+
+                    _view_model.is_busy = true;
                 }
                 catch (Exception ex)
                 {
@@ -124,7 +127,6 @@ namespace T_Rec.Views
                 finally
                 {
                     _view_model.is_busy = false;
-
                     Database = null;
                 } 
             }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using T_Rec.Models;
+using T_Rec.Helpers;
 using Xamarin.Forms;
 
 namespace T_Rec.ViewModels
@@ -93,9 +94,6 @@ namespace T_Rec.ViewModels
 
                     today_jobs = jobs.Where<JobUnit>(j =>(j.time_start > each_day && j.time_start < each_day_end)).OrderBy(j => (j.time_start)).ToList();
 
-                    //Console.WriteLine($"Day : {day}");
-                    //Console.WriteLine($"day total hours : {total_hours}");
-
                     JobInADay day_reviews = new JobInADay()
                     {
                         day_name = day.ToString(),
@@ -103,8 +101,11 @@ namespace T_Rec.ViewModels
                         day_total_hours = total_hours,
                         day_total_jobs = 0,
                         active_day = false,
-                        today_day = day == DateTime.Now.DayOfWeek ? Color.LightGray : Color.WhiteSmoke
+                        today_day = (day == DateTime.Now.DayOfWeek) //? Color.FromHex(ExtensionHelper.FindResource("PrimaryLight").ToString()) : Color.FromHex(ExtensionHelper.FindResource("BackgroundLight").ToString())
                     };
+
+                    Console.WriteLine($"Day : {day} : {day_reviews.today_day} ({DateTime.Now.DayOfWeek})");
+                    Console.WriteLine($"day total hours : {total_hours}");
 
                     if (today_jobs != null && today_jobs.Count > 0)
                     {

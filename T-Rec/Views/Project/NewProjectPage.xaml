@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:T_Rec.Models"
+             BackgroundColor="{StaticResource Background}"
              x:Class="T_Rec.Views.NewProjectPage">
     <ContentPage.Content>
         <ScrollView>

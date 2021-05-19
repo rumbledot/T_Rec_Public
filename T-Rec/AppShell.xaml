@@ -4,6 +4,9 @@
        xmlns:local="clr-namespace:T_Rec.Views"
        xmlns:sys="clr-namespace:System;assembly=mscorlib"
        Title="T_Rec"
+       BackgroundColor="{DynamicResource PrimaryLight}"
+       FlyoutBackgroundColor="{DynamicResource PrimaryLight}"
+       FlyoutWidth="250"
        x:Class="T_Rec.AppShell">
 
     <!--
@@ -15,16 +18,16 @@
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.ForegroundColor" Value="{StaticResource PrimaryText}" />
-                <Setter Property="Shell.TitleColor" Value="{StaticResource PrimaryText}" />
-                <Setter Property="Shell.DisabledColor" Value="{StaticResource AccentDark}" />
-                <Setter Property="Shell.UnselectedColor" Value="{StaticResource PrimaryText}" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource PrimaryText}"/>
-                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource PrimaryText}"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource PrimaryText}"/>
-                <Setter Property="Shell.FlyoutBackgroundColor" Value="{StaticResource PrimaryLight}"/>
+                <Setter Property="Shell.BackgroundColor" Value="{DynamicResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="{DynamicResource PrimaryText}" />
+                <Setter Property="Shell.TitleColor" Value="{DynamicResource PrimaryText}" />
+                <Setter Property="Shell.DisabledColor" Value="{DynamicResource PrimaryDark}" />
+                <Setter Property="Shell.UnselectedColor" Value="{DynamicResource PrimaryText}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{DynamicResource Primary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{DynamicResource PrimaryText}"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{DynamicResource PrimaryText}"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource PrimaryText}"/>
+                <Setter Property="Shell.FlyoutBackgroundColor" Value="{DynamicResource PrimaryLight}"/>
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
@@ -34,7 +37,7 @@
             https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
             -->
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource PrimaryText}"></Setter>
+                <Setter Property="TextColor" Value="{DynamicResource AccentText}"></Setter>
             </Style>
             <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
                 <Setter Property="VisualStateManager.VisualStateGroups">
@@ -43,12 +46,12 @@
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor" Value="{x:OnPlatform UWP=Transparent, iOS=White}" />
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource PrimaryText}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{DynamicResource AccentText}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Selected">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource AccentLight}" />
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -65,7 +68,7 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource PrimaryText}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{DynamicResource AccentText}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -81,16 +84,23 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     <Shell.FlyoutHeader>
-        <Grid BackgroundColor="{StaticResource PrimaryDark}">
-            <Image Aspect="AspectFill"
-               Source="ic_launcher_round.jpg"
-               Opacity="0.6" />
+        <Grid BackgroundColor="{DynamicResource PrimaryDark}"
+              RowDefinitions="20,120,*,60"
+              ColumnDefinitions="20,120,20">
+            <Image
+                Grid.Row="1"
+                Grid.Column="1"
+                HeightRequest="120"
+                WidthRequest="120"
+                Source="ic_launcher_round.jpg"/>
             <Label Text="T-REC"
-               TextColor="{StaticResource AccentText}"
-               FontSize="Title"
-               FontAttributes="Bold"
-               HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center" />
+                Grid.Row="2"
+                Grid.Column="1"
+                TextColor="{DynamicResource AccentText}"
+                FontSize="Title"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"/>
         </Grid>
         
     </Shell.FlyoutHeader>
@@ -101,11 +111,11 @@
     <FlyoutItem Title="Week Reviews" Icon="ic_task_weekly.png">
         <ShellContent Route="WeekJobsPage" ContentTemplate="{DataTemplate local:WeekJobsPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Projects" Icon="ic_client_project.png">
-        <ShellContent Route="ProjectsPage" ContentTemplate="{DataTemplate local:ProjectsPage}" />
-    </FlyoutItem>
     <FlyoutItem Title="Companies" Icon="ic_client_company.png">
         <ShellContent Route="CompaniesPage" ContentTemplate="{DataTemplate local:CompaniesPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Projects" Icon="ic_client_project.png">
+        <ShellContent Route="ProjectsPage" ContentTemplate="{DataTemplate local:ProjectsPage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
@@ -160,11 +170,11 @@
         <DataTemplate>
             <StackLayout Padding="0,20,0,20" BackgroundColor="{StaticResource PrimaryDark}">
                 <Label Text="T-Rec"
-                   TextColor="{StaticResource PrimaryText}"
+                   TextColor="{DynamicResource AccentText}"
                    FontAttributes="Bold"
                    HorizontalOptions="Center" />
                 <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MMMM dd, yyyy}'}"
-                   TextColor="{StaticResource PrimaryText}"
+                   TextColor="{DynamicResource AccentText}"
                    HorizontalOptions="Center" />
             </StackLayout>
         </DataTemplate>

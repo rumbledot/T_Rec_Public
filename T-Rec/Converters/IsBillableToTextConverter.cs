@@ -10,9 +10,9 @@ namespace T_Rec.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool isMuted)
+            if (value is bool today_day)
             {
-                var result = isMuted ? "Billable" : "not Billable";
+                var result = today_day ? Color.DarkOliveGreen : Color.LightGray;
                 return result;
             }
 

@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:T_Rec.Models" 
              x:Class="T_Rec.Views.NewJobPage"
+             BackgroundColor="{StaticResource Background}"
              Title="{Binding Name}">
     <ContentPage.Content>
-        <ScrollView>
-        <Frame>
+        <ScrollView BackgroundColor="{StaticResource Background}">
+            <Frame BackgroundColor="{StaticResource Background}">
             <StackLayout Margin="20" VerticalOptions="StartAndExpand">
                 <Grid 
                     RowDefinitions="40, 40"
@@ -16,6 +17,8 @@
                     Grid.Column="0"
                     Grid.RowSpan="2"
                     x:Name="picker_Active_projects"
+                    TitleColor="{StaticResource PrimaryText}"
+                    TextColor="{StaticResource PrimaryText}"
                     Title="Projects.."
                     x:DataType="model:Project"/>
                 <Button 
@@ -24,16 +27,18 @@
                     HeightRequest="40"
                     WidthRequest="40"
                     CornerRadius="20"
-                    BackgroundColor="DarkSeaGreen"
+                    BackgroundColor="{StaticResource ColorSuccess}"
                     TextColor="White"
                     x:Name="button_Is_billable"
                     Text="$"/>
                 </Grid>
-                <Label Text="Description" />
+                <Label Text="Description" 
+                       TextColor="{StaticResource PrimaryText}"/>
                 <Editor x:Name="tbox_Description"
                     AutoSize="TextChanges"
                     Placeholder="Job description" 
-                    PlaceholderColor="{StaticResource PrimaryLight}" 
+                    TextColor="{StaticResource PrimaryText}"
+                    PlaceholderColor="{StaticResource PrimaryText}"
                     MaxLength="200"
                     Text=""/>
                 <Button Text="Save" Clicked="OnSaveClicked" />

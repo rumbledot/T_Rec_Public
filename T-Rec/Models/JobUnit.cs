@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using Xamarin.Forms;
+using T_Rec.Helpers;
 
 namespace T_Rec.Models
 {
@@ -49,13 +50,7 @@ namespace T_Rec.Models
         }
 
         [Ignore]
-        public Color job_card_color 
-        {
-            get 
-            {
-                return job_done ? Color.LightGray : Color.WhiteSmoke;
-            }
-        }
+        public Color job_card_color { get; set; }
 
         public string GetProjectName()
         {

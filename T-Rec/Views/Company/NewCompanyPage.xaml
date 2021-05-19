@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="T_Rec.Views.NewCompanyPage"
+             BackgroundColor="{DynamicResource Background}"
              Title="{Binding Name}">
     <ContentPage.Content>
         <Frame>
@@ -9,14 +10,14 @@
                 <Label Text="Company Name" />
                 <Entry x:Name="tbox_Company_name"
                     Placeholder="Company Name" 
-                    PlaceholderColor="{StaticResource PrimaryLight}" 
+                    PlaceholderColor="{DynamicResource PrimaryLight}" 
                     MaxLength="100"
                     Text="" />
                 <Label Text="Main Email/Contact Number" />
                 <Editor x:Name="tbox_Email"
                     AutoSize="TextChanges"
                     Placeholder="main contact" 
-                    PlaceholderColor="{StaticResource PrimaryLight}" 
+                    PlaceholderColor="{DynamicResource BackgroundLight}" 
                     MaxLength="50"
                     Text=""/>
                 <Button Text="Save" Clicked="OnSaveClicked" />

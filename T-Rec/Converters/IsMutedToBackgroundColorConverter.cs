@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using T_Rec.Helpers;
 using Xamarin.Forms;
 
 namespace T_Rec.Converters
@@ -8,9 +9,10 @@ namespace T_Rec.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool isMuted)
+            if (value is bool job_done)
             {
-                var result = isMuted ? Color.Gray : Color.Green;
+                //var result = job_done ? Color.FromHex(ExtensionHelper.FindResource("AccentLight").ToString()) : Color.FromHex(ExtensionHelper.FindResource("PrimaryLight").ToString());
+                var result = job_done ? Color.DarkGray : Color.LightGray;
                 return result;
             }
 

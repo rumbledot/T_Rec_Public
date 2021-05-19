@@ -13,7 +13,7 @@ namespace T_Rec.Models
 
         public bool active_day { get; set; }
 
-        public Color today_day { get; set; }
+        public bool today_day { get; set; }
 
         public string day_total_hours_string
         {

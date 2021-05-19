@@ -16,7 +16,7 @@
     <ContentPage.Content>
         <StackLayout Margin="10,-10,10,10">
             <Frame CornerRadius="10"
-                   BackgroundColor="{StaticResource Background}">
+                   BackgroundColor="{StaticResource AccentDark}">
                 <StackLayout Orientation="Vertical">
                     <Label 
                         FontSize="Title"
@@ -47,53 +47,53 @@
                     
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                                    <StackLayout Orientation="Vertical"
-                                        x:DataType="model:Company">
-                                        <Frame CornerRadius="10"
-                                               BackgroundColor="{StaticResource BackgroundLight}">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="40" />
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="40" />
-                                                    <ColumnDefinition Width="40" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
-                                                <Label Grid.Row="0"
-                                                       Grid.Column="0"
-                                                       Grid.ColumnSpan="3"
-                                                       Text="{Binding name}"
-                                                       FontSize="Title"
-                                                       FontAttributes="Bold" />
-                                                <Label Grid.Row="1"
-                                                       Grid.Column="0"
-                                                       Grid.ColumnSpan="3"
-                                                       Text="{Binding email}"
-                                                       FontSize="Subtitle"/>
-                                                <Button Grid.Row="2"
-                                                        Grid.Column="0"
-                                                        HeightRequest="40"
-                                                        WidthRequest="40"
-                                                        CornerRadius="20"
-                                                        BackgroundColor="DarkSeaGreen"
-                                                        Text="!"
-                                                        Clicked="OnEdit"
-                                                        CommandParameter="{Binding .}"/>
-                                                <Button Grid.Row="2"
-                                                        Grid.Column="1"
-                                                        HeightRequest="40"
-                                                        WidthRequest="40"
-                                                        CornerRadius="20"
-                                                        BackgroundColor="Red"
-                                                        Text="X"
-                                                        Clicked="OnDelete"
-                                                        CommandParameter="{Binding .}"/>
-                                            </Grid>
-                                        </Frame>
-                                    </StackLayout>
+                            <StackLayout Orientation="Vertical"
+                                x:DataType="model:Company">
+                                <Frame CornerRadius="10"
+                                       BackgroundColor="{StaticResource BackgroundLight}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="40" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Row="0"
+                                               Grid.Column="0"
+                                               Grid.ColumnSpan="3"
+                                               Text="{Binding name}"
+                                               FontSize="Title"
+                                               FontAttributes="Bold" />
+                                        <Label Grid.Row="1"
+                                               Grid.Column="0"
+                                               Grid.ColumnSpan="3"
+                                               Text="{Binding email}"
+                                               FontSize="Subtitle"/>
+                                        <Button Grid.Row="2"
+                                                Grid.Column="0"
+                                                HeightRequest="40"
+                                                WidthRequest="40"
+                                                CornerRadius="20"
+                                                BackgroundColor="{StaticResource ColorSuccess}"
+                                                Text="!"
+                                                Clicked="OnEdit"
+                                                CommandParameter="{Binding .}"/>
+                                        <Button Grid.Row="2"
+                                                Grid.Column="1"
+                                                HeightRequest="40"
+                                                WidthRequest="40"
+                                                CornerRadius="20"
+                                                BackgroundColor="{StaticResource ColorDanger}"
+                                                Text="X"
+                                                Clicked="OnDelete"
+                                                CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
                             
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

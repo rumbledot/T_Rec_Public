@@ -39,11 +39,13 @@
                                     FontAttributes="Bold"
                                     FontSize="18"
                                     HorizontalOptions="Fill"
+                                    TextColor="{StaticResource PrimaryText}"
                                     HorizontalTextAlignment="Center" />
                             <Label Text="Create a new one?"
                                     FontAttributes="Italic"
                                     FontSize="12"
                                     HorizontalOptions="Fill"
+                                    TextColor="{StaticResource PrimaryText}"
                                     HorizontalTextAlignment="Center" />
                             <Button 
                                     Grid.Row="4"
@@ -152,7 +154,7 @@
                                             CommandParameter="{Binding .}"/>
                                         <Button 
                                             Grid.Column="3"
-                                            BackgroundColor="Red"
+                                            BackgroundColor="{StaticResource ColorDanger}"
                                             Text="X"
                                             HeightRequest="40"
                                             WidthRequest="40"

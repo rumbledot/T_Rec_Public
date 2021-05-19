@@ -43,12 +43,14 @@ namespace T_Rec.ViewModels
             is_busy = true;
         }
 
-        private void ExecuteLoadProjectsCommand()
+        private async void ExecuteLoadProjectsCommand()
         {
             try
             {
-
                 is_busy = true;
+
+                Database = await T_Rec_DB_Project.Instance;
+                Database_Company = await T_Rec_DB_Company.Instance;
 
                 Projects.Clear();
 

@@ -24,7 +24,7 @@
                     CornerRadius="60">
                 <Label Text="0"
                     x:Name="label_Proper_hours"
-                    TextColor="{StaticResource Background}"
+                    TextColor="{StaticResource AccentText}"
                     FontSize="60"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand"/>
@@ -38,7 +38,7 @@
                     CornerRadius="40">
                 <Label Text="0"
                     x:Name="label_Proper_mins"
-                    TextColor="{StaticResource Background}"
+                    TextColor="{StaticResource AccentText}"
                     FontSize="Title"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand"/>
@@ -49,7 +49,7 @@
                 Margin="5"
                 Orientation="Vertical"
                 x:DataType="model:JobInADay">
-                <Frame BackgroundColor="{Binding today_day}"
+                <Frame BackgroundColor="{StaticResource BackgroundLight}"
                     CornerRadius="10">
                     <Grid Padding="10">
                         <Grid.RowDefinitions>
@@ -64,8 +64,10 @@
                             Grid.Column="1"
                             Text="Review jobs on "
                             FontSize="Title"
+                            TextColor="{StaticResource PrimaryText}"
                             FontAttributes="Bold" />
                         <DatePicker Grid.Row="0"
+                            TextColor="{StaticResource PrimaryText}"
                             Grid.Column="2"
                             x:Name="dtpicker_Review_date"/>
                         <Button Grid.Row="0"
@@ -74,7 +76,7 @@
                             WidthRequest="40"
                             CornerRadius="20"
                             Text=">"
-                            BackgroundColor="{StaticResource AccentLight}"
+                            BackgroundColor="{StaticResource Accent}"
                             Clicked="OnReviewByDate"/>
                     </Grid>
                 </Frame>
@@ -92,7 +94,7 @@
                                 Margin="5"
                                 Orientation="Vertical"
                                 x:DataType="model:JobInADay">
-                                <Frame BackgroundColor="{Binding today_day}"
+                                <Frame BackgroundColor="{Binding today_day, Converter={StaticResource today_day_bg}}"
                                 CornerRadius="10">
                                     <Grid Padding="10">
                                         <Grid.RowDefinitions>
@@ -108,20 +110,24 @@
                                         <Label Grid.Row="0"
                                             Grid.Column="1"
                                             Text="{Binding day_name}"
+                                            TextColor="{StaticResource AccentText}"
                                             FontSize="Title"
                                             FontAttributes="Bold" />
                                         <Label Grid.Row="1"
                                             Grid.Column="1"
                                             Text="{Binding day_date}"
+                                            TextColor="{StaticResource AccentText}"
                                             FontAttributes="Bold" />
                                         <Label Grid.Row="2"
                                             Grid.Column="1"
                                             Text="{Binding day_total_hours_string}"
+                                            TextColor="{StaticResource AccentText}"
                                             FontAttributes="Italic"
                                             VerticalOptions="End" />
                                         <Label Grid.Row="2"
                                             Grid.Column="3"
                                             Text="{Binding day_total_jobs, StringFormat='({0} activities)'}"
+                                            TextColor="{StaticResource AccentText}"
                                             FontAttributes="Italic"
                                             VerticalOptions="End" />
                                         <Button Grid.Row="0"

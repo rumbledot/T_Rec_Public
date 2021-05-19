@@ -9,32 +9,37 @@
     <Application.Resources>
         <ResourceDictionary>
             <local:NegateBooleanConverter x:Key="inverter"/>
-            <Color x:Key="Background">#eeeeee</Color>
-            <Color x:Key="BackgroundLight">#ffffff</Color>
-            <Color x:Key="BackgroundDark">#bcbcbc</Color>
+            <local:IsMutedToBackgroundColorConverter x:Key="job_done_bg"/>
+            <local:IsBillableToTextConverter x:Key="today_day_bg"/>
             <Color x:Key="Primary">#78909c</Color>
             <Color x:Key="PrimaryLight">#a7c0cd</Color>
             <Color x:Key="PrimaryDark">#4b636e</Color>
             <Color x:Key="Accent">#f9a825</Color>
             <Color x:Key="AccentLight">#ffd95a</Color>
             <Color x:Key="AccentDark">#c17900</Color>
+            <Color x:Key="Background">#eeeeee</Color>
+            <Color x:Key="BackgroundLight">#ffffff</Color>
+            <Color x:Key="BackgroundDark">#bcbcbc</Color>
             <Color x:Key="PrimaryText">#000000</Color>
             <Color x:Key="AccentText">#000000</Color>
+            <Color x:Key="ColorSuccess">#1b5e20</Color>
+            <Color x:Key="ColorWarning">#8e0000</Color>
+            <Color x:Key="ColorDanger">#c62828</Color>
             <Style TargetType="Button">
-                <Setter Property="TextColor" Value="{StaticResource PrimaryText}"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource AccentText}"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
                                     <Setter Property="TextColor" Value="{StaticResource AccentText}"></Setter>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource AccentDark}" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource AccentLight}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Disabled">
                                 <VisualState.Setters>
                                     <Setter Property="TextColor" Value="{StaticResource AccentText}"></Setter>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource AccentLight}" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource AccentDark}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>

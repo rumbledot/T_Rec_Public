@@ -70,6 +70,8 @@ namespace T_Rec.Views
 
                 await Database.DeleteCompanyAsync(c);
 
+                _view_model.is_busy = true;
+
                 DependencyService.Get<Toast>().Show($"Company deleted");
             }
             catch (Exception ex)
@@ -78,6 +80,7 @@ namespace T_Rec.Views
             }
             finally 
             {
+                _view_model.is_busy = false;
                 Database = null;
             }
         }
