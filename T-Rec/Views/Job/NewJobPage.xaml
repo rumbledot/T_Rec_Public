@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:T_Rec.Models" 
              x:Class="T_Rec.Views.NewJobPage"
-             BackgroundColor="{StaticResource Background}"
+             BackgroundColor="{DynamicResource Background}"
              Title="{Binding Name}">
     <ContentPage.Content>
-        <ScrollView BackgroundColor="{StaticResource Background}">
-            <Frame BackgroundColor="{StaticResource Background}">
+        <ScrollView BackgroundColor="{DynamicResource Background}">
+            <Frame BackgroundColor="{DynamicResource Background}">
             <StackLayout Margin="20" VerticalOptions="StartAndExpand">
                 <Grid 
                     RowDefinitions="40, 40"
@@ -17,8 +17,8 @@
                     Grid.Column="0"
                     Grid.RowSpan="2"
                     x:Name="picker_Active_projects"
-                    TitleColor="{StaticResource PrimaryText}"
-                    TextColor="{StaticResource PrimaryText}"
+                    TitleColor="{DynamicResource PrimaryText}"
+                    TextColor="{DynamicResource PrimaryText}"
                     Title="Projects.."
                     x:DataType="model:Project"/>
                 <Button 
@@ -27,18 +27,18 @@
                     HeightRequest="40"
                     WidthRequest="40"
                     CornerRadius="20"
-                    BackgroundColor="{StaticResource ColorSuccess}"
+                    BackgroundColor="{DynamicResource ColorSuccess}"
                     TextColor="White"
                     x:Name="button_Is_billable"
                     Text="$"/>
                 </Grid>
                 <Label Text="Description" 
-                       TextColor="{StaticResource PrimaryText}"/>
+                       TextColor="{DynamicResource PrimaryText}"/>
                 <Editor x:Name="tbox_Description"
                     AutoSize="TextChanges"
                     Placeholder="Job description" 
-                    TextColor="{StaticResource PrimaryText}"
-                    PlaceholderColor="{StaticResource PrimaryText}"
+                    TextColor="{DynamicResource PrimaryText}"
+                    PlaceholderColor="{DynamicResource PrimaryText}"
                     MaxLength="200"
                     Text=""/>
                 <Button Text="Save" Clicked="OnSaveClicked" />

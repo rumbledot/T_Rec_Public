@@ -5,7 +5,7 @@
        xmlns:sys="clr-namespace:System;assembly=mscorlib"
        Title="T_Rec"
        BackgroundColor="{DynamicResource PrimaryLight}"
-       FlyoutBackgroundColor="{DynamicResource PrimaryLight}"
+       FlyoutBackgroundColor="White"
        FlyoutWidth="250"
        x:Class="T_Rec.AppShell">
 

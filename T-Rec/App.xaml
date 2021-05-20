@@ -9,8 +9,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <local:NegateBooleanConverter x:Key="inverter"/>
-            <local:IsMutedToBackgroundColorConverter x:Key="job_done_bg"/>
-            <local:IsBillableToTextConverter x:Key="today_day_bg"/>
+            <local:IsJobDoneColorConverter x:Key="job_done_bg"/>
+            <local:IsTodayDayColorConverter x:Key="today_day_bg"/>
             <Color x:Key="Primary">#78909c</Color>
             <Color x:Key="PrimaryLight">#a7c0cd</Color>
             <Color x:Key="PrimaryDark">#4b636e</Color>
@@ -26,25 +26,35 @@
             <Color x:Key="ColorWarning">#8e0000</Color>
             <Color x:Key="ColorDanger">#c62828</Color>
             <Style TargetType="Button">
-                <Setter Property="TextColor" Value="{StaticResource AccentText}"></Setter>
+                <Setter Property="TextColor" Value="{DynamicResource AccentText}"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="TextColor" Value="{StaticResource AccentText}"></Setter>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource AccentLight}" />
+                                    <Setter Property="TextColor" Value="{DynamicResource AccentText}"></Setter>
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentLight}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Disabled">
                                 <VisualState.Setters>
-                                    <Setter Property="TextColor" Value="{StaticResource AccentText}"></Setter>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource AccentDark}" />
+                                    <Setter Property="TextColor" Value="{DynamicResource AccentText}"></Setter>
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentDark}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </Setter>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryText}"></Setter>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="{DynamicResource PrimaryLight}"></Setter>
+            </Style>
+            <Style TargetType="Switch">
+                <Setter Property="OnColor" Value="{DynamicResource PrimaryDark}"></Setter>
+                <Setter Property="ThumbColor" Value="{DynamicResource AccentLight}"></Setter>
             </Style>
         </ResourceDictionary>        
     </Application.Resources>

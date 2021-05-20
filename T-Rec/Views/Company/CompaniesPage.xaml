@@ -16,13 +16,13 @@
     <ContentPage.Content>
         <StackLayout Margin="10,-10,10,10">
             <Frame CornerRadius="10"
-                   BackgroundColor="{StaticResource AccentDark}">
+                   BackgroundColor="{DynamicResource AccentDark}">
                 <StackLayout Orientation="Vertical">
                     <Label 
                         FontSize="Title"
                         VerticalOptions="CenterAndExpand"
                         HorizontalTextAlignment="Center"
-                        TextColor="{StaticResource PrimaryText}"
+                        TextColor="{DynamicResource AccentText}"
                         Text="Registered Companies"/>
                     <Label 
                         FontSize="Small"
@@ -50,7 +50,7 @@
                             <StackLayout Orientation="Vertical"
                                 x:DataType="model:Company">
                                 <Frame CornerRadius="10"
-                                       BackgroundColor="{StaticResource BackgroundLight}">
+                                       BackgroundColor="{DynamicResource BackgroundLight}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
@@ -65,12 +65,14 @@
                                         <Label Grid.Row="0"
                                                Grid.Column="0"
                                                Grid.ColumnSpan="3"
+                                               TextColor="{DynamicResource PrimaryText}"
                                                Text="{Binding name}"
                                                FontSize="Title"
                                                FontAttributes="Bold" />
                                         <Label Grid.Row="1"
                                                Grid.Column="0"
                                                Grid.ColumnSpan="3"
+                                               TextColor="{DynamicResource PrimaryText}"
                                                Text="{Binding email}"
                                                FontSize="Subtitle"/>
                                         <Button Grid.Row="2"

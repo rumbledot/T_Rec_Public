@@ -16,13 +16,11 @@
                     FontAttributes="Bold"
                     FontSize="18"
                     HorizontalOptions="Fill"
-                    TextColor="{DynamicResource PrimaryText}"
                     HorizontalTextAlignment="Center" />
                 <Label Text="Create a new one?"
                     FontAttributes="Italic"
                     FontSize="12"
                     HorizontalOptions="Fill"
-                    TextColor="{DynamicResource PrimaryText}"
                     HorizontalTextAlignment="Center" />
                 <Button 
                     Grid.Row="4"
@@ -45,7 +43,6 @@
                     FontAttributes="Bold"
                     FontSize="18"
                     HorizontalOptions="Fill"
-                    TextColor="{DynamicResource PrimaryText}"
                     HorizontalTextAlignment="Center" />
             </StackLayout>
         </ContentView>
@@ -97,9 +94,9 @@
                                             Margin="-20,-20,-20,-20"
                                             HorizontalOptions="FillAndExpand">
                                             <Label 
-                                                TextColor="{DynamicResource AccentText}"
                                                 FontSize="Title"
                                                 HorizontalTextAlignment="Center"
+                                                TextColor="{DynamicResource AccentText}"
                                                 Text="{Binding project_name}"/>
                                         </Frame>
                                         <Grid RowDefinitions="40,20,20,*,40"
@@ -119,7 +116,6 @@
                                                 Grid.Column="0"
                                                 Grid.ColumnSpan="2"
                                                 HeightRequest="20"
-                                                TextColor="{DynamicResource AccentText}"
                                                 Text="{Binding time_start, StringFormat='Started at {0:HH:mm}'}"
                                                 FontSize="Micro" />
                                             <Label
@@ -127,7 +123,6 @@
                                                 Grid.Column="3"
                                                 Grid.ColumnSpan="2"
                                                 IsVisible="{Binding job_done}"
-                                                TextColor="{DynamicResource AccentText}"
                                                 Text="{Binding job_total_hours_string}"
                                                 LineBreakMode="NoWrap" 
                                                 FontSize="Micro" />
@@ -136,14 +131,12 @@
                                                 Grid.Column="0"
                                                 Grid.ColumnSpan="2"
                                                 HeightRequest="20"
-                                                TextColor="{DynamicResource AccentText}"
                                                 Text="Description" FontSize="Micro"/>
                                             <ScrollView
                                                 Grid.Row="3"
                                                 Grid.Column="0"
                                                 Grid.ColumnSpan="5">
                                                 <Label 
-                                                    TextColor="{DynamicResource AccentText}"
                                                     HorizontalOptions="StartAndExpand"
                                                     VerticalOptions="StartAndExpand"
                                                     Text="{Binding description}"
@@ -154,8 +147,7 @@
                                         <StackLayout Orientation="Horizontal"
                                                      HorizontalOptions="EndAndExpand"
                                                      VerticalOptions="EndAndExpand">
-                                            <Button 
-                                                BackgroundColor="{DynamicResource AccentLight}"
+                                            <Button
                                                 Text="OK"
                                                 HeightRequest="40"
                                                 WidthRequest="40"

@@ -5,14 +5,13 @@ using Xamarin.Forms;
 
 namespace T_Rec.Converters
 {
-    internal class IsMutedToBackgroundColorConverter : IValueConverter
+    internal class IsJobDoneColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is bool job_done)
             {
-                //var result = job_done ? Color.FromHex(ExtensionHelper.FindResource("AccentLight").ToString()) : Color.FromHex(ExtensionHelper.FindResource("PrimaryLight").ToString());
-                var result = job_done ? Color.DarkGray : Color.LightGray;
+                var result = job_done ? Application.Current.Resources["BackgroundDark"] : Application.Current.Resources["BackgroundLight"];
                 return result;
             }
 

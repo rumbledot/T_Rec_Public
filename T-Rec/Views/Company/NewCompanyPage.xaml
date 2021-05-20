@@ -5,20 +5,25 @@
              BackgroundColor="{DynamicResource Background}"
              Title="{Binding Name}">
     <ContentPage.Content>
-        <Frame>
+        <Frame 
+            BackgroundColor="{DynamicResource Background}">
             <StackLayout Margin="20" VerticalOptions="StartAndExpand">
-                <Label Text="Company Name" />
+                <Label Text="Company Name" 
+                       TextColor="{DynamicResource PrimaryText}"/>
                 <Entry x:Name="tbox_Company_name"
                     Placeholder="Company Name" 
-                    PlaceholderColor="{DynamicResource PrimaryLight}" 
+                    PlaceholderColor="{DynamicResource PrimaryText}" 
                     MaxLength="100"
+                    TextColor="{DynamicResource PrimaryText}"
                     Text="" />
-                <Label Text="Main Email/Contact Number" />
+                <Label Text="Main Email/Contact Number" 
+                       TextColor="{DynamicResource PrimaryText}"/>
                 <Editor x:Name="tbox_Email"
                     AutoSize="TextChanges"
                     Placeholder="main contact" 
-                    PlaceholderColor="{DynamicResource BackgroundLight}" 
+                    PlaceholderColor="{DynamicResource PrimaryText}" 
                     MaxLength="50"
+                    TextColor="{DynamicResource PrimaryText}"
                     Text=""/>
                 <Button Text="Save" Clicked="OnSaveClicked" />
                 <Button Text="Cancel" Clicked="OnCancelClicked" />

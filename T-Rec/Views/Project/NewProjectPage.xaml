@@ -2,59 +2,82 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:T_Rec.Models"
-             BackgroundColor="{StaticResource Background}"
+             BackgroundColor="{DynamicResource Background}"
              x:Class="T_Rec.Views.NewProjectPage">
     <ContentPage.Content>
         <ScrollView>
-        <Frame>
+            <Frame
+                BackgroundColor="{DynamicResource Background}">
             <StackLayout Margin="20" VerticalOptions="StartAndExpand">
-                <Label Text="Company"/>
+                <Label Text="Company"
+                       TextColor="{DynamicResource PrimaryText}"/>
                 <Picker x:Name="picker_Company"
+                    TitleColor="{DynamicResource PrimaryText}"
+                    TextColor="{DynamicResource PrimaryText}"
                     Title="For company.."/>
                 <StackLayout Orientation="Horizontal">
                     <StackLayout Orientation="Vertical">
-                        <Label Text="Start date" />
-                        <DatePicker x:Name="dtpicker_Start_date"/>
+                        <Label Text="Start date" 
+                               TextColor="{DynamicResource PrimaryText}"/>
+                        <DatePicker x:Name="dtpicker_Start_date"
+                            TextColor="{DynamicResource PrimaryText}"/>
                     </StackLayout>
                     <StackLayout Orientation="Vertical">
-                        <Label Text="End date" />
-                        <DatePicker x:Name="dtpicker_End_date"/>
+                        <Label Text="End date" 
+                               TextColor="{DynamicResource PrimaryText}"/>
+                        <DatePicker x:Name="dtpicker_End_date"
+                            TextColor="{DynamicResource PrimaryText}"/>
                     </StackLayout>
                     <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand">
-                        <Label Text="Billable" FontSize="Small" />
-                        <Switch x:Name="switch_Billable"/>
+                        <Label Text="Tracked" 
+                               FontSize="Small" 
+                               TextColor="{DynamicResource PrimaryText}"/>
+                        <Switch x:Name="switch_Billable"
+                                ThumbColor="{DynamicResource AccentLight}"
+                                OnColor="{DynamicResource PrimaryDark}"/>
                     </StackLayout>
                 </StackLayout>
-                <Label Text="Project Name"/>
+                <Label Text="Project Name"
+                       TextColor="{DynamicResource PrimaryText}"/>
                 <Entry x:Name="tbox_Project_name"
                     Placeholder="Project's Name" 
-                    PlaceholderColor="{StaticResource PrimaryLight}" 
+                    PlaceholderColor="{DynamicResource PrimaryLight}" 
                     MaxLength="100"
+                    TextColor="{DynamicResource PrimaryText}"
                     Text="" />
-                <Label Text="Description" />
+                <Label Text="Description" 
+                       TextColor="{DynamicResource PrimaryText}"/>
                 <Entry x:Name="tbox_Project_description"
                     Placeholder="Brief description"
-                    PlaceholderColor="{StaticResource PrimaryLight}" 
+                    PlaceholderColor="{DynamicResource PrimaryLight}" 
                     MaxLength="200"
+                    TextColor="{DynamicResource PrimaryText}"
                     Text="" />
-                <Label Text="Main Email/Contact Number" />
+                <Label Text="Main Email/Contact Number" 
+                       TextColor="{DynamicResource PrimaryText}"/>
                 <Editor x:Name="tbox_Email"
                     AutoSize="TextChanges"
                     Placeholder="Project PIC" 
-                    PlaceholderColor="{StaticResource PrimaryLight}" 
+                    PlaceholderColor="{DynamicResource PrimaryLight}" 
                     MaxLength="50"
+                    TextColor="{DynamicResource PrimaryText}"
                     Text=""/>
-                <Label Text="Project Status" />
+                <Label Text="Project Status" 
+                       TextColor="{DynamicResource PrimaryText}"/>
                 <Picker x:Name="picker_Project_status"
                     Title="Status.."
+                    TextColor="{DynamicResource PrimaryText}"
+                    TitleColor="{DynamicResource PrimaryText}"
                     ItemsSource="{Binding picker_list}"
                     SelectedItem="{Binding selected_status}"/>
-                <Label Text="Project Status Note" />
+                <Label Text="Project Status Note" 
+                       TextColor="{DynamicResource PrimaryText}"/>
                 <Editor x:Name="tbox_Note"
                     AutoSize="TextChanges"
                     Placeholder="Optional note on project status" 
-                    PlaceholderColor="{StaticResource PrimaryLight}" 
+                    PlaceholderColor="{DynamicResource PrimaryLight}" 
                     MaxLength="200"
+                    TextColor="{DynamicResource PrimaryText}"
                     Text=""/>
                 <Button Text="Save" Clicked="OnSaveClicked" />
                 <Button Text="Cancel" Clicked="OnCancelClicked" />

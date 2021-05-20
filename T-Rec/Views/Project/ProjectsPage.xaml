@@ -4,7 +4,7 @@
              x:Class="T_Rec.Views.ProjectsPage"
              xmlns:vm="clr-namespace:T_Rec.ViewModels"
              xmlns:model="clr-namespace:T_Rec.Models"
-             BackgroundColor="{StaticResource Background}"
+             BackgroundColor="{DynamicResource Background}"
              Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
@@ -39,18 +39,18 @@
                                     FontAttributes="Bold"
                                     FontSize="18"
                                     HorizontalOptions="Fill"
-                                    TextColor="{StaticResource PrimaryText}"
+                                    TextColor="{DynamicResource PrimaryText}"
                                     HorizontalTextAlignment="Center" />
                             <Label Text="Create a new one?"
                                     FontAttributes="Italic"
                                     FontSize="12"
                                     HorizontalOptions="Fill"
-                                    TextColor="{StaticResource PrimaryText}"
+                                    TextColor="{DynamicResource PrimaryText}"
                                     HorizontalTextAlignment="Center" />
                             <Button 
                                     Grid.Row="4"
                                     Grid.Column="4"
-                                    BackgroundColor="{StaticResource Accent}"
+                                    BackgroundColor="{DynamicResource Accent}"
                                     Text="New Project"
                                     HeightRequest="40"
                                     WidthRequest="100"
@@ -68,18 +68,21 @@
                                 CornerRadius="5"
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="FillAndExpand"
+                                BackgroundColor="{DynamicResource BackgroundLight}"
                                 x:DataType="model:Project">
                                 <Grid RowDefinitions="20,20,40,20,10,*,10,*,40,40"
                                     ColumnDefinitions="*,*,40,40">
                                     <Label
                                         Grid.Row="0"
                                         Grid.Column="0"
+                                        TextColor="{DynamicResource PrimaryText}"
                                         Text="{Binding project_started, StringFormat='{0:dd MMM yyyy}'}"
                                         LineBreakMode="NoWrap" 
                                         FontSize="Small" />
                                     <Label
                                         Grid.Row="0"
                                         Grid.Column="1"
+                                        TextColor="{DynamicResource PrimaryText}"
                                         Text="{Binding project_ended, StringFormat='{0:dd MMM yyyy}'}"
                                         LineBreakMode="NoWrap" 
                                         FontSize="Small" />
@@ -92,6 +95,7 @@
                                         Grid.Row="1"
                                         Grid.Column="0"
                                         Grid.ColumnSpan="3"
+                                        TextColor="{DynamicResource PrimaryText}"
                                         Text="{Binding company_name}"
                                         LineBreakMode="NoWrap" 
                                         FontSize="Subtitle" />
@@ -99,23 +103,27 @@
                                         Grid.Row="2"
                                         Grid.Column="0"
                                         Grid.ColumnSpan="3"
+                                        TextColor="{DynamicResource PrimaryText}"
                                         Text="{Binding name}"
                                         FontSize="Title" />
                                     <Label 
                                         Grid.Row="3"
                                         Grid.Column="0"
+                                        TextColor="{DynamicResource PrimaryText}"
                                         Text="Status"
                                         FontSize="Micro" />
                                     <Label 
                                         Grid.Row="3"
                                         Grid.Column="1"
                                         Grid.ColumnSpan="2"
+                                        TextColor="{DynamicResource PrimaryText}"
                                         Text="{Binding project_status}"
                                         FontSize="Small" />
                                     <Label 
                                         Grid.Row="4"
                                         Grid.Column="0"
                                         Grid.ColumnSpan="4"
+                                        TextColor="{DynamicResource PrimaryText}"
                                         Text="Description"
                                         FontSize="Micro" />
                                     <Label 
@@ -123,18 +131,21 @@
                                         Grid.Column="0"
                                         Grid.ColumnSpan="4"
                                         HorizontalOptions="Start"
+                                        TextColor="{DynamicResource PrimaryText}"
                                         Text="{Binding description}"
                                         FontSize="Small" />
                                     <Label 
                                         Grid.Row="6"
                                         Grid.Column="0"
                                         Grid.ColumnSpan="4"
+                                        TextColor="{DynamicResource PrimaryText}"
                                         Text="Note on status"
                                         FontSize="Micro" />
                                     <Label 
                                         Grid.Row="7"
                                         Grid.Column="0"
                                         Grid.ColumnSpan="4"
+                                        TextColor="{DynamicResource PrimaryText}"
                                         Text="{Binding project_status_note}"
                                         FontSize="Small" />
                                     <StackLayout 
@@ -143,7 +154,7 @@
                                         Orientation="Horizontal">
                                         <Button 
                                             Grid.Column="2"
-                                            BackgroundColor="{StaticResource Accent}"
+                                            BackgroundColor="{StaticResource AccentLight}"
                                             Text="!"
                                             HeightRequest="40"
                                             WidthRequest="40"
@@ -154,7 +165,7 @@
                                             CommandParameter="{Binding .}"/>
                                         <Button 
                                             Grid.Column="3"
-                                            BackgroundColor="{StaticResource ColorDanger}"
+                                            BackgroundColor="{DynamicResource ColorDanger}"
                                             Text="X"
                                             HeightRequest="40"
                                             WidthRequest="40"
@@ -174,8 +185,8 @@
         </RefreshView>
 
         <IndicatorView x:Name="indicatorView"
-                IndicatorColor="{StaticResource AccentLight}"
-                SelectedIndicatorColor="{StaticResource AccentDark}"
+                IndicatorColor="{DynamicResource AccentLight}"
+                SelectedIndicatorColor="{DynamicResource AccentDark}"
                 HorizontalOptions="Center" />
         </StackLayout>
     </AbsoluteLayout>

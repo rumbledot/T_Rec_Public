@@ -94,8 +94,10 @@
                                 Margin="5"
                                 Orientation="Vertical"
                                 x:DataType="model:JobInADay">
-                                <Frame BackgroundColor="{Binding today_day, Converter={StaticResource today_day_bg}}"
-                                CornerRadius="10">
+                                <Frame 
+                                    x:DataType="model:JobInADay"
+                                    BackgroundColor="{Binding today_day, Converter={StaticResource today_day_bg}}"
+                                    CornerRadius="10">
                                     <Grid Padding="10">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="40" />

@@ -6,13 +6,13 @@ using Xamarin.Forms;
 
 namespace T_Rec.Converters
 {
-    internal class IsBillableToTextConverter : IValueConverter
+    internal class IsTodayDayColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is bool today_day)
             {
-                var result = today_day ? Color.DarkOliveGreen : Color.LightGray;
+                var result = today_day ? Application.Current.Resources["Primary"] : Application.Current.Resources["BackgroundLight"];
                 return result;
             }
 

@@ -46,7 +46,7 @@ namespace T_Rec
         {
             DependencyService.Get<Toast>().Show($"Current OS Theme {theme}");
 
-            if (theme == Theme.Light)
+            if (theme == Theme.Dark)
             {
                 DependencyService.Get<Toast>().Show($"Current OS Theme DARK");
 

@@ -104,8 +104,8 @@ namespace T_Rec.ViewModels
                         today_day = (day == DateTime.Now.DayOfWeek) //? Color.FromHex(ExtensionHelper.FindResource("PrimaryLight").ToString()) : Color.FromHex(ExtensionHelper.FindResource("BackgroundLight").ToString())
                     };
 
-                    Console.WriteLine($"Day : {day} : {day_reviews.today_day} ({DateTime.Now.DayOfWeek})");
-                    Console.WriteLine($"day total hours : {total_hours}");
+                    //Console.WriteLine($"Day : {day} : {day_reviews.today_day} ({DateTime.Now.DayOfWeek})");
+                    //Console.WriteLine($"day total hours : {total_hours}");
 
                     if (today_jobs != null && today_jobs.Count > 0)
                     {
