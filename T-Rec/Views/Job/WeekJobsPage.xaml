@@ -92,8 +92,7 @@
                         <DataTemplate>
                             <StackLayout HorizontalOptions="StartAndExpand"
                                 Margin="5"
-                                Orientation="Vertical"
-                                x:DataType="model:JobInADay">
+                                Orientation="Vertical">
                                 <Frame 
                                     x:DataType="model:JobInADay"
                                     BackgroundColor="{Binding today_day, Converter={StaticResource today_day_bg}}"

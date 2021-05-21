@@ -9,8 +9,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <local:NegateBooleanConverter x:Key="inverter"/>
-            <local:IsJobDoneColorConverter x:Key="job_done_bg"/>
             <local:IsTodayDayColorConverter x:Key="today_day_bg"/>
+            <local:IsJobDoneColorConverter x:Key="job_done_bg"/>
             <Color x:Key="Primary">#78909c</Color>
             <Color x:Key="PrimaryLight">#a7c0cd</Color>
             <Color x:Key="PrimaryDark">#4b636e</Color>

@@ -82,7 +82,7 @@
                             <StackLayout>
                                 <Frame HasShadow="True"
                                     BorderColor="DarkGray"
-                                    BackgroundColor="{Binding job_done,Converter={StaticResource job_done_bg}}"
+                                    BackgroundColor="{Binding job_done, Converter={StaticResource job_done_bg}}"
                                     CornerRadius="5"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand"

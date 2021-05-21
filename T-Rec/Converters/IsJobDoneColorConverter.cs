@@ -12,6 +12,7 @@ namespace T_Rec.Converters
             if (value is bool job_done)
             {
                 var result = job_done ? Application.Current.Resources["BackgroundDark"] : Application.Current.Resources["BackgroundLight"];
+                Console.WriteLine(result);
                 return result;
             }
 

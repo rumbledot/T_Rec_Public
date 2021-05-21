@@ -101,8 +101,8 @@ namespace T_Rec.ViewModels
                         day_total_hours = total_hours,
                         day_total_jobs = 0,
                         active_day = false,
-                        today_day = (day == DateTime.Now.DayOfWeek) //? Color.FromHex(ExtensionHelper.FindResource("PrimaryLight").ToString()) : Color.FromHex(ExtensionHelper.FindResource("BackgroundLight").ToString())
-                    };
+                        today_day = (day == DateTime.Now.DayOfWeek)
+                };
 
                     //Console.WriteLine($"Day : {day} : {day_reviews.today_day} ({DateTime.Now.DayOfWeek})");
                     //Console.WriteLine($"day total hours : {total_hours}");
@@ -117,14 +117,11 @@ namespace T_Rec.ViewModels
                             total_hours += (job.billable && job.job_done) ? job.job_time_in_hours : 0;
                         }
 
-                        day_reviews = new JobInADay()
-                        {
-                            day_name = day.ToString(),
-                            day_date = each_day.ToString("d MMM yyyy"),
-                            day_total_hours = total_hours,
-                            day_total_jobs = today_jobs.Count,
-                            active_day = true
-                        };
+                        day_reviews.day_name = day.ToString();
+                        day_reviews.day_date = each_day.ToString("d MMM yyyy");
+                        day_reviews.day_total_hours = total_hours;
+                        day_reviews.day_total_jobs = today_jobs.Count;
+                        day_reviews.active_day = true;
                     }
 
                     total_week_hours += total_hours;

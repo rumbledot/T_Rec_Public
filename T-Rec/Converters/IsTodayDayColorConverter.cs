@@ -13,6 +13,7 @@ namespace T_Rec.Converters
             if (value is bool today_day)
             {
                 var result = today_day ? Application.Current.Resources["Primary"] : Application.Current.Resources["BackgroundLight"];
+                //Console.WriteLine("today day converter " + today_day + " : color : " + result);
                 return result;
             }
 
