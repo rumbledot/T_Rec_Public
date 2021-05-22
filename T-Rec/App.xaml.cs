@@ -11,6 +11,8 @@ namespace T_Rec
 
         public App()
         {
+            Device.SetFlags(new string[] { "Shape_Experimental" });
+
             InitializeComponent();
 
             Theme theme = DependencyService.Get<IEnvironment>().GetOperatingSystemTheme();
@@ -46,7 +48,7 @@ namespace T_Rec
         {
             DependencyService.Get<Toast>().Show($"Current OS Theme {theme}");
 
-            if (theme == Theme.Dark)
+            if (theme == Theme.Light)
             {
                 DependencyService.Get<Toast>().Show($"Current OS Theme DARK");
 

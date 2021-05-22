@@ -4,7 +4,7 @@
              x:Class="T_Rec.Views.CompaniesPage"
              xmlns:vm="clr-namespace:T_Rec.ViewModels"
              xmlns:model="clr-namespace:T_Rec.Models"
-             BackgroundColor="{StaticResource Background}"
+             BackgroundColor="{StaticResource Primary}"
              Title="{Binding Title}">
     
     <ContentPage.ToolbarItems>
@@ -14,25 +14,16 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout Margin="10,-10,10,10">
-            <Frame CornerRadius="10"
-                   BackgroundColor="{DynamicResource AccentDark}">
-                <StackLayout Orientation="Vertical">
-                    <Label 
-                        FontSize="Title"
-                        VerticalOptions="CenterAndExpand"
-                        HorizontalTextAlignment="Center"
-                        TextColor="{DynamicResource AccentText}"
-                        Text="Registered Companies"/>
-                    <Label 
-                        FontSize="Small"
-                        Text="Create a company to create a project."/>
-                    <Label 
-                        FontSize="Small"
-                        Text="Including your own company to create unbillable projects and activities (eg. lunch break)."/>
-                </StackLayout>
+        <StackLayout>
+            <Frame BackgroundColor="{DynamicResource Accent}"
+                   CornerRadius="20"
+                   HeightRequest="120"
+                   Margin="0,-20,0,0">
             </Frame>
-
+            <Frame CornerRadius="20"
+                   Margin="15,-30,15,-20"
+                   BackgroundColor="{DynamicResource Background}">
+                
             <RefreshView x:DataType="vm:CompaniesViewModel" 
                          Command="{Binding LoadCompaniesCommand}" 
                          IsRefreshing="{Binding is_busy, Mode=TwoWay}">
@@ -42,14 +33,16 @@
                     
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical"
-                            ItemSpacing="10"/>
+                            ItemSpacing="5"/>
                     </CollectionView.ItemsLayout>
                     
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Orientation="Vertical"
+                                HorizontalOptions="FillAndExpand"
                                 x:DataType="model:Company">
                                 <Frame CornerRadius="10"
+                                       HorizontalOptions="FillAndExpand"
                                        BackgroundColor="{DynamicResource BackgroundLight}">
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -102,6 +95,7 @@
                 </CollectionView>
 
             </RefreshView>
+            </Frame>
 
         </StackLayout>
     </ContentPage.Content>

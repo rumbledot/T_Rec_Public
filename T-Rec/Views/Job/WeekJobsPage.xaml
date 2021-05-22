@@ -10,14 +10,15 @@
              Title="{Binding Title}">
 
     <ContentPage.Content>
-        <StackLayout Margin="10,10,10,10">
+        <StackLayout>
 
-            <Grid RowDefinitions="80,35,5"
-                ColumnDefinitions="120,80,*">
+            <Grid RowDefinitions="5,80,35,50"
+                ColumnDefinitions="*,120,80,*"
+                BackgroundColor="{DynamicResource Primary}">
                 <Frame
-                    Grid.Row="0"
+                    Grid.Row="1"
                     Grid.RowSpan="2"
-                    Grid.Column="0"
+                    Grid.Column="1"
                     MinimumHeightRequest="120"
                     MinimumWidthRequest="120"
                     BackgroundColor="{StaticResource PrimaryDark}"
@@ -30,8 +31,8 @@
                     VerticalOptions="CenterAndExpand"/>
                 </Frame>
                 <Frame
-                    Grid.Row="0"
-                    Grid.Column="1"
+                    Grid.Row="1"
+                    Grid.Column="2"
                     MinimumHeightRequest="80"
                     MinimumWidthRequest="80"
                     BackgroundColor="{StaticResource PrimaryLight}"
@@ -45,11 +46,11 @@
                 </Frame>
             </Grid>
 
-            <StackLayout HorizontalOptions="StartAndExpand"
-                Margin="5"
+            <StackLayout HorizontalOptions="Center"
+                Margin="0,-50,0,0"
                 Orientation="Vertical"
                 x:DataType="model:JobInADay">
-                <Frame BackgroundColor="{StaticResource BackgroundLight}"
+                <Frame BackgroundColor="{StaticResource PrimaryLight}"
                     CornerRadius="10">
                     <Grid Padding="10">
                         <Grid.RowDefinitions>
@@ -64,10 +65,10 @@
                             Grid.Column="1"
                             Text="Review jobs on "
                             FontSize="Title"
-                            TextColor="{StaticResource PrimaryText}"
-                            FontAttributes="Bold" />
+                            TextColor="{StaticResource AccentText}"
+                            FontAttributes="Bold"/>
                         <DatePicker Grid.Row="0"
-                            TextColor="{StaticResource PrimaryText}"
+                            TextColor="{StaticResource AccentText}"
                             Grid.Column="2"
                             x:Name="dtpicker_Review_date"/>
                         <Button Grid.Row="0"

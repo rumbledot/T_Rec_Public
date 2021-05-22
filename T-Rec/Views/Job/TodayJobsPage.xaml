@@ -9,8 +9,7 @@
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ContentView x:Key="LoadTodayEmptyView">
-            <StackLayout
-                BackgroundColor="{DynamicResource Background}">
+            <StackLayout>
                 <Label Text="No job for today yet."
                     Margin="10,25,10,10"
                     FontAttributes="Bold"
@@ -38,6 +37,7 @@
         <ContentView x:Key="ReviewDayEmptyView">
             <StackLayout
                 BackgroundColor="{DynamicResource Background}">
+                
                 <Label Text="No jobs found on this day."
                     Margin="10,25,10,10"
                     FontAttributes="Bold"
@@ -57,12 +57,28 @@
     
     <AbsoluteLayout
         BackgroundColor="{DynamicResource Background}">
+        <Path VerticalOptions="StartAndExpand"
+            AbsoluteLayout.LayoutBounds="1, 1, 1, 0.12"
+            AbsoluteLayout.LayoutFlags="All"
+            Fill="#4b636e" 
+            Stroke="#4b636e"
+            Aspect="Fill"
+            Rotation="180"
+            Data="m50.93557,153.4114l647.00389,0l0,59.5624c-274.14155,-26.25819 -349.32123,45.4845 -647.00389,9.79984l0,-69.36224z"></Path>
+        <Path VerticalOptions="StartAndExpand"
+            AbsoluteLayout.LayoutBounds="1, 1, 1, 0.1"
+            AbsoluteLayout.LayoutFlags="All"
+            Fill="#78909c" 
+            Stroke="#78909c"
+            Aspect="Fill"
+            Rotation="180"
+            Data="m697.93855,167.41097l0,42.84989c-269.5852,-39.07979 -252.11921,56.05198 -647.00389,7.05012l0,-49.90001l647.00389,0"></Path>
+
         <StackLayout
             Orientation="Horizontal"
             Padding="20, 0, 20, 0"
             AbsoluteLayout.LayoutBounds="0, 0.2, 1, 0.8"
             AbsoluteLayout.LayoutFlags="All">
-
             <RefreshView x:DataType="vm:JobsViewModel"
                 IsRefreshing="{Binding is_busy, Mode=TwoWay}"
                 x:Name="JobsRefreshView"
