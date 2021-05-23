@@ -89,6 +89,12 @@
 
                 <CollectionView x:Name="WeekListView"
                     ItemsSource="{Binding Days}">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                            ItemSpacing="5"/>
+                    </CollectionView.ItemsLayout>
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout HorizontalOptions="StartAndExpand"
@@ -97,7 +103,8 @@
                                 <Frame 
                                     x:DataType="model:JobInADay"
                                     BackgroundColor="{Binding today_day, Converter={StaticResource today_day_bg}}"
-                                    CornerRadius="10">
+                                    CornerRadius="10"
+                                    Margin="20,0,20,0">
                                     <Grid Padding="10">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="40" />

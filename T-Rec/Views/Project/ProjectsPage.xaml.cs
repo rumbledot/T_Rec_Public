@@ -18,13 +18,41 @@ namespace T_Rec.Views
 
         private ProjectsViewModel _view_model;
 
+        private Company selected_company;
+
+        public bool viewing_only { get; set; } = false;
+
         public ProjectsPage()
         {
             try
             {
                 InitializeComponent();
 
+                ProjectListView.EmptyView = Resources["LoadProjectsEmptyView"];
+
                 BindingContext = _view_model = new ProjectsViewModel();
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toast>().Show($"Page load failed \n {ex.Message}");
+            }
+        }
+
+        public ProjectsPage(Company c)
+        {
+            try
+            {
+                InitializeComponent();
+
+                Title = "Company's project";
+                viewing_only = true;
+
+                selected_company = c;
+                btn_Add.IsEnabled = false;
+
+                ProjectListView.EmptyView = Resources["LoadCompanyProjectsEmptyView"];
+
+                BindingContext = _view_model = new ProjectsViewModel(selected_company);
             }
             catch (Exception ex)
             {
@@ -39,12 +67,20 @@ namespace T_Rec.Views
             _view_model.OnAppearing();
         }
 
-        public void OnMore(object sender, EventArgs e)
+        public async void OnJobList(object sender, EventArgs e)
         {
             var item = sender as Button;
             Project p = item.CommandParameter as Project;
 
-            DependencyService.Get<Toast>().Show($"Project details {p.name}");
+            await Navigation.PushAsync(new TodayJobsPage(p));
+        }
+
+        public async void OnMore(object sender, EventArgs e)
+        {
+            var item = sender as Button;
+            Project p = item.CommandParameter as Project;
+
+            await Navigation.PushAsync(new ProjectPage(p));
         }
 
         public async void OnEdit(object sender, EventArgs e) 

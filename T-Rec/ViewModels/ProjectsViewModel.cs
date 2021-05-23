@@ -21,14 +21,14 @@ namespace T_Rec.ViewModels
 
         public Command OnAddProjectCommand { get; }
 
-        public ProjectsViewModel()
+        public ProjectsViewModel(Company c = null)
         {
             try
             {
                 Title = "All Projects";
                 Projects = new ObservableCollection<Project>();
 
-                LoadProjectsCommand = new Command(() => ExecuteLoadProjectsCommand());
+                LoadProjectsCommand = new Command(() => ExecuteLoadProjectsCommand(c));
 
                 OnAddProjectCommand = new Command(async () => await OnAddProject());
             }
@@ -43,7 +43,7 @@ namespace T_Rec.ViewModels
             is_busy = true;
         }
 
-        private async void ExecuteLoadProjectsCommand()
+        private async void ExecuteLoadProjectsCommand(Company c)
         {
             try
             {
@@ -79,7 +79,17 @@ namespace T_Rec.ViewModels
 
                 #endregion //safe keeping
 
-                List<object[]> result = T_Rec_Controller.QueryFetch("SELECT PROJECT.*, COMPANY.NAME FROM PROJECT JOIN COMPANY ON PROJECT.COMPANY_ID=COMPANY.COMPANY_ID", false);
+                List<object[]> result = new List<object[]>();
+
+                if (c == null)
+                {
+                    result = T_Rec_Controller.QueryFetch("SELECT PROJECT.*, COMPANY.NAME FROM PROJECT JOIN COMPANY ON PROJECT.COMPANY_ID=COMPANY.COMPANY_ID", false);
+                } 
+                else 
+                {
+                    //Console.WriteLine($"Projects from company {c.company_id} : {c.name}");
+                    result = T_Rec_Controller.QueryFetch($"SELECT PROJECT.* FROM PROJECT WHERE PROJECT.COMPANY_ID={c.company_id}", false);
+                }
 
                 Project p;
 
@@ -97,9 +107,19 @@ namespace T_Rec.ViewModels
                             description = row[5].ToString(),
                             project_started = Convert.ToDateTime(row[6]),
                             project_ended = Convert.ToDateTime(row[7]),
-                            billable = Convert.ToBoolean(row[8]),
-                            company_name = row[9].ToString()
+                            billable = Convert.ToBoolean(row[8])
                         };
+
+                        if (c == null)
+                        {
+                            p.company_id = Convert.ToInt32(row[1]);
+                            p.company_name = row[9].ToString();
+                        }
+                        else 
+                        {
+                            p.company_id = c.company_id;
+                            p.company_name = c.name;
+                        }
 
                         Projects.Add(p);
                         //Console.WriteLine(new string('-', 20));

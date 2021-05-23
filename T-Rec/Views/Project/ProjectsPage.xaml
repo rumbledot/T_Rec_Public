@@ -7,187 +7,230 @@
              BackgroundColor="{DynamicResource Background}"
              Title="{Binding Title}">
 
+    <ContentPage.Resources>
+        <ContentView x:Key="LoadProjectsEmptyView">
+            <StackLayout>
+                <Label Text="No project yet"
+                    Margin="10,25,10,10"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalOptions="Fill"
+                    TextColor="{DynamicResource PrimaryText}"
+                    HorizontalTextAlignment="Center" />
+                <Label Text="Create a new one?"
+                    FontAttributes="Italic"
+                    FontSize="12"
+                    HorizontalOptions="Fill"
+                    TextColor="{DynamicResource PrimaryText}"
+                    HorizontalTextAlignment="Center" />
+                <Button 
+                    Grid.Row="4"
+                    Grid.Column="4"
+                    BackgroundColor="{DynamicResource Accent}"
+                    Text="New Project"
+                    HeightRequest="40"
+                    WidthRequest="100"
+                    Padding="10"
+                    Command="{Binding OnAddProjectCommand}"
+                    CommandParameter="{Binding .}"/>
+            </StackLayout>
+        </ContentView>
+        <ContentView x:Key="LoadCompanyProjectsEmptyView">
+            <StackLayout
+                BackgroundColor="{DynamicResource Background}">
+
+                <Label Text="No projects for this company."
+                    Margin="10,25,10,10"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalOptions="Fill"
+                    HorizontalTextAlignment="Center" />
+            </StackLayout>
+        </ContentView>
+    </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add"
             x:DataType="vm:ProjectsViewModel"
+            x:Name="btn_Add"
             Command="{Binding OnAddProjectCommand}" />
     </ContentPage.ToolbarItems>
 
     <AbsoluteLayout>
         <StackLayout
-            Orientation="Horizontal"
-            Padding="20, 0, 20, 0"
-            AbsoluteLayout.LayoutBounds="0, 0.2, 1, 0.8"
+            Orientation="Vertical"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
             AbsoluteLayout.LayoutFlags="All">
+            <Frame BackgroundColor="{DynamicResource Primary}"
+                   HeightRequest="50">
+            </Frame>
+            <Frame CornerRadius="10"
+                   Margin="15,-60,15,-20"
+                   BackgroundColor="{DynamicResource Background}">
 
         <RefreshView x:DataType="vm:ProjectsViewModel"
                 IsRefreshing="{Binding is_busy, Mode=TwoWay}"
                 Command="{Binding LoadProjectsCommand}">
             <CollectionView 
-                    AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.6, 0.6"
-                    AbsoluteLayout.LayoutFlags="All"
-                    ItemsSource="{Binding Projects}">
+                x:Name="ProjectListView"
+                AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.6, 0.6"
+                AbsoluteLayout.LayoutFlags="All"
+                ItemsSource="{Binding Projects}">
+                
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"
-                            ItemSpacing="20"/>
+                    <LinearItemsLayout Orientation="Vertical"
+                            ItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
-                <CollectionView.EmptyView>
-                    <ContentView>
-                        <StackLayout>
-                            <Label Text="No project yet"
-                                    Margin="10,25,10,10"
-                                    FontAttributes="Bold"
-                                    FontSize="18"
-                                    HorizontalOptions="Fill"
-                                    TextColor="{DynamicResource PrimaryText}"
-                                    HorizontalTextAlignment="Center" />
-                            <Label Text="Create a new one?"
-                                    FontAttributes="Italic"
-                                    FontSize="12"
-                                    HorizontalOptions="Fill"
-                                    TextColor="{DynamicResource PrimaryText}"
-                                    HorizontalTextAlignment="Center" />
-                            <Button 
-                                    Grid.Row="4"
-                                    Grid.Column="4"
-                                    BackgroundColor="{DynamicResource Accent}"
-                                    Text="New Project"
-                                    HeightRequest="40"
-                                    WidthRequest="100"
-                                    Padding="10"
-                                    Command="{Binding OnAddProjectCommand}"
-                                    CommandParameter="{Binding .}"/>
-                        </StackLayout>
-                    </ContentView>
-                </CollectionView.EmptyView>
+                
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <ScrollView>
                             <Frame HasShadow="True"
-                                BorderColor="DarkGray"
                                 CornerRadius="5"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="Center"
                                 BackgroundColor="{DynamicResource BackgroundLight}"
                                 x:DataType="model:Project">
-                                <Grid RowDefinitions="20,20,40,20,10,*,10,*,40,40"
-                                    ColumnDefinitions="*,*,40,40">
-                                    <Label
-                                        Grid.Row="0"
-                                        Grid.Column="0"
-                                        TextColor="{DynamicResource PrimaryText}"
-                                        Text="{Binding project_started, StringFormat='{0:dd MMM yyyy}'}"
-                                        LineBreakMode="NoWrap" 
-                                        FontSize="Small" />
-                                    <Label
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        TextColor="{DynamicResource PrimaryText}"
-                                        Text="{Binding project_ended, StringFormat='{0:dd MMM yyyy}'}"
-                                        LineBreakMode="NoWrap" 
-                                        FontSize="Small" />
-                                    <Switch
-                                        Grid.Row="0"
-                                        Grid.Column="2"
-                                        IsToggled="{Binding billable}"
-                                        IsEnabled="False"/>
-                                    <Label
-                                        Grid.Row="1"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="3"
-                                        TextColor="{DynamicResource PrimaryText}"
-                                        Text="{Binding company_name}"
-                                        LineBreakMode="NoWrap" 
-                                        FontSize="Subtitle" />
-                                    <Label 
-                                        Grid.Row="2"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="3"
-                                        TextColor="{DynamicResource PrimaryText}"
-                                        Text="{Binding name}"
-                                        FontSize="Title" />
-                                    <Label 
-                                        Grid.Row="3"
-                                        Grid.Column="0"
-                                        TextColor="{DynamicResource PrimaryText}"
-                                        Text="Status"
-                                        FontSize="Micro" />
-                                    <Label 
-                                        Grid.Row="3"
-                                        Grid.Column="1"
-                                        Grid.ColumnSpan="2"
-                                        TextColor="{DynamicResource PrimaryText}"
-                                        Text="{Binding project_status}"
-                                        FontSize="Small" />
-                                    <Label 
-                                        Grid.Row="4"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="4"
-                                        TextColor="{DynamicResource PrimaryText}"
-                                        Text="Description"
-                                        FontSize="Micro" />
-                                    <Label 
-                                        Grid.Row="5"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="4"
-                                        HorizontalOptions="Start"
-                                        TextColor="{DynamicResource PrimaryText}"
-                                        Text="{Binding description}"
-                                        FontSize="Small" />
-                                    <Label 
-                                        Grid.Row="6"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="4"
-                                        TextColor="{DynamicResource PrimaryText}"
-                                        Text="Note on status"
-                                        FontSize="Micro" />
-                                    <Label 
-                                        Grid.Row="7"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="4"
-                                        TextColor="{DynamicResource PrimaryText}"
-                                        Text="{Binding project_status_note}"
-                                        FontSize="Small" />
-                                    <StackLayout 
-                                        Grid.Row="9"
-                                        VerticalOptions="End"
-                                        Orientation="Horizontal">
-                                        <Button 
-                                            Grid.Column="2"
-                                            BackgroundColor="{StaticResource AccentLight}"
-                                            Text="!"
-                                            HeightRequest="40"
-                                            WidthRequest="40"
-                                            CornerRadius="80"
-                                            Padding="10"
-                                            x:Name="btn_Edit"
-                                            Clicked="OnEdit"
-                                            CommandParameter="{Binding .}"/>
-                                        <Button 
+                                <StackLayout Orientation="Vertical"
+                                    HorizontalOptions="Center">
+                                    <Frame
+                                        BackgroundColor="{DynamicResource AccentDark}"
+                                        Margin="-20,-20,-20,-20"
+                                        HorizontalOptions="FillAndExpand">
+                                            <Label 
+                                            FontSize="Title"
+                                            HorizontalTextAlignment="Center"
+                                            TextColor="{DynamicResource AccentText}"
+                                            Text="{Binding name}"/>
+                                    </Frame>
+                                    <Grid RowDefinitions="20,20,20,40"
+                                        ColumnDefinitions="*,60,60,80">
+                                        <Frame 
+                                            Grid.Row="0"
                                             Grid.Column="3"
-                                            BackgroundColor="{DynamicResource ColorDanger}"
-                                            Text="X"
-                                            HeightRequest="40"
-                                            WidthRequest="40"
-                                            CornerRadius="80"
-                                            Padding="10"
-                                            x:Name="btn_Delete"
-                                            Clicked="OnDelete"
-                                            CommandParameter="{Binding .}"/>
+                                            BackgroundColor="{DynamicResource Accent}"
+                                            CornerRadius="30"
+                                            Padding="1">
+                                            <Label 
+                                                TextColor="{DynamicResource AccentText}"
+                                                FontSize="Small"
+                                                Text="{Binding project_status}"
+                                                HorizontalTextAlignment="Center"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="CenterAndExpand"/>
+                                        </Frame>
+                                        <Frame 
+                                            Grid.Row="0"
+                                            Grid.Column="2"
+                                            BackgroundColor="{DynamicResource ColorSuccess}"
+                                            CornerRadius="20"
+                                            Padding="1"
+                                            IsVisible="{Binding billable}">
+                                            <Label 
+                                                TextColor="White"
+                                                FontSize="Small"
+                                                Text="Tracked"
+                                                HorizontalTextAlignment="Center"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="CenterAndExpand"/>
+                                        </Frame>
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="0"
+                                            TextColor="{DynamicResource PrimaryText}"
+                                            Text="{Binding project_started, StringFormat='{0:dd MMM yyyy}'}"
+                                            LineBreakMode="NoWrap" 
+                                            FontSize="Micro" />
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            TextColor="{DynamicResource PrimaryText}"
+                                            Text="{Binding project_ended, StringFormat='{0:dd MMM yyyy}'}"
+                                            IsVisible="{Binding open_ended, Converter={StaticResource inverter}}"
+                                            LineBreakMode="NoWrap" 
+                                            FontSize="Micro" />
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            TextColor="{DynamicResource PrimaryText}"
+                                            Text="Open ended"
+                                            IsVisible="{Binding open_ended}"
+                                            LineBreakMode="NoWrap" 
+                                            FontSize="Micro" />
+                                        <Label
+                                            Grid.Row="2"
+                                            Grid.Column="0"
+                                            TextColor="{DynamicResource PrimaryText}"
+                                            Text="Company"
+                                            LineBreakMode="NoWrap" 
+                                            FontSize="Micro" />
+                                        <Label
+                                            Grid.Row="3"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="3"
+                                            TextColor="{DynamicResource PrimaryText}"
+                                            Text="{Binding company_name}"
+                                            LineBreakMode="NoWrap" 
+                                            FontSize="Title" />
+                                        <StackLayout 
+                                            Grid.Row="4"
+                                            VerticalOptions="End"
+                                            Orientation="Horizontal">
+                                            <Button 
+                                                Grid.Column="1"
+                                                BackgroundColor="{DynamicResource ColorWarning}"
+                                                Text=">"
+                                                HeightRequest="40"
+                                                WidthRequest="40"
+                                                CornerRadius="80"
+                                                Padding="10"
+                                                x:Name="btn_JobList"
+                                                Clicked="OnJobList"
+                                                CommandParameter="{Binding .}"/>
+                                            <Button 
+                                                Grid.Column="2"
+                                                BackgroundColor="{StaticResource ColorSuccess}"
+                                                Text="?"
+                                                HeightRequest="40"
+                                                WidthRequest="40"
+                                                CornerRadius="80"
+                                                Padding="10"
+                                                x:Name="btn_More"
+                                                Clicked="OnMore"
+                                                CommandParameter="{Binding .}"/>
+                                            <Button 
+                                                Grid.Column="3"
+                                                BackgroundColor="{StaticResource AccentLight}"
+                                                Text="!"
+                                                HeightRequest="40"
+                                                WidthRequest="40"
+                                                CornerRadius="80"
+                                                Padding="10"
+                                                x:Name="btn_Edit"
+                                                Clicked="OnEdit"
+                                                CommandParameter="{Binding .}"/>
+                                            <Button 
+                                                Grid.Column="4"
+                                                BackgroundColor="{DynamicResource ColorDanger}"
+                                                Text="X"
+                                                HeightRequest="40"
+                                                WidthRequest="40"
+                                                CornerRadius="80"
+                                                Padding="10"
+                                                x:Name="btn_Delete"
+                                                Clicked="OnDelete"
+                                                CommandParameter="{Binding .}"/>
+                                        </StackLayout>
+                                        </Grid>
                                     </StackLayout>
-                                    </Grid>
-                            </Frame>
+                                </Frame>
                         </ScrollView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-        </RefreshView>
-
-        <IndicatorView x:Name="indicatorView"
-                IndicatorColor="{DynamicResource AccentLight}"
-                SelectedIndicatorColor="{DynamicResource AccentDark}"
-                HorizontalOptions="Center" />
+            </RefreshView>
+        </Frame>
+            
         </StackLayout>
     </AbsoluteLayout>
 </ContentPage>

@@ -48,6 +48,21 @@ namespace T_Rec
             }
         }
 
+        public Task<List<JobUnit>> CloseUpJobs() 
+        {
+            try
+            {
+                DateTime yesterday = DateTime.Now.AddDays(-1);
+
+                return Database.Table<JobUnit>().Where(job => (
+                job.time_start == yesterday && job.job_done == false)).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public Task<List<JobUnit>> GetTodayJobs(DateTime today)
         {
             try
@@ -60,6 +75,19 @@ namespace T_Rec
                 job.time_start > today && job.time_start < today_end)).OrderByDescending(job => (job.time_start)).ToListAsync();
             }
             catch (Exception ex )
+            {
+                throw ex;
+            }
+        }
+
+        public Task<List<JobUnit>> GetProjectJobs(int id) 
+        {
+            try
+            {
+                return Database.Table<JobUnit>().Where(job => (
+                job.project_id == id)).OrderByDescending(job => (job.time_start)).ToListAsync();
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

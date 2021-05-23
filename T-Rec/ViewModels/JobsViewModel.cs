@@ -30,7 +30,7 @@ namespace T_Rec.ViewModels
         public Command LoadTodayJobsCommand { get; }
         public Command OnAddJobCommand { get; }
 
-        public JobsViewModel(ToolbarItem btn, DateTime get_job_on_date)
+        public JobsViewModel(ToolbarItem btn, DateTime get_job_on_date, Project p = null)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace T_Rec.ViewModels
                 toolbtn_add_new_job = btn;
                 Jobs = new ObservableCollection<JobUnit>();
 
-                LoadTodayJobsCommand = new Command(() => ExecuteLoadJobsCommand(get_job_on_date));
+                LoadTodayJobsCommand = new Command(() => ExecuteLoadJobsCommand(get_job_on_date, p));
 
                 OnAddJobCommand = new Command(async () => await OnAddJob());
             }
@@ -53,7 +53,7 @@ namespace T_Rec.ViewModels
             is_busy = true;
         }
 
-        async void ExecuteLoadJobsCommand(DateTime get_job_on_date)
+        async void ExecuteLoadJobsCommand(DateTime get_job_on_date, Project project)
         {
             try
             {
@@ -65,7 +65,16 @@ namespace T_Rec.ViewModels
 
                 Jobs.Clear();
 
-                var items = await Database.GetTodayJobs(get_job_on_date);
+                var items = new List<JobUnit>();
+
+                if (project == null)
+                {
+                    items = await Database.GetTodayJobs(get_job_on_date);
+                }
+                else 
+                {
+                    items = await Database.GetProjectJobs(project.project_id);
+                }
 
                 Project p;
 
@@ -73,11 +82,20 @@ namespace T_Rec.ViewModels
                 {
                     foreach (JobUnit item in items)
                     {
-                        p = await Database_Project.GetProjectAsync(item.project_id);
+                        if (project == null)
+                        {
+                            p = await Database_Project.GetProjectAsync(item.project_id);
 
-                        item.project_name = p.name;
-                        item.billable = p.billable;
-                        item.job_card_color = item.job_done ? Color.FromHex(ExtensionHelper.FindResource("BackgroundDark").ToString()) : Color.FromHex(ExtensionHelper.FindResource("BackgroundLight").ToString());
+                            item.project_name = p.name;
+                            item.billable = p.billable;
+                            item.job_card_color = item.job_done ? Color.FromHex(ExtensionHelper.FindResource("BackgroundDark").ToString()) : Color.FromHex(ExtensionHelper.FindResource("BackgroundLight").ToString());
+                        }
+                        else 
+                        {
+                            item.project_name = project.name;
+                            item.billable = project.billable;
+                            item.job_card_color = item.job_done ? Color.FromHex(ExtensionHelper.FindResource("BackgroundDark").ToString()) : Color.FromHex(ExtensionHelper.FindResource("BackgroundLight").ToString());
+                        }
 
                         Jobs.Add(item);
                         if (!item.job_done)

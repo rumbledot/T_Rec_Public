@@ -50,6 +50,14 @@ namespace T_Rec.Models
         public string company_name { get; set; }
 
         [Ignore]
+        public bool open_ended { 
+            get 
+            {
+                return project_ended == project_started;
+            } 
+        }
+
+        [Ignore]
         public double project_duration
         {
             get 

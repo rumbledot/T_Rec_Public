@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:T_Rec.ViewModels"
+             xmlns:model="clr-namespace:T_Rec.Models" 
+             x:Class="T_Rec.Views.ProjectPage"
+             x:Name="ProjectView"
+             BackgroundColor="{StaticResource Background}"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout x:DataType="model:Project">
+            <Frame BackgroundColor="{DynamicResource Primary}"
+                   HeightRequest="50">
+            </Frame>
+            <Frame CornerRadius="10"
+                   Margin="15,-60,15,-20"
+                   BackgroundColor="{DynamicResource Background}">
+                    <StackLayout>
+                        <StackLayout 
+                            Grid.Row="4"
+                            VerticalOptions="End"
+                            Orientation="Horizontal">
+                            <Button 
+                                BackgroundColor="{DynamicResource ColorWarning}"
+                                Text=">"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                CornerRadius="80"
+                                Padding="10"
+                                x:Name="btn_JobList"
+                                Clicked="OnJobList"/>
+                            <Button 
+                                BackgroundColor="{StaticResource AccentLight}"
+                                Text="!"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                CornerRadius="80"
+                                Padding="10"
+                                x:Name="btn_Edit"
+                                Clicked="OnEdit"/>
+                            <Button 
+                                BackgroundColor="{DynamicResource ColorDanger}"
+                                Text="X"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                CornerRadius="80"
+                                Padding="10"
+                                x:Name="btn_Delete"
+                                Clicked="OnDelete"/>
+                        </StackLayout>
+                    </StackLayout>
+            </Frame>
+            <Frame CornerRadius="10"
+                Margin="15,30,15,0"
+                BackgroundColor="{DynamicResource Background}"
+                x:DataType="model:Project">
+                <StackLayout>
+                <Frame
+                    BackgroundColor="{DynamicResource AccentDark}"
+                    Margin="-20,-20,-20,-20"
+                    HorizontalOptions="FillAndExpand">
+                    <Label 
+                        x:Name="lbl_Project_name"
+                        FontSize="Title"
+                        HorizontalTextAlignment="Center"
+                        TextColor="{DynamicResource AccentText}"
+                        Text="name"/>
+                </Frame>
+                <StackLayout Orientation="Horizontal">
+                    <Frame 
+                        x:Name="lbl_Project_status_label"
+                        BackgroundColor="{DynamicResource Accent}"
+                        CornerRadius="30"
+                        Padding="1">
+                        <Label 
+                            WidthRequest="100"
+                            HeightRequest="20"
+                            x:Name="lbl_Project_status"
+                            TextColor="{DynamicResource AccentText}"
+                            FontSize="Micro"
+                            Text="{Binding project_status}"
+                            HorizontalTextAlignment="Center"
+                            HorizontalOptions="Center"
+                            VerticalOptions="CenterAndExpand"/>
+                    </Frame>
+                    <Frame 
+                        x:Name="lbl_Project_tracked_label"
+                        BackgroundColor="{DynamicResource ColorSuccess}"
+                        CornerRadius="20"
+                        Padding="1">
+                        <Label 
+                            WidthRequest="100"
+                            HeightRequest="20"
+                            x:Name="lbl_Project_tracked"
+                            TextColor="White"
+                            FontSize="Micro"
+                            Text="Tracked"
+                            HorizontalTextAlignment="Center"
+                            HorizontalOptions="Center"
+                            VerticalOptions="CenterAndExpand"/>
+                    </Frame>
+                </StackLayout>
+                <ScrollView>
+                    <Grid RowDefinitions="30,30,20,40,20,*,20,*"
+                        ColumnDefinitions="60,60,100,100">
+                        <Label
+                            x:Name="lbl_Project_start"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            TextColor="{DynamicResource PrimaryText}"
+                            Text="start date"
+                            LineBreakMode="NoWrap" 
+                            FontSize="Micro" />
+                        <Label
+                            x:Name="lbl_Project_end"
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            Grid.ColumnSpan="2"
+                            TextColor="{DynamicResource PrimaryText}"
+                            Text="end date"
+                            LineBreakMode="NoWrap" 
+                            FontSize="Micro" />
+                        <Label
+                            x:Name="lbl_Project_end_open"
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            Grid.ColumnSpan="2"
+                            TextColor="{DynamicResource PrimaryText}"
+                            Text="Open ended"
+                            LineBreakMode="NoWrap" 
+                            FontSize="Micro" />
+                        <Label 
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            FontSize="Micro"
+                            TextColor="{DynamicResource AccentText}"
+                            Text="Company"/>
+                        <Label 
+                            x:Name="lbl_Project_company"
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4"
+                            FontSize="Subtitle"
+                            TextColor="{DynamicResource AccentText}"
+                            Text="{Binding company_name}"/>
+                        <Label 
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            FontSize="Micro"
+                            TextColor="{DynamicResource AccentText}"
+                            Text="Description"/>
+                        <Label 
+                            x:Name="lbl_Project_description"
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4"
+                            FontSize="Subtitle"
+                            TextColor="{DynamicResource AccentText}"
+                            Text="{Binding description}"/>
+                        <Label 
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            FontSize="Micro"
+                            TextColor="{DynamicResource AccentText}"
+                            Text="Status Note"/>
+                        <Label 
+                            x:Name="lbl_Project_note"
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4"
+                            FontSize="Subtitle"
+                            TextColor="{DynamicResource AccentText}"
+                            Text="{Binding project_status_note}"/>
+                        </Grid>
+                </ScrollView>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

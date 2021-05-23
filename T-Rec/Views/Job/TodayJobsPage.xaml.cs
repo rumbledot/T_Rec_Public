@@ -62,6 +62,26 @@ namespace T_Rec.Views
             }
         }
 
+        public TodayJobsPage(Project p)
+        {
+            try
+            {
+                InitializeComponent();
+
+                Title = "Project's Jobs Reviews";
+                viewing_only = true;
+                fab_Add_job.IsVisible = false;
+
+                JobsListView.EmptyView = Resources["ReviewDayEmptyView"];
+
+                BindingContext = _view_model = new JobsViewModel(tbtn_add_job, DateTime.Now, p);
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toast>().Show($"Page load failed \n {ex.Message}");
+            }
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();

@@ -38,6 +38,14 @@ namespace T_Rec.Views
             _view_model.OnAppearing();
         }
 
+        public async void OnMore(object sender, EventArgs e)
+        {
+            var item = sender as Button;
+            Company c = item.CommandParameter as Company;
+
+            await Navigation.PushAsync(new ProjectsPage(c));
+        }
+
         async void OnEdit(object sender, EventArgs e)
         {
             try

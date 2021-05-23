@@ -27,7 +27,7 @@ namespace T_Rec.Views
         {
             base.OnAppearing();
 
-            dtpicker_Review_date.MinimumDate = DateTime.Now.AddYears(-1);
+            dtpicker_Review_date.MinimumDate = DateTime.Now.AddMonths(-6);
             dtpicker_Review_date.MaximumDate = DateTime.Now;
             dtpicker_Review_date.Date = DateTime.Now.AddDays(-1);
 

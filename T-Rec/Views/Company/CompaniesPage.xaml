@@ -4,7 +4,7 @@
              x:Class="T_Rec.Views.CompaniesPage"
              xmlns:vm="clr-namespace:T_Rec.ViewModels"
              xmlns:model="clr-namespace:T_Rec.Models"
-             BackgroundColor="{StaticResource Primary}"
+             BackgroundColor="{StaticResource Background}"
              Title="{Binding Title}">
     
     <ContentPage.ToolbarItems>
@@ -15,13 +15,11 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Frame BackgroundColor="{DynamicResource Accent}"
-                   CornerRadius="20"
-                   HeightRequest="120"
-                   Margin="0,-20,0,0">
+            <Frame BackgroundColor="{DynamicResource Primary}"
+                   HeightRequest="50">
             </Frame>
-            <Frame CornerRadius="20"
-                   Margin="15,-30,15,-20"
+            <Frame CornerRadius="10"
+                   Margin="15,-60,15,-20"
                    BackgroundColor="{DynamicResource Background}">
                 
             <RefreshView x:DataType="vm:CompaniesViewModel" 
@@ -44,11 +42,13 @@
                                 <Frame CornerRadius="10"
                                        HorizontalOptions="FillAndExpand"
                                        BackgroundColor="{DynamicResource BackgroundLight}">
+                                    <StackLayout>
                                     <Grid>
                                         <Grid.RowDefinitions>
+                                            <RowDefinition Height="20" />
                                             <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="40" />
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="60"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="40" />
@@ -59,26 +59,51 @@
                                                Grid.Column="0"
                                                Grid.ColumnSpan="3"
                                                TextColor="{DynamicResource PrimaryText}"
+                                               Text="Company"
+                                               FontSize="Micro"/>
+                                        <Label Grid.Row="1"
+                                               Grid.Column="0"
+                                               Grid.ColumnSpan="3"
+                                               TextColor="{DynamicResource PrimaryText}"
                                                Text="{Binding name}"
                                                FontSize="Title"
                                                FontAttributes="Bold" />
-                                        <Label Grid.Row="1"
+                                        <Label Grid.Row="2"
+                                               Grid.Column="0"
+                                               Grid.ColumnSpan="3"
+                                               TextColor="{DynamicResource PrimaryText}"
+                                               Text="Contact"
+                                               FontSize="Micro"/>
+                                        <Label Grid.Row="3"
                                                Grid.Column="0"
                                                Grid.ColumnSpan="3"
                                                TextColor="{DynamicResource PrimaryText}"
                                                Text="{Binding email}"
                                                FontSize="Subtitle"/>
-                                        <Button Grid.Row="2"
-                                                Grid.Column="0"
+                                    </Grid>
+                                    <Frame
+                                        Margin="-20"
+                                        BackgroundColor="{DynamicResource Accent}"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="EndAndExpand">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Button
                                                 HeightRequest="40"
                                                 WidthRequest="40"
                                                 CornerRadius="20"
                                                 BackgroundColor="{StaticResource ColorSuccess}"
+                                                Text="?"
+                                                Clicked="OnMore"
+                                                CommandParameter="{Binding .}"/>
+                                            <Button 
+                                                HeightRequest="40"
+                                                WidthRequest="40"
+                                                CornerRadius="20"
+                                                BackgroundColor="{StaticResource AccentLight}"
                                                 Text="!"
                                                 Clicked="OnEdit"
                                                 CommandParameter="{Binding .}"/>
-                                        <Button Grid.Row="2"
-                                                Grid.Column="1"
+                                            <Button 
                                                 HeightRequest="40"
                                                 WidthRequest="40"
                                                 CornerRadius="20"
@@ -86,7 +111,9 @@
                                                 Text="X"
                                                 Clicked="OnDelete"
                                                 CommandParameter="{Binding .}"/>
-                                    </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                    </StackLayout>
                                 </Frame>
                             </StackLayout>
                             
